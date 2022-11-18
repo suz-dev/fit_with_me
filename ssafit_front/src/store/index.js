@@ -291,19 +291,23 @@ export default new Vuex.Store({
 
     createReview({ commit }, review) {
       const API_URL = `${REST_API}/videoapi/review`;
-      axios({
-        url: API_URL,
-        method: "POST",
-        params: {
-          content: review.content,
-          star: review.star,
-          title: review.title,
-          userId: review.userId,
-          userSeq: review.userSeq,
-          videoId: this.state.video.id,
-          viewCnt: 0,
-        },
-      })
+      axios
+        .post(
+          API_URL,
+          {
+            content: review.content,
+            star: review.star,
+            userId: review.userId,
+            userName: review.userName,
+            videoId: this.state.video.id,
+            viewCnt: 0,
+          },
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
         .then(() => {
           commit("CREATE_REVIEW", review);
           location.reload();
