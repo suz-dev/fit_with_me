@@ -45,9 +45,11 @@ public class VideoController {
     public ResponseEntity<?> getVideoDetail(@PathVariable String id) {
         Video video = videoService.getVideoById(id);
         System.out.println(video);
+        System.out.println(video==null);
+
         if (video != null) {
             return new ResponseEntity<Video>(video, HttpStatus.OK);
-        } else return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/video")

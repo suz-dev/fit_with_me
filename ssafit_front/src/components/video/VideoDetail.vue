@@ -9,12 +9,18 @@
       width="420"
       height="315"
     ></iframe>
-
+    <div>
+      {{ video.title }}
+      {{ video.channelName }}
+      {{ video.viewCnt }}
+    </div>
     <!-- <video-item></video-item> -->
     <!-- 리뷰 목록 -->
-    <router-view></router-view>
-    <!-- 리뷰 등록 form -->
-    <video-review-create></video-review-create>
+    <b-container>
+      <router-view></router-view>
+      <!-- 리뷰 등록 form -->
+      <video-review-create></video-review-create
+    ></b-container>
   </div>
 </template>
 

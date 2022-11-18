@@ -15,7 +15,7 @@
     </b-container>
 
     <b-container v-if="videos">
-      <b-card-group deck id="card-group">
+      <b-card-group deck>
         <div
           v-for="video in videos.slice(
             (currentPage - 1) * perPage,
@@ -31,6 +31,7 @@
             tag="article"
             style="max-width: 20rem"
             class="mb-2"
+            id="card"
           >
             <b-card-text>
               {{ video.snippet.channelTitle }}
@@ -118,4 +119,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#card {
+  border-radius: 10%;
+}
+
+img {
+  border-radius: 10%;
+}
+</style>

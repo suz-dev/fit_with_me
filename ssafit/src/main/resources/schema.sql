@@ -5,10 +5,11 @@ DATABASE ssafit DEFAULT CHARACTER SET utf8mb4;
 
 USE
 ssafit;
+
 CREATE TABLE video
 (
     id           VARCHAR(200),
-    title        VARCHAR(50) NOT NULL,
+    title        VARCHAR(500) NOT NULL,
     part         VARCHAR(50) NOT NULL,
     channel_name VARCHAR(20) NOT NULL,
     view_cnt     INT         NOT NULL DEFAULT '0',
