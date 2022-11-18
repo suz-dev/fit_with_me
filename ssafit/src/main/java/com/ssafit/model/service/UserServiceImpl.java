@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService {
         return userDao.deleteUser(userId) == 1;
     }
 
+    @Override
+    public User getLoginUSer(String userId) {
+        return userDao.selectLoginUser(userId);
+    }
+
     // userId, userName 두가지로 검색
     @Override
     public User getUser(String userId) {
