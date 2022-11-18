@@ -1,8 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "@/views/HomeView";
-import VideoListMostViewed from "@/components/video/VideoListMostViewed.vue";
-// import VideoPartList from "@/components/video/VideoPartList.vue";
+import VideoSearch from "@/components/video/VideoSearch.vue";
 import VideoDetail from "@/components/video/VideoDetail.vue";
 import VideoReviewList from "@/components/video/VideoReviewList.vue";
 import VideoReviewDetail from "@/components/video/VideoReviewDetail.vue";
@@ -20,7 +19,7 @@ const routes = [
       {
         path: "",
         name: "videoList",
-        component: VideoListMostViewed,
+        component: VideoSearch,
       },
     ],
   },

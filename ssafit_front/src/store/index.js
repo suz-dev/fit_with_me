@@ -9,7 +9,7 @@ const REST_API = `http://localhost:9999`;
 
 export default new Vuex.Store({
   state: {
-    videos: [],
+    searchVideos: [],
     mostViewedVideos: [],
     partVideos: [],
     video: {},
@@ -19,8 +19,8 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
-    GET_MOST_VIEWED_VIDEOS(state, payload) {
-      state.mostViewedVideos = payload;
+    SEARCH_VIDEO(state, payload) {
+      state.searchVideos = payload;
     },
     GET_PART_VIDEOS(state, payload) {
       state.partVideos = payload;
@@ -53,24 +53,30 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getMostViewedVideos({ commit }) {
-      const API_URL = `${REST_API}/videoapi/video`;
+    searchVideos({ commit }, search) {
+      const API_URL = `https://www.googleapis.com/youtube/v3/search`;
+      const YOUTUBE_KEY = process.env.VUE_APP_YOUTUBE_API_KEY;
+
       axios({
         url: API_URL,
         method: "GET",
         params: {
-          mode: 2,
+          key: YOUTUBE_KEY,
+          part: "snippet",
+          q: search,
+          type: "video",
+          maxResults: 10,
         },
-        // headers: {
-        //   "access-token": sessionStorage.getItem("access-token"),
-        // },
       })
         .then((res) => {
-          commit("GET_MOST_VIEWED_VIDEOS", res.data);
+          console.log(res.data.items)
+          commit("SEARCH_VIDEO", res.data.items)
         })
+
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+
+        })
     },
     getPartVideos({ commit }, part) {
       const API_URL = `${REST_API}/videoapi/video`;
