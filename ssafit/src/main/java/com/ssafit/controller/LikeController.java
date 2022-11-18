@@ -27,6 +27,7 @@ public class LikeController {
         params.put("userId", userId);
         params.put("videoId", videoId);
         likeService.createLike(params);
+        // test
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 
     }
