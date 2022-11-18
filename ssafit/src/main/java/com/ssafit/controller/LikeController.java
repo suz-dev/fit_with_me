@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/wishapi")
+@RequestMapping("/likeapi")
 public class LikeController {
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
@@ -21,8 +21,8 @@ public class LikeController {
     private LikeService likeService;
 
 
-    @PostMapping("/wish")
-    public ResponseEntity<?> createWish(String userId, String videoId) {
+    @PostMapping("/like")
+    public ResponseEntity<?> createLike(String userId, String videoId) {
         HashMap<String, String> params = new HashMap<>();
         params.put("userId", userId);
         params.put("videoId", videoId);
@@ -32,14 +32,14 @@ public class LikeController {
 
     }
 
-    @GetMapping("/wish/{userId}")
-    public ResponseEntity<?> getWishList(@PathVariable String userId) {
+    @GetMapping("/like/{userId}")
+    public ResponseEntity<?> getLike(@PathVariable String userId) {
         List<Video> wishList = likeService.getLike(userId);
         return new ResponseEntity<List<Video>>(wishList, HttpStatus.OK);
     }
 
-    @DeleteMapping("/wish")
-    public ResponseEntity<?> removeWish(@RequestParam String userId, @RequestParam String videoId) {
+    @DeleteMapping("/like")
+    public ResponseEntity<?> removeLike(@RequestParam String userId, @RequestParam String videoId) {
         HashMap<String, String> params = new HashMap<>();
         params.put("userId", userId);
         params.put("videoId", videoId);
