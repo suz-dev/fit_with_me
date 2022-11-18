@@ -34,7 +34,7 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/user")
-    public ResponseEntity<String> create(User user) {
+    public ResponseEntity<String> createUser(User user) {
         userService.createUser(user);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.CREATED);
     }
@@ -86,37 +86,30 @@ public class UserController {
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
     }
 
-
     // 회원 조회
     @GetMapping("/user/{userId}")
-    public ResponseEntity<User> detail(@PathVariable String userId) {
+    public ResponseEntity<User> getUser(@PathVariable String userId) {
         // 추가 예외처리
         return new ResponseEntity<User>(userService.getUser(userId), HttpStatus.OK);
     }
 
     // 회원 전체 조회
     @GetMapping("/user")
-    public ResponseEntity<List<User>> list(@RequestParam(defaultValue = "") String mode,
-                                           @RequestParam(defaultValue = "") String keyword) {
-        HashMap<String, String> params = new HashMap<>();
-
-        params.put("mode", mode);
-        params.put("keyword", keyword);
-
-        return new ResponseEntity<List<User>>(userService.getAllUsers(params), HttpStatus.OK);
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<List<User>>(userService.getUsers(), HttpStatus.OK);
     }
 
     // 회원 정보 수정
     @PutMapping("/user")
-    public ResponseEntity<String> update(User user) {
+    public ResponseEntity<String> modifyUser(User user) {
         userService.modifyUser(user);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
     }
 
     // 회원 삭제?
-    @DeleteMapping("/user/{userSeq}")
-    public ResponseEntity<String> delete(@PathVariable int userSeq) {
-        if (userService.removeUser(userSeq)) {
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<String> removeUser(@PathVariable String userId) {
+        if (userService.removeUser(userId)) {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
@@ -124,18 +117,18 @@ public class UserController {
 
     // 팔로우
     @PostMapping("/follow")
-    public ResponseEntity<?> follow(int fromUser, int toUser) {
-        HashMap<String, Integer> params = new HashMap<>();
+    public ResponseEntity<?> addFollow(String fromUser, String toUser) {
+        HashMap<String, String> params = new HashMap<>();
         params.put("fromUser", fromUser);
         params.put("toUser", toUser);
-        followService.follow(params);
+        followService.addFollow(params);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
     }
 
     // 언팔로우
     @DeleteMapping("/follow")
-    public ResponseEntity<?> unfollow(@RequestParam int fromUser, @RequestParam int toUser) {
-        HashMap<String, Integer> params = new HashMap<>();
+    public ResponseEntity<?> unFollow(@RequestParam String fromUser, @RequestParam String toUser) {
+        HashMap<String, String> params = new HashMap<>();
         params.put("fromUser", fromUser);
         params.put("toUser", toUser);
         if (followService.unFollow(params))
@@ -145,22 +138,15 @@ public class UserController {
 
     // 팔로잉 리스트 (from_user로 검색)
     @GetMapping("/following/{fromUser}")
-    public ResponseEntity<List<User>> getFollowingList(@PathVariable int fromUser) {
-        List<User> followingList = followService.getFollowingList(fromUser);
+    public ResponseEntity<List<User>> getFollowing(@PathVariable String fromUser) {
+        List<User> followingList = followService.getFollowing(fromUser);
         return new ResponseEntity<List<User>>(followingList, HttpStatus.OK);
     }
 
-
     // 팔로워 리스트 (to_user로 검색)
     @GetMapping("/follower/{toUser}")
-    public ResponseEntity<List<User>> getFollowerList(@PathVariable int toUser) {
-        List<User> followerList = followService.getFollowerList(toUser);
+    public ResponseEntity<List<User>> getFollower(@PathVariable String toUser) {
+        List<User> followerList = followService.getFollower(toUser);
         return new ResponseEntity<List<User>>(followerList, HttpStatus.OK);
-    }
-
-    @GetMapping("/following/wish/{fromUser}")
-    public ResponseEntity<List<HashMap<String, String>>> getFollowWishList(@PathVariable int fromUser) {
-        List<HashMap<String, String>> followWishList = followService.getFollowWishList(fromUser);
-        return new ResponseEntity<>(followWishList, HttpStatus.OK);
     }
 }
