@@ -51,6 +51,7 @@ public class UserController {
             if (confirm != null && user.getPassword().equals(confirm.getPassword())) {
                 result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
                 result.put("message", SUCCESS);
+                result.put("userName", confirm.getUserName());
                 status = HttpStatus.ACCEPTED;
             } else {
                 result.put("message", FAIL);
