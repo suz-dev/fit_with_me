@@ -2,11 +2,21 @@
   <div class="container">
     <h2>로그인</h2>
     <div>
-      <b-form-group label="id" label-for="id">
-        <b-form-input id="id" v-model="user.id" trim></b-form-input>
+      <b-form-group label-for="id">
+        <b-form-input
+          id="id"
+          v-model="user.id"
+          trim
+          placeholder="ID"
+        ></b-form-input>
       </b-form-group>
-      <b-form-group label="pw" label-for="pw">
-        <b-form-input id="pw" v-model="user.password" trim></b-form-input>
+      <b-form-group label-for="pw">
+        <b-form-input
+          id="pw"
+          v-model="user.password"
+          trim
+          placeholder="Password"
+        ></b-form-input>
       </b-form-group>
 
       <b-button to="/user/regist" variant="outline-success">회원가입</b-button>

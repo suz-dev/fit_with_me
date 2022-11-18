@@ -7,7 +7,7 @@
       <!-- 로그인 전: 로그인 버튼 -->
       <!-- 로그인 후: 로그아웃 버튼 + UserView로 이동할 수 있는 뭐.. 마이페이지?..이런거  -->
       <div>
-        <div v-if="loginUser">
+        <div v-if="loginUser.userName">
           <span>{{ loginUser.userName }}님 환영합니다!</span>
           <b-button @click="logout">로그아웃</b-button>
           <b-button to="/user/userInfo" variant="light">마이페이지</b-button>
