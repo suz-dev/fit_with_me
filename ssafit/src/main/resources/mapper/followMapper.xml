@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssafit.model.dao.FollowDao">
+
+    <resultMap id="userResultMap" type="User">
+        <id column="user_seq" property="userSeq"/>
+        <result column="user_id" property="userId"/>
+        <result column="password" property="password"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+
+    <resultMap id="followWishMap" type="HashMap">
+        <result column="u.user_name" property="userName"/>
+        <result column="v.title" property="title"/>
+    </resultMap>
+
+    <!--    SELECT * FROM user-->
+    <!--    WHERE user_seq IN (SELECT to_user FROM follow WHERE from_user = 1);-->
+
+    <select id="selectFollowingList" parameterType="int" resultMap="userResultMap">
+        SELECT * FROM user
+        WHERE user_seq IN (SELECT to_user FROM follow WHERE from_user = #{fromUser});
+    </select>
+
+
+    <select id="selectFollowerList" resultMap="userResultMap" parameterType="int">
+        SELECT * FROM user
+        WHERE user_seq IN (SELECT from_user FROM follow WHERE to_user = #{toUser});
+    </select>
+
+    <insert id="addFollow" parameterType="HashMap">
+        INSERT INTO follow VALUES(#{fromUser}, #{toUser});
+
+    </insert>
+
+    <delete id="unFollow" parameterType="HashMap">
+        DELETE FROM follow WHERE from_user = #{fromUser} and to_user= #{toUser};
+    </delete>
+
+    <select id="selectFollowWishList" parameterType="int" resultType="HashMap">
+        SELECT u.user_name, v.title
+        FROM wish w, video v, user u
+        WHERE w.user_seq IN (SELECT to_user FROM follow WHERE from_user = #{fromUser})
+        and w.video_id = v.id
+        and w.user_seq = u.user_seq;
+    </select>
+
+</mapper>
+

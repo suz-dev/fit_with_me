@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssafit.model.dao.ReviewDao">
+
+    <resultMap  id="reviewResultMap" type="Review">
+        <id column="review_id" property="reviewId" />
+        <result column="content" property="content"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="video_id" property="videoId"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="star" property="star"/>
+    </resultMap>
+
+
+    <select id="selectAllReview" parameterType="String" resultMap="reviewResultMap">
+        SELECT * FROM review
+        WHERE video_id = #{videoId}
+    </select>
+
+    <select id="selectReview" parameterType="int" resultMap="reviewResultMap">
+        SELECT * FROM review
+        WHERE review_id=#{reviewId}
+    </select>
+
+    <insert id="insertReview" parameterType="Review">
+        INSERT INTO review(content, user_id, user_name, video_id, star)
+        VALUES (#{content}, #{userId}, #{userName}, #{videoId}, #{star});
+    </insert>
+
+    <update id="updateReview" parameterType="Review">
+        UPDATE review
+        SET content = #{content}, star = #{star}
+        WHERE review_id = #{reviewId}
+    </update>
+
+    <delete id="deleteReview" parameterType="int">
+        DELETE FROM review
+        WHERE review_id=#{reviewId}
+    </delete>
+
+</mapper>

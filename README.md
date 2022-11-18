@@ -1,4 +1,4 @@
-# fit_with_me
+# ssafit_1116
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://lab.ssafy.com/ssafit_lyg_jsj/fit_with_me.git
+git remote add origin https://lab.ssafy.com/leeykkk22/ssafit_1116.git
 git branch -M master
 git push -uf origin master
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/ssafit_lyg_jsj/fit_with_me/-/settings/integrations)
+- [ ] [Set up project integrations](https://lab.ssafy.com/leeykkk22/ssafit_1116/-/settings/integrations)
 
 ## Collaborate with your team
 

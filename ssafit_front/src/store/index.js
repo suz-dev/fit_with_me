@@ -1,0 +1,247 @@
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+import router from "@/router";
+
+Vue.use(Vuex);
+
+const REST_API = `http://localhost:9999`;
+
+export default new Vuex.Store({
+  state: {
+    videos: [],
+    mostViewedVideos: [],
+    partVideos: [],
+    video: {},
+    reviews: [],
+    review: {},
+    user: "",
+  },
+  getters: {},
+  mutations: {
+    GET_MOST_VIEWED_VIDEOS(state, payload) {
+      state.mostViewedVideos = payload;
+    },
+    GET_PART_VIDEOS(state, payload) {
+      state.partVideos = payload;
+    },
+    GET_VIDEO(state, payload) {
+      state.video = payload;
+    },
+    GET_REVIEWS(state, payload) {
+      state.reviews = payload;
+    },
+    GET_REVIEW(state, payload) {
+      state.review = payload;
+    },
+    UPDATE_REVIEW(state, payload) {
+      console.log(payload);
+      state.review.title = payload.title;
+      state.review.content = payload.content;
+      state.review.star = payload.star;
+    },
+
+    USER_LOGIN(state, payload) {
+      state.user = payload;
+    },
+    LOGOUT(state) {
+      state.user = "";
+    },
+
+    CREATE_REVIEW(state, payload) {
+      state.reviews.push(payload);
+    },
+  },
+  actions: {
+    getMostViewedVideos({ commit }) {
+      const API_URL = `${REST_API}/videoapi/video`;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          mode: 2,
+        },
+        // headers: {
+        //   "access-token": sessionStorage.getItem("access-token"),
+        // },
+      })
+        .then((res) => {
+          commit("GET_MOST_VIEWED_VIDEOS", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getPartVideos({ commit }, part) {
+      const API_URL = `${REST_API}/videoapi/video`;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          mode: 1,
+          keyword: part,
+        },
+      })
+        .then((res) => {
+          commit("GET_PART_VIDEOS", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getVideo({ commit }, id) {
+      const API_URL = `${REST_API}/videoapi/video/${id}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          commit("GET_VIDEO", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getReviews({ commit }, id) {
+      const API_URL = `${REST_API}/videoapi/review`;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          videoId: id,
+        },
+      })
+        .then((res) => {
+          commit("GET_REVIEWS", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getReview({ commit }, id) {
+      const API_URL = `${REST_API}/videoapi/review/${id}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          commit("GET_REVIEW", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    updateReview({ commit }, updateReview) {
+      const API_URL = `${REST_API}/videoapi/review`;
+      axios({
+        url: API_URL,
+        method: "PUT",
+        params: {
+          reviewId: updateReview.reviewId,
+          title: updateReview.title,
+          content: updateReview.content,
+          viewCnt: updateReview.viewCnt,
+          star: updateReview.star,
+        },
+      })
+        .then(() => {
+          commit("UPDATE_REVIEW", updateReview);
+          alert("수정 완료");
+        })
+        .catch((err) => {
+          console.log(updateReview);
+          console.log(err);
+        });
+    },
+    deleteReview({ commit }, data) {
+      const API_URL = `${REST_API}/videoapi/review/${data.id}`;
+      axios
+        .delete(API_URL)
+        .then(() => {
+          commit;
+          router.push(`/${data.videoId}`);
+        })
+        .catch((err) => {
+          console.log(data.id);
+          console.log(err);
+        });
+    },
+
+    // 로그인
+    login({ commit }, payload) {
+      const API_URL = `${REST_API}/userapi/login`;
+
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: {
+          userId: payload.id,
+          password: payload.password,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          sessionStorage.setItem("access-token", res.data["access-token"]);
+          sessionStorage.setItem("userId", payload.id);
+          alert("로그인 성공!");
+          commit("USER_LOGIN", payload.id);
+          router.push("/");
+          return;
+        })
+        .catch((err) => {
+          console.log(payload);
+          console.log(err);
+        });
+    },
+
+    // 로그아웃
+    logout({ commit }) {
+      sessionStorage.removeItem("access-token");
+      sessionStorage.removeItem("userId");
+      commit("LOGOUT");
+    },
+    createUser({ commit }, user) {
+      const API_URL = `${REST_API}/userapi/user`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: user,
+      })
+        .then((res) => {
+          console.log(res);
+          alert("회원가입 성공!");
+          // commit("USER_CREATE", user); 팔로우할때 다시 구현
+          commit;
+          router.push("/");
+          return;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    createReview({ commit }, review) {
+      const API_URL = `${REST_API}/videoapi/review`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: {
+          content: review.content,
+          star: review.star,
+          title: review.title,
+          userId: review.userId,
+          userSeq: review.userSeq,
+          videoId: this.state.video.id,
+          viewCnt: 0,
+        },
+      })
+        .then(() => {
+          commit("CREATE_REVIEW", review);
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  modules: {},
+});
