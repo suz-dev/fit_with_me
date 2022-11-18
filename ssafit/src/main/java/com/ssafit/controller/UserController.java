@@ -46,9 +46,9 @@ public class UserController {
         HashMap<String, Object> result = new HashMap<>();
         HttpStatus status = null;
 
-        User confirm = userService.getUser(user.getUserId());
+        User confirm = userService.getLoginUSer(user.getUserId());
         try {
-            if (confirm != null && user.getUserId() != null || user.getUserId().length() > 0) {
+            if (confirm != null && user.getPassword().equals(confirm.getPassword())) {
                 result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
                 result.put("message", SUCCESS);
                 status = HttpStatus.ACCEPTED;

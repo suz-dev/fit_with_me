@@ -14,6 +14,11 @@
         <result column="profile" property="profile"/>
     </resultMap>
 
+    <!-- 로그인시 조회 -->
+    <select id="selectLoginUser" parameterType="String" resultMap="userResultMap">
+        SELECT * FROM user WHERE user_id = #{userId}
+    </select>
+
     <select id="selectUser" parameterType="String" resultMap="userResultMap">
         SELECT * FROM user
         <!-- id 기준 조회 -->
