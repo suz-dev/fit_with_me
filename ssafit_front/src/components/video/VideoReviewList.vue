@@ -8,6 +8,9 @@
           data.item.title
         }}</router-link>
       </template>
+      <template #cell(star)="data">
+        <b-form-rating v-model="data.item.star"></b-form-rating>
+      </template>
     </b-table>
   </div>
 </template>
@@ -20,20 +23,20 @@ export default {
     return {
       fields: [
         {
-          key: "title",
-          label: "제목",
+          key: "content",
+          label: "내용",
         },
         {
-          key: "userId",
-          label: "유저 아이디",
+          key: "userName",
+          label: "유저 이름",
         },
         {
           key: "regDate",
           label: "등록날짜",
         },
         {
-          key: "viewCnt",
-          label: "조회수",
+          key: "star",
+          label: "별점",
         },
       ],
     };
