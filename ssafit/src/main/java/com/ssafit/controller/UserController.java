@@ -46,7 +46,7 @@ public class UserController {
         HashMap<String, Object> result = new HashMap<>();
         HttpStatus status = null;
 
-        User confirm = userService.getLoginUSer(user.getUserId());
+        User confirm = userService.getLoginUser(user.getUserId());
         try {
             if (confirm != null && user.getPassword().equals(confirm.getPassword())) {
                 result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
@@ -54,7 +54,7 @@ public class UserController {
                 status = HttpStatus.ACCEPTED;
             } else {
                 result.put("message", FAIL);
-                status = HttpStatus.ACCEPTED;
+                status = HttpStatus.NOT_FOUND;
             }
         } catch (UnsupportedEncodingException e) {
             result.put("message", FAIL);
@@ -63,19 +63,6 @@ public class UserController {
 
         return new ResponseEntity<Map<String, Object>>(result, status);
     }
-
-    // 로그인
-//    @PostMapping("/login")
-//    public ResponseEntity<?> doLogin(User user, HttpSession session) {
-//        User confirm = userService.getUser(user.getUserId());
-//        if (confirm != null && user.getUserId().equals(confirm.getUserId()) && user.getPassword().equals(confirm.getPassword())) {
-//            session.setAttribute("loginUser", confirm.getUserName());
-//
-//            return new ResponseEntity<User>(confirm, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//        }
-//    }
 
     // 로그아웃
     @DeleteMapping("/logout")
