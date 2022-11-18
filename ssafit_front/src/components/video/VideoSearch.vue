@@ -43,7 +43,7 @@
             <b-button variant="primary" :to="video.id.videoId"
               >영상 상세</b-button
             >
-            <b-button variant="outline-danger" v-if="user"
+            <b-button variant="outline-danger" v-if="loginUser.userName"
               ><b-icon-suit-heart
                 variant="danger"
                 @click="createLike(video.id.videoId)"
@@ -76,6 +76,7 @@ export default {
   },
   computed: {
     ...mapState({ videos: "searchVideos" }),
+    ...mapState(["loginUser"]),
     rows() {
       return this.videos.length;
     },
