@@ -41,12 +41,12 @@
             <b-button variant="primary" :to="video.id.videoId"
               >영상 상세</b-button
             >
-            <span class="h4 mb-2" v-if="user">
-              <b-icon-suit-heart
+            <b-button variant="outline-danger" v-if="user"
+              ><b-icon-suit-heart
                 variant="danger"
-                @click="heart"
-              ></b-icon-suit-heart>
-            </span>
+                @click="createLike(video.id.videoId)"
+              ></b-icon-suit-heart
+            ></b-button>
           </b-card>
         </div>
       </b-card-group>
@@ -65,6 +65,7 @@
 import { mapState } from "vuex";
 export default {
   name: "VideoList",
+
   data() {
     return {
       perPage: 3,
@@ -111,8 +112,8 @@ export default {
     searchPartVideos() {
       this.$store.dispatch("searchPartVideos", this.selected);
     },
-    heart() {
-      console.log("heart");
+    createLike(videoId) {
+      this.$store.dispatch("createLike", videoId);
     },
   },
 
