@@ -40,9 +40,10 @@
               <!-- <b-badge>{{ video.viewCnt }}</b-badge> -->
             </b-card-text>
 
-            <b-button variant="primary" :to="video.id.videoId"
-              >영상 상세</b-button
+            <b-icon-heart variant="primary" @click="heart"
+              >영상 상세</b-icon-heart
             >
+            <b-button variant=""></b-button>
           </b-card>
         </div>
       </b-card-group>
