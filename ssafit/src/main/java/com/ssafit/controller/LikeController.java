@@ -22,11 +22,11 @@ public class LikeController {
 
 
     @PostMapping("/wish")
-    public ResponseEntity<?> createWish(int userSeq, String videoId) {
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("userSeq", userSeq);
+    public ResponseEntity<?> createWish(String userId, String videoId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", userId);
         params.put("videoId", videoId);
-        wishService.createWish(params);
+        likeService.createLike(params);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 
     }
