@@ -5,7 +5,6 @@ import com.ssafit.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -33,11 +32,11 @@ public class UserServiceImpl implements UserService {
 
     // userId로 삭제
     @Override
-    public boolean removeUser(int userSeq) {
-        return userDao.deleteUser(userSeq) == 1;
+    public boolean removeUser(String userId) {
+        return userDao.deleteUser(userId) == 1;
     }
 
-    // userId, userName 두가지로 검색?
+    // userId, userName 두가지로 검색
     @Override
     public User getUser(String userId) {
         return userDao.selectUser(userId);
@@ -45,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     // 전체 조회
     @Override
-    public List<User> getAllUsers(HashMap<String, String> params) {
-        return userDao.selectUserList(params);
+    public List<User> getUsers() {
+        return userDao.selectAllUser();
     }
 }

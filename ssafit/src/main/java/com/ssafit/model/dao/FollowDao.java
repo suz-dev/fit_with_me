@@ -9,17 +9,15 @@ import java.util.List;
 public interface FollowDao {
 
     // 회원 팔로잉 (등록만)
-    public void addFollow(HashMap<String, Integer> params);
+    public void addFollow(HashMap<String, String> params);
 
     // 팔로잉 취소
-    public int unFollow(HashMap<String, Integer> params);
+    public int unFollow(HashMap<String, String> params);
 
     // 팔로잉 리스트
-    List<User> selectFollowingList(int fromUser);
+    List<User> selectAllFollowing(String fromUser);
 
     // 팔로워 리스트
-    List<User> selectFollowerList(int toUser);
+    List<User> selectAllFollower(String toUser);
 
-    // 팔로우한 사람이 찜한 영상 리스트
-    List<HashMap<String, String>> selectFollowWishList(int fromUser);
 }

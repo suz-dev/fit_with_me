@@ -8,17 +8,15 @@ import java.util.List;
 public interface FollowService {
     
     // 회원 팔로잉
-    void follow(HashMap<String, Integer> params);
-    
+    void addFollow(HashMap<String, String> params);
+
     // 팔로우 취소
-    boolean unFollow(HashMap<String, Integer> params);
+    boolean unFollow(HashMap<String, String> params);
     
     // 팔로잉 리스트
-    public List<User> getFollowingList(int fromUser);
+    public List<User> getFollowing(String fromUser);
 
     // 팔로워 리스트
-    public List<User> getFollowerList(int toUser);
-
-    public List<HashMap<String, String>> getFollowWishList(int fromUser);
+    public List<User> getFollower(String toUser);
 
 }
