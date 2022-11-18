@@ -41,6 +41,12 @@
             <b-button variant="primary" :to="video.id.videoId"
               >영상 상세</b-button
             >
+            <span class="h4 mb-2" v-if="user">
+              <b-icon-suit-heart
+                variant="danger"
+                @click="heart"
+              ></b-icon-suit-heart>
+            </span>
           </b-card>
         </div>
       </b-card-group>
@@ -105,6 +111,9 @@ export default {
     searchPartVideos() {
       this.$store.dispatch("searchPartVideos", this.selected);
     },
+    heart() {
+      console.log("heart");
+    },
   },
 
   computed: {
@@ -112,6 +121,7 @@ export default {
       return this.videos.length;
     },
     ...mapState({ videos: "partVideos" }),
+    ...mapState(["user"]),
   },
   created() {
     this.$store.dispatch("searchPartVideos", this.selected);
