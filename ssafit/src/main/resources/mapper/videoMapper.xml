@@ -22,8 +22,8 @@
     </select>
 
     <insert id="insertVideo" parameterType="Video">
-        INSERT INTO video(title, part, id, channel_name)
-        VALUES (#{title}, #{part}, #{id}, #{channelName})
+        INSERT INTO video(title, part, id, channel_name, view_cnt)
+        VALUES (#{title}, #{part}, #{id}, #{channelName}, #{viewCnt})
     </insert>
 
     <update id="updateVideo" parameterType="Video">
