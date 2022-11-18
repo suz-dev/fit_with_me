@@ -253,6 +253,8 @@ export default new Vuex.Store({
       sessionStorage.removeItem("userId");
       commit("LOGOUT");
     },
+
+    // 회원가입
     createUser({ commit }, user) {
       const API_URL = `${REST_API}/userapi/user`;
       axios({
@@ -272,6 +274,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+
     createReview({ commit }, review) {
       const API_URL = `${REST_API}/videoapi/review`;
       axios({

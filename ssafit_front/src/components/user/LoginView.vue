@@ -8,6 +8,8 @@
       <b-form-group label="pw" label-for="pw">
         <b-form-input id="pw" v-model="user.password" trim></b-form-input>
       </b-form-group>
+
+      <b-button to="/user/regist" variant="outline-success">회원가입</b-button>
       <b-button type="submit" variant="outline-success" @click="login"
         >로그인</b-button
       >
