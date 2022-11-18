@@ -11,33 +11,33 @@
         <result column="user_name" property="userName"/>
         <result column="email" property="email"/>
         <result column="birth_date" property="birthDate"/>
+        <result column="profile" property="profile"/>
     </resultMap>
 
     <select id="selectUser" parameterType="String" resultMap="userResultMap">
-        SELECT * FROM user WHERE user_id = #{userId}
-
+        SELECT * FROM user
+        <!-- id 기준 조회 -->
+        <if test="mode == 1">
+            WHERE user_id LIKE CONCAT('%', #{userId}, '%')
+        </if>
+        <!-- 이름 기준 조회 -->
+        <if test="mode == 2">
+            WHERE user_name LIKE '%${userName}%'
+        </if>
     </select>
 
-    <select id="selectUserList" parameterType="HashMap" resultMap="userResultMap">
+    <select id="selectAllUser" resultMap="userResultMap">
         SELECT * FROM user
-        <!-- 이후 동적 쿼리 날리기 -->
-        <if test="mode == 1">
-            WHERE user_id LIKE CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="mode == 2">
-            WHERE user_name LIKE '%${keyword}%'
-        </if>
-
     </select>
 
     <insert id="insertUser" parameterType="User">
-        INSERT INTO user(user_id, password, user_name,email, birth_date, sex)
-        VALUES (#{userId}, #{password}, #{userName}, #{email}, #{birthDate}, #{sex});
+        INSERT INTO user(user_id, password, user_name,email, birth_date, sex, profile)
+        VALUES (#{userId}, #{password}, #{userName}, #{email}, #{birthDate}, #{sex}, #{profile});
     </insert>
 
     <update id="updateUser" parameterType="User">
         UPDATE user
-        SET password = #{password}, user_name=#{userName}, birth_date=#{birthDate}, sex=#{sex}
+        SET password = #{password}, user_name=#{userName}, birth_date=#{birthDate}, sex=#{sex}, profile=#{profile}
         WHERE user_id = #{userId}
     </update>
 
@@ -45,6 +45,5 @@
         DELETE FROM user
         WHERE user_id=#{userId}
     </delete>
-
 
 </mapper>
