@@ -62,7 +62,7 @@ export default {
     return {
       perPage: 3,
       currentPage: 1,
-      selected: null,
+      selected: "골프",
       options: [
         { value: "골프", text: "골프" },
         {
@@ -111,6 +111,9 @@ export default {
       return this.videos.length;
     },
     ...mapState({ videos: "partVideos" }),
+  },
+  created() {
+    this.$store.dispatch("searchPartVideos", this.selected);
   },
 };
 </script>
