@@ -15,7 +15,7 @@ export default new Vuex.Store({
     video: {},
     reviews: [],
     review: {},
-    user: "",
+    loginUser: {},
   },
   getters: {},
   mutations: {
@@ -41,11 +41,14 @@ export default new Vuex.Store({
       state.review.star = payload.star;
     },
 
-    USER_LOGIN(state, payload) {
-      state.user = payload;
+    USER_LOGIN(state) {
+      state.loginUser = {
+        userName: sessionStorage.getItem("userName"),
+        userId: sessionStorage.getItem("userId"),
+      };
     },
     LOGOUT(state) {
-      state.user = "";
+      state.loginUser = "";
     },
 
     CREATE_REVIEW(state, payload) {
@@ -117,20 +120,30 @@ export default new Vuex.Store({
           console.log("---insert----");
           console.log(res.data.items);
           const AXIOS_URL = `${REST_API}/videoapi/video`;
-          axios({
-            url: AXIOS_URL,
-            method: "POST",
-            params: {
-              channelName: res.data.items[0].snippet.channelTitle,
-              id: res.data.items[0].id,
-              title: res.data.items[0].snippet.title,
-              viewCnt: res.data.items[0].statistics.viewCount,
-              part: "",
-            },
-          }).then(() => {
-            console.log("삽입 완료");
-            dispatch("getVideo", videoId);
-          });
+          axios
+            .post(
+              AXIOS_URL,
+              {
+                channelName: res.data.items[0].snippet.channelTitle,
+                id: res.data.items[0].id,
+                title: res.data.items[0].snippet.title,
+                viewCnt: res.data.items[0].statistics.viewCount,
+                part: "",
+              },
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+              }
+            )
+            .then(() => {
+              console.log("삽입 완료");
+              dispatch("getVideo", videoId);
+            })
+            .catch((err) => {
+              console.log(err);
+              console.log(res.data.items[0].snippet.title);
+            });
         })
 
         .catch((err) => {
@@ -236,8 +249,9 @@ export default new Vuex.Store({
           console.log(res);
           sessionStorage.setItem("access-token", res.data["access-token"]);
           sessionStorage.setItem("userId", payload.id);
+          sessionStorage.setItem("userName", res.data.userName);
           alert("로그인 성공!");
-          commit("USER_LOGIN", payload.id);
+          commit("USER_LOGIN");
           router.push("/");
           return;
         })
@@ -293,6 +307,23 @@ export default new Vuex.Store({
         .then(() => {
           commit("CREATE_REVIEW", review);
           location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    createLike({ commit }, videoId) {
+      const API_URL = `${REST_API}/likeapi/like`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: {
+          userId: this.state.user,
+          videoId: videoId,
+        },
+      })
+        .then(() => {
+          commit;
         })
         .catch((err) => {
           console.log(err);
