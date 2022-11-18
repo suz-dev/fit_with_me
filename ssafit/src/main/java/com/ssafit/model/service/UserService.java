@@ -11,9 +11,10 @@ public interface UserService {
 
     boolean modifyUser(User user);
 
-    boolean removeUser(int userSeq);
+    // userId로 삭제
+    boolean removeUser(String userId);
 
     User getUser(String userId);
 
-    List<User> getAllUsers(HashMap<String, String> params);
+    List<User> getUsers();
 }

@@ -16,27 +16,24 @@ public class FollowServiceImpl implements FollowService {
 
 
     @Override
-    public void follow(HashMap<String, Integer> params) {
+    public void addFollow(HashMap<String, String> params) {
         followDao.addFollow(params);
     }
 
     @Override
-    public boolean unFollow(HashMap<String, Integer> params) {
+    public boolean unFollow(HashMap<String, String> params){
         return followDao.unFollow(params) == 1;
     }
 
     @Override
-    public List<User> getFollowingList(int fromUser) {
-        return followDao.selectFollowingList(fromUser);
+    public List<User> getFollowing(String fromUser) {
+        return followDao.selectAllFollowing(fromUser);
     }
 
     @Override
-    public List<User> getFollowerList(int toUser) {
-        return followDao.selectFollowerList(toUser);
+    public List<User> getFollower(String toUser) {
+        return followDao.selectAllFollower(toUser);
     }
 
-    @Override
-    public List<HashMap<String, String>> getFollowWishList(int fromUser) {
-        return followDao.selectFollowWishList(fromUser);
-    }
+
 }
