@@ -33,6 +33,7 @@
             tag="article"
             style="max-width: 20rem"
             class="mb-2"
+            id="card"
           >
             <b-card-text>
               {{ video.snippet.channelTitle }}
@@ -82,4 +83,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#card {
+  border-radius: 10%;
+}
+
+img {
+  border-radius: 10%;
+}
+</style>
