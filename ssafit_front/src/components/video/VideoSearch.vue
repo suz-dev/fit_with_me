@@ -15,10 +15,16 @@
         </b-input-group-append>
       </b-input-group>
     </b-container>
-
+    <hr />
     <b-container v-if="videos">
-      <b-card-group deck>
-        <div v-for="video in videos.slice(0, 3)" :key="video.id.videoId">
+      <b-card-group deck id="card-group">
+        <div
+          v-for="video in videos.slice(
+            (currentPage - 1) * perPage,
+            currentPage * perPage
+          )"
+          :key="video.id.videoId"
+        >
           <b-card
             :title="video.snippet.title"
             :img-src="video.snippet.thumbnails.high.url"
@@ -39,6 +45,13 @@
           </b-card>
         </div>
       </b-card-group>
+
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="card-group"
+      ></b-pagination>
     </b-container>
   </div>
 </template>
@@ -50,10 +63,15 @@ export default {
   data() {
     return {
       search: "",
+      perPage: 3,
+      currentPage: 1,
     };
   },
   computed: {
     ...mapState({ videos: "searchVideos" }),
+    rows() {
+      return this.videos.length;
+    },
   },
   methods: {
     searchVideos() {
