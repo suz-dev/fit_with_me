@@ -69,14 +69,13 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log(res.data.items)
-          commit("SEARCH_VIDEO", res.data.items)
+          console.log(res.data.items);
+          commit("SEARCH_VIDEO", res.data.items);
         })
 
         .catch((err) => {
-          console.log(err)
-
-        })
+          console.log(err);
+        });
     },
     searchPartVideos({ commit }, part) {
       const API_URL = `https://www.googleapis.com/youtube/v3/search`;
@@ -94,25 +93,65 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log(res.data.items)
-          commit("SEARCH_PART_VIDEOS", res.data.items)
+          console.log(res.data.items);
+          commit("SEARCH_PART_VIDEOS", res.data.items);
         })
 
         .catch((err) => {
-          console.log(err)
-
-        })
+          console.log(err);
+        });
     },
-    getVideo({ commit }, id) {
+    createVideo({ dispatch }, videoId) {
+      const API_URL = `https://www.googleapis.com/youtube/v3/videos`;
+      const YOUTUBE_KEY = process.env.VUE_APP_YOUTUBE_API_KEY;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          key: YOUTUBE_KEY,
+          part: "snippet, statistics",
+          id: videoId,
+        },
+      })
+        .then((res) => {
+          console.log("---insert----");
+          console.log(res.data.items);
+          const AXIOS_URL = `${REST_API}/videoapi/video`;
+          axios({
+            url: AXIOS_URL,
+            method: "POST",
+            params: {
+              channelName: res.data.items[0].snippet.channelTitle,
+              id: res.data.items[0].id,
+              title: res.data.items[0].snippet.title,
+              viewCnt: res.data.items[0].statistics.viewCount,
+              part: "",
+            },
+          }).then(() => {
+            console.log("삽입 완료");
+            dispatch("getVideo", videoId);
+          });
+        })
+
+        .catch((err) => {
+          console.log("삽입 실패");
+          console.log(err);
+        });
+    },
+    getVideo({ commit, dispatch }, id) {
       const API_URL = `${REST_API}/videoapi/video/${id}`;
       axios({
         url: API_URL,
         method: "GET",
       })
         .then((res) => {
+          console.log(res.data);
+          console.log("db에 있음");
           commit("GET_VIDEO", res.data);
         })
         .catch((err) => {
+          console.log("db에 없음");
+          dispatch("createVideo", id);
           console.log(err);
         });
     },
