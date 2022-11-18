@@ -15,7 +15,7 @@ public interface UserService {
     boolean removeUser(String userId);
 
     // 로그인 회원 조회
-    User getLoginUSer(String userId);
+    User getLoginUser(String userId);
 
     User getUser(String userId);
 
