@@ -22,7 +22,7 @@ export default new Vuex.Store({
     SEARCH_VIDEO(state, payload) {
       state.searchVideos = payload;
     },
-    GET_PART_VIDEOS(state, payload) {
+    SEARCH_PART_VIDEOS(state, payload) {
       state.partVideos = payload;
     },
     GET_VIDEO(state, payload) {
@@ -78,22 +78,30 @@ export default new Vuex.Store({
 
         })
     },
-    getPartVideos({ commit }, part) {
-      const API_URL = `${REST_API}/videoapi/video`;
+    searchPartVideos({ commit }, part) {
+      const API_URL = `https://www.googleapis.com/youtube/v3/search`;
+      const YOUTUBE_KEY = process.env.VUE_APP_YOUTUBE_API_KEY;
+
       axios({
         url: API_URL,
         method: "GET",
         params: {
-          mode: 1,
-          keyword: part,
+          key: YOUTUBE_KEY,
+          part: "snippet",
+          q: part,
+          type: "video",
+          maxResults: 10,
         },
       })
         .then((res) => {
-          commit("GET_PART_VIDEOS", res.data);
+          console.log(res.data.items)
+          commit("SEARCH_PART_VIDEOS", res.data.items)
         })
+
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+
+        })
     },
     getVideo({ commit }, id) {
       const API_URL = `${REST_API}/videoapi/video/${id}`;
