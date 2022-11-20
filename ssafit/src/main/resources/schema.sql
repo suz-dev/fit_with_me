@@ -31,6 +31,7 @@ CREATE TABLE user
 CREATE TABLE review
 (
     review_id INT AUTO_INCREMENT,
+    profile VARCHAR(20) NOT NULL,
     content   TEXT         NOT NULL,
     user_id   VARCHAR(255) NOT NULL,
     user_name VARCHAR(20)  NOT NULL,

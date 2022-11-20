@@ -47,10 +47,11 @@ export default new Vuex.Store({
       state.loginUser = {
         userName: sessionStorage.getItem("userName"),
         userId: sessionStorage.getItem("userId"),
+        profile: sessionStorage.getItem("profile"),
       };
     },
     LOGOUT(state) {
-      state.loginUser = "";
+      state.loginUser = {};
     },
 
     CREATE_REVIEW(state, payload) {
@@ -252,6 +253,7 @@ export default new Vuex.Store({
           sessionStorage.setItem("access-token", res.data["access-token"]);
           sessionStorage.setItem("userId", payload.id);
           sessionStorage.setItem("userName", res.data.userName);
+          sessionStorage.setItem("profile", res.data.profile);
           alert("로그인 성공!");
           commit("USER_LOGIN");
           router.push("/");
@@ -262,7 +264,6 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-
     // 로그아웃
     logout({ commit }) {
       sessionStorage.removeItem("access-token");
