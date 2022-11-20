@@ -48,6 +48,6 @@ export default {
 <style>
 .userId {
   text-align: left;
-  font-size: 3vw;
+  font-size: 20px;
 }
 </style>
