@@ -15,20 +15,12 @@
     </resultMap>
 
     <!-- 로그인시 조회 -->
-    <select id="selectLoginUser" parameterType="String" resultMap="userResultMap">
+    <select id="selectUserById" parameterType="String" resultMap="userResultMap">
         SELECT * FROM user WHERE user_id = #{userId}
     </select>
 
-    <select id="selectUser" parameterType="String" resultMap="userResultMap">
-        SELECT * FROM user
-        <!-- id 기준 조회 -->
-        <if test="mode == 1">
-            WHERE user_id LIKE CONCAT('%', #{userId}, '%')
-        </if>
-        <!-- 이름 기준 조회 -->
-        <if test="mode == 2">
-            WHERE user_name LIKE '%${userName}%'
-        </if>
+    <select id="selectUserByName" parameterType="String" resultMap="userResultMap">
+        SELECT * FROM user WHERE user_name = #{userName}
     </select>
 
     <select id="selectAllUser" resultMap="userResultMap">

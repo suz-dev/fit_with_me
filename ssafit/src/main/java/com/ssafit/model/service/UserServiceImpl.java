@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     // 회원 정보 수정
     @Override
     public boolean modifyUser(User user) {
-        User originUser = userDao.selectUser(user.getUserId());
+        User originUser = userDao.selectUserById(user.getUserId());
         System.out.println("originUser = " + originUser.getUserId());
         System.out.println("user = " + user.getUserId());
         originUser.setPassword(user.getPassword()); // 비번 수정 -> 검증 기능 추가?
@@ -38,13 +38,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getLoginUser(String userId) {
-        return userDao.selectLoginUser(userId);
+        return userDao.selectUserById(userId);
     }
 
     // userId, userName 두가지로 검색
     @Override
     public User getUser(String userId) {
-        return userDao.selectUser(userId);
+        return userDao.selectUserById(userId);
     }
 
     // 전체 조회

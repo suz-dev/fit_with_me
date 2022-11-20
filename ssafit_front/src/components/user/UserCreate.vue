@@ -9,67 +9,67 @@
           <b-form inline>
             <div>
               <label>
-                <input type="radio" name="test" value="big" />
+                <input type="radio" v-model="profile" value="bear" checked />
                 <img src="@/assets/bear.png" alt="Option 2" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" name="test" value="small" checked />
+                <input type="radio" v-model="profile" value="bird" checked />
                 <img src="@/assets/bird.png" alt="Option 1" />
               </label>
             </div>
             <div>
               <label>
-                <input type="radio" name="test" value="small" checked />
+                <input type="radio" v-model="profile" value="chicken" checked />
                 <img src="@/assets/chicken.png" alt="Option 1" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" name="test" value="big" />
+                <input type="radio" v-model="profile" value="dog" checked />
                 <img src="@/assets/dog.png" alt="Option 2" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" name="test" value="small" checked />
+                <input type="radio" v-model="profile" value="fox" checked />
                 <img src="@/assets/fox.png" alt="Option 1" />
               </label>
             </div>
             <div>
               <label>
-                <input type="radio" name="test" value="small" checked />
+                <input type="radio" v-model="profile" value="horse" checked />
                 <img src="@/assets/horse.png" alt="Option 1" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" name="test" value="big" />
+                <input type="radio" v-model="profile" value="leopard" checked />
                 <img src="@/assets/leopard.png" alt="Option 2" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" name="test" value="small" checked />
+                <input type="radio" v-model="profile" value="penguin" checked />
                 <img src="@/assets/penguin.png" alt="Option 1" />
               </label>
             </div>
             <div>
               <label>
-                <input type="radio" name="test" value="small" checked />
+                <input type="radio" v-model="profile" value="turtle" checked />
                 <img src="@/assets/turtle.png" alt="Option 1" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" name="test" value="small" checked />
+                <input type="radio" v-model="profile" value="basic" checked />
                 <img src="@/assets/basic.png" alt="Option 1" />
               </label>
             </div>
@@ -91,7 +91,7 @@
           <!-- 구현 -->
           <!-- 중복체크 확인 여부 -->
           <!-- 중복체크 해서 ok -> true / false-->
-          <b-button>ID 중복체크</b-button>
+          <b-button @click="checkId">ID 중복체크</b-button>
         </b-form>
       </b-form-group>
 
@@ -202,6 +202,7 @@ export default {
     },
   },
   methods: {
+    checkId() {},
     createUser() {
       let user = {
         profile: this.profile,

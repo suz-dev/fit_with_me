@@ -11,10 +11,10 @@ public interface UserDao {
     int insertUser(User user);
 
     // 로그인 회원 조회
-    User selectLoginUser(String userId);
+    User selectUserById(String userId);
 
     // 회원 조회 (userId 기준)
-    User selectUser(String userId);
+    User selectUserByName(String userName);
 
     // 회원 목록 조회
     List<User> selectAllUser();
