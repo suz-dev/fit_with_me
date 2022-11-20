@@ -16,7 +16,7 @@
       <b-button variant="outline-danger"
         ><b-icon-suit-heart
           variant="danger"
-          @click="createLike(video.id)"
+          @click.self="createLike(video.id)"
         ></b-icon-suit-heart
       ></b-button>
     </div>
@@ -49,6 +49,7 @@ export default {
   methods: {
     createLike(videoId) {
       this.$store.dispatch("createLike", videoId);
+      return false;
     },
   },
 };
