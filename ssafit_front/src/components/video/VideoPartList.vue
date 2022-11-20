@@ -48,7 +48,7 @@
             <b-button variant="outline-danger" v-if="loginUser.userName"
               ><b-icon-suit-heart
                 variant="danger"
-                @click="createLike(video.id.videoId)"
+                @click.self="createLike(video.id.videoId)"
               ></b-icon-suit-heart
             ></b-button>
           </b-card>
