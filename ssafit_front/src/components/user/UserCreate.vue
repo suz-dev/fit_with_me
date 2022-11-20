@@ -81,8 +81,9 @@
       <b-form-group id="id" label-for="id">
         <b-form inline>
           <b-form-input
+            ref="idInput"
             id="id"
-            v-model="id"
+            v-model="userId"
             type="text"
             placeholder="ID"
             required
@@ -125,7 +126,7 @@
       <b-form-group id="name" label-for="name">
         <b-form-input
           id="name"
-          v-model="name"
+          v-model="userName"
           type="text"
           placeholder="Name"
           required
@@ -135,6 +136,7 @@
       <b-form-group id="email" label-for="email">
         <b-form-input
           id="email"
+          ref="emailInput"
           v-model="email"
           type="email"
           class="form-control"
@@ -143,37 +145,19 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="birthDate" label-for="birthDate">
-        <b-form-input
-          id="birthDate"
-          v-model="birthDate"
-          type="date"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- 성별 -->
       <b-form inline>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="sex"
-            checked
-          />
-          <label class="f" for="flexRadioDefault2"> 여성 </label>
-        </div>
+        <b-form-group id="birthDate" label-for="birthDate">
+          <b-form-datepicker
+            id="birthDate"
+            v-model="birthDate"
+            placeholder="생년월일 (선택)"
+            required
+          ></b-form-datepicker>
+        </b-form-group>
 
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="sex"
-          />
-          <label class="m" for="flexRadioDefault1"> 남성 </label>
-        </div>
+        <!-- 성별 -->
+
+        <b-form-select v-model="sex" :options="options"></b-form-select>
       </b-form>
     </b-container>
     <b-button class="btn btn-primary" to="/">취소</b-button>
@@ -188,13 +172,21 @@ export default {
 
   data() {
     return {
-      profile: "",
-      id: "",
+      profile: "basic",
+      userId: "",
       password: "",
       pw2: "",
-      name: "",
-      sex: "",
+      userName: "",
+      sex: null,
       email: "",
+      birthDate: null,
+      validId: false,
+      validEmail: true,
+      options: [
+        { value: "null", text: "성별 (선택)", disabled: true },
+        { value: "f", text: "여성" },
+        { value: "m", text: "남성" },
+      ],
     };
   },
 
@@ -205,7 +197,12 @@ export default {
   },
   methods: {
     checkId() {
-      const API_URL = `http://localhost:9999/userapi/user/${this.id}`;
+      if (this.userId.length == 0) {
+        alert("아이디를 입력하세요.");
+        return;
+      }
+
+      const API_URL = `http://localhost:9999/userapi/user/${this.userId}`;
 
       axios({
         url: API_URL,
@@ -213,12 +210,11 @@ export default {
       })
         .then((res) => {
           console.log(res);
-
-          alert("로그인 성공!");
-
-          return;
+          alert("이미 사용중인 아이디입니다");
         })
         .catch((err) => {
+          alert("사용 가능한 아이디입니다");
+          this.validId = true;
           console.log(err);
         });
     },
@@ -226,13 +222,33 @@ export default {
     createUser() {
       let user = {
         profile: this.profile,
-        id: this.userId,
+        userId: this.userId,
         password: this.password,
-        name: this.userName,
+        userName: this.userName,
         email: this.email,
         sex: this.sex,
         birthDate: this.birthDate,
       };
+
+      if (!this.validId) {
+        alert("아이디 중복 체크를 하지 않았습니다.");
+        this.$refs.idInput.focus();
+        return;
+      }
+      if (this.password.length == 0) {
+        alert("비밀번호를 입력하세요");
+        return;
+      }
+      if (this.userName.length == 0) {
+        alert("이름을 입력하세요");
+        return;
+      }
+      if (this.email.indexOf("@") == -1) {
+        alert("이메일 형식이 아닙니다.");
+        this.$refs.emailInput.focus();
+        this.validEmail = false;
+        return;
+      }
       this.$store.dispatch("createUser", user);
     },
   },
