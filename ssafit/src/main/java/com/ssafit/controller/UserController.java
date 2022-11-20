@@ -52,6 +52,7 @@ public class UserController {
                 result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
                 result.put("message", SUCCESS);
                 result.put("userName", confirm.getUserName());
+                result.put("profile", confirm.getProfile());
                 status = HttpStatus.ACCEPTED;
             } else {
                 result.put("message", FAIL);
