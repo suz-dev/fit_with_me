@@ -303,6 +303,7 @@ export default new Vuex.Store({
             star: review.star,
             userId: review.userId,
             userName: review.userName,
+            profile: review.profile,
             videoId: this.state.video.id,
             viewCnt: 0,
           },
@@ -314,7 +315,8 @@ export default new Vuex.Store({
         )
         .then(() => {
           commit("CREATE_REVIEW", review);
-          location.reload();
+          console.log(review);
+          // location.reload();
         })
         .catch((err) => {
           console.log(err);
