@@ -1,17 +1,34 @@
 <template>
   <div>
+    <hr />
     <!-- table로 리뷰 목록 보여주기 -->
     <h2>리뷰 리스트</h2>
-    <b-table striped hover :items="reviews" :fields="fields">
-      <template #cell(title)="data">
-        <router-link :to="'review/' + data.item.reviewId">{{
-          data.item.title
-        }}</router-link>
-      </template>
-      <template #cell(star)="data">
-        <b-form-rating v-model="data.item.star"></b-form-rating>
-      </template>
-    </b-table>
+    <b-container>
+      <b-row v-for="review in reviews" :key="review.reviewId">
+        <b-col
+          ><img
+            :src="require(`@/assets/${review.profile}.png`)"
+            style="border-radius: 50%; width: 50px"
+          />
+
+          {{ review.userName }}
+        </b-col>
+        <b-col> {{ review.content }}</b-col>
+        <b-col>
+          {{ review.regDate }}
+        </b-col>
+        <b-col
+          ><b-form-rating
+            variant="warning"
+            :value="review.star"
+            readonly
+          ></b-form-rating
+        ></b-col>
+        <b-col v-if="review.userName == loginUser.userName"
+          ><b-button>수정</b-button> <b-button>삭제</b-button></b-col
+        >
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -19,30 +36,8 @@
 import { mapState } from "vuex";
 
 export default {
-  data() {
-    return {
-      fields: [
-        {
-          key: "content",
-          label: "내용",
-        },
-        {
-          key: "userName",
-          label: "유저 이름",
-        },
-        {
-          key: "regDate",
-          label: "등록날짜",
-        },
-        {
-          key: "star",
-          label: "별점",
-        },
-      ],
-    };
-  },
   computed: {
-    ...mapState(["reviews"]),
+    ...mapState(["reviews", "loginUser"]),
   },
   created() {
     const pathName = new URL(document.location).pathname.split("/");
@@ -52,4 +47,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

@@ -14,12 +14,14 @@ public class Review {
     private String videoId;
     private String regDate;
 
+    private String profile;
+
     private int star;
 
     public Review() {
     }
 
-    public Review(int reviewId, String content, String userId, String userName, String videoId, String regDate, int star) {
+    public Review(int reviewId, String content, String userId, String userName, String videoId, String regDate, int star, String profile) {
         this.reviewId = reviewId;
         this.content = content;
         this.userId = userId;
@@ -27,6 +29,7 @@ public class Review {
         this.videoId = videoId;
         this.regDate = regDate;
         this.star = star;
+        this.profile=profile;
     }
 
     public int getReviewId() {
@@ -83,5 +86,13 @@ public class Review {
 
     public void setStar(int star) {
         this.star = star;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

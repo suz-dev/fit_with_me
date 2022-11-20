@@ -10,6 +10,7 @@
         <result column="content" property="content"/>
         <result column="user_id" property="userId"/>
         <result column="user_name" property="userName"/>
+        <result column="profile" property="profile"/>
         <result column="video_id" property="videoId"/>
         <result column="reg_date" property="regDate"/>
         <result column="star" property="star"/>
@@ -27,8 +28,8 @@
     </select>
 
     <insert id="insertReview" parameterType="Review">
-        INSERT INTO review(content, user_id, user_name, video_id, star)
-        VALUES (#{content}, #{userId}, #{userName}, #{videoId}, #{star});
+        INSERT INTO review(content, user_id, user_name, profile, video_id, star)
+        VALUES (#{content}, #{userId}, #{userName},#{profile}, #{videoId}, #{star});
     </insert>
 
     <update id="updateReview" parameterType="Review">

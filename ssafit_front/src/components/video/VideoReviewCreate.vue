@@ -45,6 +45,7 @@ export default {
         content: "",
         userId: sessionStorage.getItem("userId"),
         userName: sessionStorage.getItem("userName"),
+        profile: sessionStorage.getItem("profile"),
         star: 0,
       },
     };
@@ -55,6 +56,7 @@ export default {
   },
   methods: {
     createReview() {
+      console.log(this.review);
       this.$store.dispatch("createReview", this.review);
     },
   },
