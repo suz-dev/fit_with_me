@@ -182,8 +182,10 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "UserCreate",
+
   data() {
     return {
       profile: "",
@@ -202,7 +204,25 @@ export default {
     },
   },
   methods: {
-    checkId() {},
+    checkId() {
+      const API_URL = `http://localhost:9999/userapi/user/${this.id}`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          console.log(res);
+
+          alert("로그인 성공!");
+
+          return;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     createUser() {
       let user = {
         profile: this.profile,
