@@ -98,9 +98,10 @@
 
       <b-form-group id="pw" label-for="pw">
         <b-form-input
+          ref="pwInput"
           id="pw"
           v-model="password"
-          type="text"
+          type="password"
           placeholder="Password"
           required
         ></b-form-input>
@@ -116,6 +117,7 @@
       >
         <b-form-input
           id="pw"
+          ref="pw2Input"
           v-model="pw2"
           type="text"
           placeholder="Password 재입력"
@@ -126,6 +128,7 @@
       <b-form-group id="name" label-for="name">
         <b-form-input
           id="name"
+          ref="nameInput"
           v-model="userName"
           type="text"
           placeholder="Name"
@@ -237,10 +240,17 @@ export default {
       }
       if (this.password.length == 0) {
         alert("비밀번호를 입력하세요");
+        this.$refs.pwInput.focus();
+        return;
+      }
+      if (!this.state) {
+        alert("비밀번호가 일치하는지 확인해주세요");
+        this.$refs.pw2Input.focus();
         return;
       }
       if (this.userName.length == 0) {
         alert("이름을 입력하세요");
+        this.$refs.nameInput.focus();
         return;
       }
       if (this.email.indexOf("@") == -1) {
