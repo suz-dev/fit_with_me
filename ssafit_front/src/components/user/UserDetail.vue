@@ -23,25 +23,16 @@
           >
         </div>
       </div>
-<<<<<<< HEAD
-    </div>
-    <user-like></user-like>
-  </div>
-=======
+
       <div class="userId">{{ loginUser.userId }}</div>
     </section>
   </header>
->>>>>>> d4069adc0a1a19355dbef1f673b731cb03d55e54
 </template>
 
 <script>
 import { mapState } from "vuex";
-import UserLike from "./UserLike.vue";
 
 export default {
-  components: {
-    UserLike,
-  },
   computed: {
     ...mapState(["loginUser"]),
   },
