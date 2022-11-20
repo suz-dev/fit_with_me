@@ -11,7 +11,7 @@ CREATE TABLE video
     id           VARCHAR(200),
     title        VARCHAR(500) NOT NULL,
     part         VARCHAR(50) NOT NULL,
-    channel_name VARCHAR(20) NOT NULL,
+    channel_name VARCHAR(200) NOT NULL,
     view_cnt     INT         NOT NULL DEFAULT '0',
     PRIMARY KEY (id)
 );
