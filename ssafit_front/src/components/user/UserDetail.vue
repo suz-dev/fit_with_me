@@ -1,18 +1,30 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <!-- 유저 정보 -->
-    <b-container>
-      <img
-        style="border-radius: 50%; width: 50px"
-        :src="require(`@/assets/${loginUser.profile}.png`)"
-      />
+
+    <div class="d-inline-flex p-2">
+      <div>
+        <img
+          style="border-radius: 50%; width: 100px"
+          :src="require(`@/assets/${loginUser.profile}.png`)"
+        />
+        <p class="text-lg-start">
+          {{ loginUser.userId }}
+        </p>
+      </div>
 
       <div>
-        {{ loginUser.profile }}
-        {{ loginUser.userId }}
-        {{ loginUser.userName }}
+        <div>
+          {{ loginUser.userName }}
+        </div>
+        <div>
+          <!-- 등록 폼 수정 폼으로 바꾸기 -->
+          <b-button to="/user/regist" variant="outline-success"
+            >회원정보 수정</b-button
+          >
+        </div>
       </div>
-    </b-container>
+    </div>
   </div>
 </template>
 
