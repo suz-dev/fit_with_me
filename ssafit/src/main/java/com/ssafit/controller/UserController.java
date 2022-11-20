@@ -76,7 +76,10 @@ public class UserController {
 
     // 회원 조회
     @GetMapping("/user/{userId}")
-    public ResponseEntity<User> getUser(@PathVariable String userId) {
+    public ResponseEntity<?> getUser(@PathVariable String userId) {
+        if (userService.getUser(userId) == null){
+            return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+        }
         // 추가 예외처리
         return new ResponseEntity<User>(userService.getUser(userId), HttpStatus.OK);
     }
