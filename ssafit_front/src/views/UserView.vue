@@ -15,7 +15,12 @@
     </div>
 
     <!-- 캘린더 / 찜 / 유저 추천 -->
-    <div class="d-flex justify-content-center">cal / like / users</div>
+    <div class="d-flex justify-content-center">
+      <b-button to="/user/userInfo/like">like</b-button>
+      cal / like / users
+    </div>
+
+    <router-view></router-view>
   </div>
 </template>
 

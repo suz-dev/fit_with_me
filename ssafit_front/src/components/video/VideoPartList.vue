@@ -25,7 +25,11 @@
         >
           <b-card
             :title="video.snippet.title"
-            :img-src="video.snippet.thumbnails.high.url"
+            :img-src="
+              'https://img.youtube.com/vi/' +
+              video.id.videoId +
+              '/mqdefault.jpg'
+            "
             img-alt="Image"
             img-top
             tag="article"

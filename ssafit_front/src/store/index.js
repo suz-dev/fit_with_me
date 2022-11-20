@@ -19,6 +19,7 @@ export default new Vuex.Store({
     review: {},
     loginUser: {},
     user: {},
+    likeVideos: [],
   },
   getters: {},
   mutations: {
@@ -58,6 +59,9 @@ export default new Vuex.Store({
 
     CREATE_REVIEW(state, payload) {
       state.reviews.push(payload);
+    },
+    GET_LIKES(state, payload) {
+      state.likeVideos = payload;
     },
   },
   actions: {
@@ -345,6 +349,38 @@ export default new Vuex.Store({
             // duplicate entry
             alert("이미 찜한 영상입니다.");
           }
+          console.log(err);
+        });
+    },
+    getLikes({ commit }, userId) {
+      const API_URL = `${REST_API}/likeapi/like/${userId}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          console.log(res.data);
+          commit("GET_LIKES", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteLike({ commit }, videoId) {
+      const API_URL = `${REST_API}/likeapi/like`;
+      axios({
+        url: API_URL,
+        method: "DELETE",
+        params: {
+          userId: this.state.loginUser.userId,
+          videoId: videoId,
+        },
+      })
+        .then(() => {
+          commit;
+          location.reload();
+        })
+        .catch((err) => {
           console.log(err);
         });
     },
