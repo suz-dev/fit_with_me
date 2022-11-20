@@ -25,13 +25,18 @@
         </div>
       </div>
     </div>
+    <user-like></user-like>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import UserLike from "./UserLike.vue";
 
 export default {
+  components: {
+    UserLike,
+  },
   computed: {
     ...mapState(["loginUser"]),
   },
