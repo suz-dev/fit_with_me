@@ -113,7 +113,10 @@ export default {
       this.$store.dispatch("searchPartVideos", this.selected);
     },
     createLike(videoId) {
-      this.$store.dispatch("createLike", videoId);
+      this.$store
+        .dispatch("getVideo", videoId)
+
+        .then(this.$store.dispatch("createLike", videoId));
     },
   },
 

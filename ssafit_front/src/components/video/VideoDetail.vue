@@ -13,6 +13,12 @@
       {{ video.title }}
       {{ video.channelName }}
       {{ video.viewCnt }}
+      <b-button variant="outline-danger"
+        ><b-icon-suit-heart
+          variant="danger"
+          @click="createLike(video.id)"
+        ></b-icon-suit-heart
+      ></b-button>
     </div>
     <!-- <video-item></video-item> -->
     <!-- 리뷰 목록 -->
@@ -39,6 +45,11 @@ export default {
     console.log(id);
     this.$store.dispatch("getVideo", id);
     this.$store.dispatch("getReviews", id);
+  },
+  methods: {
+    createLike(videoId) {
+      this.$store.dispatch("createLike", videoId);
+    },
   },
 };
 </script>
