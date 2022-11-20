@@ -228,7 +228,7 @@ export default new Vuex.Store({
         .delete(API_URL)
         .then(() => {
           commit;
-          router.push(`/${data.videoId}`);
+          location.reload();
         })
         .catch((err) => {
           console.log(data.id);

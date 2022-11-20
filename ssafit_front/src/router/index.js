@@ -5,7 +5,6 @@ import UserView from "@/views/UserView";
 import VideoSearch from "@/components/video/VideoSearch.vue";
 import VideoDetail from "@/components/video/VideoDetail.vue";
 import VideoReviewList from "@/components/video/VideoReviewList.vue";
-import VideoReviewDetail from "@/components/video/VideoReviewDetail.vue";
 import LoginView from "@/components/user/LoginView.vue";
 import UserCreate from "@/components/user/UserCreate.vue";
 import UserDetail from "@/components/user/UserDetail.vue";
@@ -36,11 +35,6 @@ const routes = [
         component: VideoReviewList,
       },
     ],
-  },
-  {
-    path: "/review/:id",
-    name: "videoReviewDetail",
-    component: VideoReviewDetail,
   },
   // 로그인
   {
