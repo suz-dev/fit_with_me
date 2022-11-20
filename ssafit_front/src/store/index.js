@@ -18,6 +18,7 @@ export default new Vuex.Store({
     reviews: [],
     review: {},
     loginUser: {},
+    user: {},
   },
   getters: {},
   mutations: {
@@ -49,6 +50,7 @@ export default new Vuex.Store({
         userId: sessionStorage.getItem("userId"),
         profile: sessionStorage.getItem("profile"),
       };
+      state.user = state.loginUser;
     },
     LOGOUT(state) {
       state.loginUser = {};
@@ -323,21 +325,43 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    createLike({ commit }, videoId) {
-      const API_URL = `${REST_API}/likeapi/like`;
+    createLike({ commit, dispatch }, videoId) {
+      const API_GET = `${REST_API}/videoapi/video/${videoId}`;
       axios({
-        url: API_URL,
-        method: "POST",
-        params: {
-          userId: this.state.user,
-          videoId: videoId,
-        },
+        url: API_GET,
+        method: "GET",
       })
-        .then(() => {
-          commit;
+        .then((res) => {
+          console.log(res.data);
+          console.log("db에 있음");
         })
         .catch((err) => {
+          console.log("db에 없음");
+          dispatch("createVideo", videoId);
           console.log(err);
+        })
+        .finally(() => {
+          const API_URL = `${REST_API}/likeapi/like`;
+          axios({
+            url: API_URL,
+            method: "POST",
+            params: {
+              userId: this.state.loginUser.userId,
+              videoId: videoId,
+            },
+          })
+            .then(() => {
+              console.log(videoId);
+              alert("찜 완료");
+              commit;
+            })
+            .catch((err) => {
+              if (err.response.data.message.includes("Duplicate entry")) {
+                // duplicate entry
+                alert("이미 찜한 영상입니다.");
+              }
+              console.log(err);
+            });
         });
     },
   },

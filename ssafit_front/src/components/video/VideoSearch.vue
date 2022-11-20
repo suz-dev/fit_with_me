@@ -86,6 +86,9 @@ export default {
       console.log(this.search);
       this.$store.dispatch("searchVideos", this.search);
     },
+    createLike(videoId) {
+      this.$store.dispatch("createLike", videoId);
+    },
   },
 };
 </script>
