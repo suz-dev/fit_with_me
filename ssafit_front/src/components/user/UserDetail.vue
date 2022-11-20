@@ -1,31 +1,31 @@
 <template>
-  <div class="d-flex justify-content-center">
-    <!-- 유저 정보 -->
-
-    <div class="d-inline-flex p-2">
-      <div>
-        <img
-          style="border-radius: 50%; width: 100px"
-          :src="require(`@/assets/${loginUser.profile}.png`)"
-        />
-        <p class="text-lg-start">
-          {{ loginUser.userId }}
-        </p>
-      </div>
-
-      <div>
-        <div>
+  <!-- 유저 정보 -->
+  <header class="d-flex justify-content-center">
+    <div>
+      <img
+        style="border-radius: 50%; width: 90px"
+        :src="require(`@/assets/${loginUser.profile}.png`)"
+      />
+    </div>
+    <p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <section>
+      <div class="d-inline-flex">
+        <h2>
           {{ loginUser.userName }}
-        </div>
+        </h2>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         <div>
           <!-- 등록 폼 수정 폼으로 바꾸기 -->
           <b-button to="/user/regist" variant="outline-success"
-            >회원정보 수정</b-button
+            >회원 정보 수정</b-button
           >
         </div>
       </div>
-    </div>
-  </div>
+      <div class="userId">{{ loginUser.userId }}</div>
+    </section>
+  </header>
 </template>
 
 <script>
@@ -44,4 +44,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.userId {
+  text-align: left;
+  font-size: 3vw;
+}
+</style>
