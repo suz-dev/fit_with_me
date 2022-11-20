@@ -17,7 +17,7 @@
 
     </insert>
 
-    <select id="selectAllLike" resultMap="videoResultMap" parameterType="int">
+    <select id="selectAllLike" resultMap="videoResultMap" parameterType="String">
         SELECT *
         FROM video
         WHERE id IN (SELECT video_id
