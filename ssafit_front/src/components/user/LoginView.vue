@@ -13,6 +13,7 @@
       <b-form-group label-for="pw">
         <b-form-input
           id="pw"
+          type="password"
           v-model="user.password"
           trim
           placeholder="Password"
