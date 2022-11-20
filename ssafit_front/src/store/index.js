@@ -329,7 +329,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    createLike({ commit }, videoId) {
+    createLike({ commit, dispatch }, videoId) {
       const API_URL = `${REST_API}/likeapi/like`;
       axios({
         url: API_URL,
@@ -348,6 +348,13 @@ export default new Vuex.Store({
           if (err.response.data.message.includes("Duplicate entry")) {
             // duplicate entry
             alert("이미 찜한 영상입니다.");
+            return;
+          } else if (err.response.data.message.includes("foreign key")) {
+            dispatch("createVideo", videoId);
+            setTimeout(() => {
+              dispatch("createLike", videoId);
+            }, 500);
+            return;
           }
           console.log(err);
         });
