@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>회원가입</h2>
+    <h2>회원 정보</h2>
 
     <b-container>
       <!-- 프로필 사진 -->
@@ -119,7 +119,7 @@
           id="pw"
           ref="pw2Input"
           v-model="pw2"
-          type="text"
+          type="password"
           placeholder="Password 재입력"
           required
         ></b-form-input>
