@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <header-nav></header-nav>
-    <hr />
+    <br />
+    <br />
     <router-view></router-view>
     <!-- <img src="@/assets/bear.png" /> -->
   </div>

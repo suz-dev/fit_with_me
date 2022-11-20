@@ -264,6 +264,7 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(payload);
           console.log(err);
+          alert("회원정보가 일치하지 않습니다.");
         });
     },
     // 로그아웃
