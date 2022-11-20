@@ -27,7 +27,10 @@
         </b-form-group>
 
         <b-form-group inline id="star" label="별점 :" label-for="star">
-          <b-form-rating v-model="review.star"></b-form-rating>
+          <b-form-rating
+            variant="warning"
+            v-model="review.star"
+          ></b-form-rating>
         </b-form-group>
         <button class="btn btn-primary" @click="createReview">등록</button>
       </b-form>
