@@ -18,12 +18,14 @@
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         <div>
           <!-- 등록 폼 수정 폼으로 바꾸기 -->
+
           <b-button
             v-if="loginUser.userId == user.userId"
             to="/user/regist"
-            variant="outline-success"
-            >회원 정보 수정</b-button
-          >
+            variant="none"
+            ><b-icon icon="gear" variant="secondary"></b-icon
+          ></b-button>
+
           <b-button
             v-else-if="validFollow(user.userId)"
             variant="outline-danger"
