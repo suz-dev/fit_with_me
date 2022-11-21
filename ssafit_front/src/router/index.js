@@ -78,7 +78,7 @@ const routes = [
     ],
   },
   {
-    path: "/user/userInfo",
+    path: "/user/userInfo/:userId",
     name: "userDetail",
     component: UserDetail,
   },

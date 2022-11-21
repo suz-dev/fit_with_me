@@ -72,6 +72,9 @@ export default new Vuex.Store({
     GET_FOLLOWER(state, payload) {
       state.follower = payload;
     },
+    GET_USER(state, payload) {
+      state.user = payload;
+    },
   },
   actions: {
     searchVideos({ commit }, search) {
@@ -493,6 +496,19 @@ export default new Vuex.Store({
           console.log(err);
           console.log(toUser);
           console.log(this.state.loginUser.userId);
+        });
+    },
+    getUser({ commit }, userId) {
+      const API_URL = `${REST_API}/userapi/user/${userId}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          commit("GET_USER", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },

@@ -12,7 +12,9 @@
           />
           <span>{{ loginUser.userName }}님 환영합니다!</span>
           <b-button @click="logout">로그아웃</b-button>
-          <b-button to="/user/userInfo" variant="light">마이페이지</b-button>
+          <b-button :to="'/user/userInfo/' + loginUser.userId" variant="light"
+            >마이페이지</b-button
+          >
         </div>
         <div v-else>
           <b-button to="/user/login" variant="light">로그인</b-button>
