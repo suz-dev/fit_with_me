@@ -60,8 +60,9 @@ export default {
 
   methods: {
     // 팔로우
-    addFollow(fromUser) {
-      this.$store.dispatch("addFollow", fromUser);
+    addFollow(userId) {
+      console.log(userId);
+      this.$store.dispatch("addFollow", userId);
     },
     validFollow(userId) {
       for (var key in this.loginFollowing) {
