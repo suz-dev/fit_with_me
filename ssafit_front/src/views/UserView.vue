@@ -4,25 +4,43 @@
     <user-detail :key="$route.fullPath"></user-detail>
 
     <br />
+    <br />
     <!-- 팔로우 페이지-->
+
     <div class="d-flex justify-content-center">
       <b-form inline>
         <!-- follow 컴포넌트-->
         <div class="d-flex justify-content-center">
-          <b-button :to="'/user/userInfo/' + user.userId + '/follower'"
+          <b-button
+            :to="'/user/userInfo/' + user.userId + '/follower'"
+            variant="outline-secondary"
             >follower</b-button
           >
-          <b-button :to="'/user/userInfo/' + user.userId + '/following'"
+          <div>&nbsp;&nbsp;</div>
+          <b-button
+            :to="'/user/userInfo/' + user.userId + '/following'"
+            variant="outline-secondary"
             >following</b-button
           >
         </div>
       </b-form>
     </div>
 
+    <br />
+
     <!-- 캘린더 / 찜 / 유저 추천 -->
     <div class="d-flex justify-content-center">
-      <b-button :to="'/user/userInfo/' + user.userId + '/like'">like</b-button>
-      <b-button :to="'/user/userInfo/' + user.userId + '/users'"
+      <b-button variant="outline-secondary">Calendar</b-button>
+      <div>&nbsp;&nbsp;</div>
+      <b-button
+        :to="'/user/userInfo/' + user.userId + '/like'"
+        variant="outline-secondary"
+        >like</b-button
+      >
+      <div>&nbsp;&nbsp;</div>
+      <b-button
+        :to="'/user/userInfo/' + user.userId + '/users'"
+        variant="outline-secondary"
         >recommend</b-button
       >
     </div>

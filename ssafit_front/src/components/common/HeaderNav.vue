@@ -3,7 +3,7 @@
     <b-navbar class="navbar navbar-expand-sm" variant="none">
       <!-- 홈 링크 -->
 
-      <div class="container-fluid">
+      <b-container>
         <div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
@@ -45,7 +45,7 @@
             <b-button to="/user/login" variant="light">로그인</b-button>
           </div>
         </main>
-      </div>
+      </b-container>
     </b-navbar>
   </div>
 </template>
