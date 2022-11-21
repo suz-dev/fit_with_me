@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar class="navbar navbar-expand-sm" variant="primary">
+    <b-navbar class="navbar navbar-expand-sm" variant="none">
       <!-- 홈 링크 -->
 
       <div class="container-fluid">
@@ -10,16 +10,13 @@
 
         <header>
           <router-link to="/"
-            ><img
-              src="../../assets/logo_Cooper Black.png"
-              style="width: 100px"
-              alt=""
+            ><img src="../../assets/logo_gra.png" style="width: 100px" alt=""
           /></router-link>
         </header>
 
         <!-- 로그인/로그아웃 -->
         <main>
-          <div display:inline-block v-if="loginUser.userName">
+          <div v-if="loginUser.userName">
             <div class="dropdown">
               <img
                 style="border-radius: 50%; width: 50px"
@@ -28,10 +25,12 @@
             </div>
             <div>
               <b-dropdown
+                no-caret
                 id="dropdown-right"
                 right
+                block
+                variant="none"
                 :text="loginUser.userName"
-                class="m-md-2"
               >
                 <b-dropdown-item :to="'/user/userInfo/' + loginUser.userId"
                   >My Page</b-dropdown-item
@@ -74,13 +73,7 @@ export default {
 </script>
 
 <style scoped>
-#dropdown-right {
-}
 main {
   float: right;
-}
-a {
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  color: black;
 }
 </style>
