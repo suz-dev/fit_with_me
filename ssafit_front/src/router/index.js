@@ -11,6 +11,7 @@ import UserDetail from "@/components/user/UserDetail.vue";
 import UserLike from "@/components/user/UserLike.vue";
 import FollowingList from "@/components/user/FollowingList.vue";
 import FollowerList from "@/components/user/FollowerList.vue";
+import UserList from "@/components/user/UserList.vue";
 
 Vue.use(VueRouter);
 
@@ -74,6 +75,12 @@ const routes = [
         path: "follower/:userId",
         name: "follower",
         component: FollowerList,
+      },
+      // 전체 유저 리스트
+      {
+        path: "users",
+        name: "getAllUser",
+        component: UserList,
       },
     ],
   },
