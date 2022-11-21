@@ -113,6 +113,7 @@ public class UserController {
         HashMap<String, String> params = new HashMap<>();
         params.put("fromUser", fromUser);
         params.put("toUser", toUser);
+        System.out.println(fromUser+" "+toUser);
         followService.addFollow(params);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
     }

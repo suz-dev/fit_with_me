@@ -475,19 +475,18 @@ export default new Vuex.Store({
     },
 
     // 팔로우
-    addFollow({ commit }, fromUser) {
-      const API_URL = `${REST_API}/userapi/following/${fromUser}`;
+    addFollow({ dispatch }, userId) {
+      const API_URL = `${REST_API}/userapi/follow`;
       axios({
         url: API_URL,
         method: "POST",
         params: {
-          fromUser: fromUser,
-          toUSer: this.state,
+          fromUser: this.state.loginUser.userId,
+          toUser: userId,
         },
       })
         .then(() => {
-          commit;
-          location.reload();
+          dispatch("getLoginFollowing", this.state.loginUser.userId);
         })
         .catch((err) => {
           console.log(err);
@@ -507,7 +506,6 @@ export default new Vuex.Store({
       })
         .then(() => {
           dispatch("getLoginFollowing", this.state.loginUser.userId);
-          location.reload();
         })
         .catch((err) => {
           console.log(err);

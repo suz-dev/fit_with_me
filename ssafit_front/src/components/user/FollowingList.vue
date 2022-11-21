@@ -57,6 +57,10 @@ export default {
   },
 
   methods: {
+    addFollow(userId) {
+      console.log(userId);
+      this.$store.dispatch("addFollow", userId);
+    },
     // 언팔로우
     unFollow(toUser) {
       this.$store.dispatch("unFollow", toUser);
