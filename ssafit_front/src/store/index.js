@@ -20,7 +20,6 @@ export default new Vuex.Store({
     loginUser: {},
     user: {},
     likeVideos: [],
-    following: [],
   },
   getters: {},
   mutations: {
@@ -63,9 +62,6 @@ export default new Vuex.Store({
     },
     GET_LIKES(state, payload) {
       state.likeVideos = payload;
-    },
-    GET_FOLLOWING(state, payload) {
-      state.following = payload;
     },
   },
   actions: {
@@ -347,20 +343,22 @@ export default new Vuex.Store({
           console.log(videoId);
           alert("찜 완료");
           commit;
+          dispatch("getLikes", this.state.loginUser.userId);
         })
         .catch((err) => {
+          console.log(err);
           if (err.response.data.message.includes("Duplicate entry")) {
             // duplicate entry
             alert("이미 찜한 영상입니다.");
             return;
           } else if (err.response.data.message.includes("foreign key")) {
+            console.log("멈춤?");
             dispatch("createVideo", videoId);
             setTimeout(() => {
               dispatch("createLike", videoId);
             }, 500);
             return;
           }
-          console.log(err);
         });
     },
     getLikes({ commit }, userId) {
@@ -377,7 +375,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    deleteLike({ commit }, videoId) {
+    deleteLike({ dispatch }, videoId) {
       const API_URL = `${REST_API}/likeapi/like`;
       axios({
         url: API_URL,
@@ -388,44 +386,14 @@ export default new Vuex.Store({
         },
       })
         .then(() => {
-          commit;
-          location.reload();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-
-    getFollowing({ commit }, userId) {
-      const API_URL = `${REST_API}/userapi/following/${userId}`;
-      axios({
-        url: API_URL,
-        method: "GET",
-      }).then((res) => {
-        commit("GET_FOLLOWING", res.data);
-      });
-    },
-
-    unFollow({ commit }, fromUser) {
-      const API_URL = `${REST_API}/userapi/following/${fromUser}`;
-      axios({
-        url: API_URL,
-        method: "DELETE",
-        params: {
-          fromUser: fromUser,
-          toUSer: this.state,
-        },
-      })
-        .then(() => {
-          commit;
-          location.reload();
+          alert("삭제 완료");
+          dispatch("getLikes", this.state.loginUser.userId);
         })
         .catch((err) => {
           console.log(err);
         });
     },
   },
-
   modules: {},
   plugins: [createPersistedState()],
 });

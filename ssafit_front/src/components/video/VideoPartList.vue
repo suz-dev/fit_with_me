@@ -45,15 +45,24 @@
             <b-button variant="primary" :to="video.id.videoId"
               >영상 상세</b-button
             >
-            <div>
-              <b-button v-if="like">찜 삭제</b-button>
+            <span v-if="loginUser.userName">
+              <!-- 찜 등록-->
               <b-button
+                v-if="validLike(video.id.videoId)"
                 variant="outline-danger"
-                v-if="loginUser.userName"
                 @click="createLike(video.id.videoId)"
                 ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
               ></b-button>
-            </div>
+              <!-- 찜 삭제-->
+              <b-button
+                v-else
+                variant="outline-danger"
+                @click="deleteLike(video.id.videoId)"
+                ><b-icon-suit-heart-fill
+                  variant="danger"
+                ></b-icon-suit-heart-fill
+              ></b-button>
+            </span>
           </b-card>
         </div>
       </b-card-group>
@@ -70,7 +79,6 @@
 
 <script>
 import { mapState } from "vuex";
-import axios from "axios";
 export default {
   name: "VideoList",
 
@@ -118,6 +126,15 @@ export default {
     };
   },
   methods: {
+    validLike(videoId) {
+      for (var key in this.likeVideos) {
+        if (this.likeVideos[key].id == videoId) {
+          console.log(videoId);
+          return false;
+        }
+      }
+      return true;
+    },
     searchPartVideos() {
       this.$store.dispatch("searchPartVideos", this.selected);
     },
@@ -127,19 +144,9 @@ export default {
 
         .then(this.$store.dispatch("createLike", videoId));
     },
-    getLike(videoId) {
-      const API_URL = `http://localhost:9999/likeapi/like`;
-      axios({
-        url: API_URL,
-        method: "GET",
-        params: {
-          videoId: videoId,
-          userId: this.loginUser.userId,
-        },
-      }).then((res) => {
-        console.log(res);
-        return;
-      });
+    deleteLike(videoId) {
+      confirm("삭제하시겠습니까?");
+      this.$store.dispatch("deleteLike", videoId);
     },
   },
 
@@ -148,22 +155,10 @@ export default {
       return this.videos.length;
     },
     ...mapState({ videos: "partVideos" }),
-    ...mapState(["loginUser"]),
+    ...mapState(["loginUser", "likeVideos"]),
   },
   created() {
     this.$store.dispatch("searchPartVideos", this.selected);
-  },
-
-  watch: {
-    videos(newValue) {
-      this.status = [];
-      newValue.forEach(() => {
-        var tmp = {
-          index: false,
-        };
-        this.status.push(tmp);
-      });
-    },
   },
 };
 </script>
