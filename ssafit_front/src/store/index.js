@@ -291,11 +291,16 @@ export default new Vuex.Store({
         method: "PUT",
         params: user,
       })
-        .then((res) => {
+        .then(() => {
+          console.log("수정 후 ");
           console.log(user);
-          console.log(res);
+
           alert("회원 정보 수정이 완료되었습니다");
-          commit;
+
+          sessionStorage.setItem("userName", user.userName);
+          sessionStorage.setItem("profile", user.profile);
+          commit("USER_LOGIN");
+          commit("");
           location.reload();
           return;
         })
