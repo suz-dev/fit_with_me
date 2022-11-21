@@ -22,6 +22,7 @@ export default new Vuex.Store({
     users: [],
     likeVideos: [],
     following: [],
+    loginFollowing: [],
     follower: [],
   },
   getters: {},
@@ -65,6 +66,9 @@ export default new Vuex.Store({
     },
     GET_LIKES(state, payload) {
       state.likeVideos = payload;
+    },
+    GET_LOGIN_FOLLOWING(state, payload) {
+      state.loginFollowing = payload;
     },
 
     GET_FOLLOWING(state, payload) {
@@ -437,6 +441,15 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err);
         });
+    }, // 팔로잉 리스트
+    getLoginFollowing({ commit }, userId) {
+      const API_URL = `${REST_API}/userapi/following/${userId}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit("GET_LOGIN_FOLLOWING", res.data);
+      });
     },
 
     // 팔로잉 리스트
@@ -482,7 +495,7 @@ export default new Vuex.Store({
     },
 
     // 팔로우 취소
-    unFollow({ commit }, toUser) {
+    unFollow({ dispatch }, toUser) {
       const API_URL = `${REST_API}/userapi/follow`;
       axios({
         url: API_URL,
@@ -493,7 +506,7 @@ export default new Vuex.Store({
         },
       })
         .then(() => {
-          commit;
+          dispatch("getLoginFollowing", this.state.loginUser.userId);
           location.reload();
         })
         .catch((err) => {
@@ -526,7 +539,23 @@ export default new Vuex.Store({
       })
         .then((res) => {
           console.log(res.data);
-          commit("GET_USERS", res.data);
+
+          commit(
+            "GET_USERS",
+            res.data.filter((data) => {
+              // 전체 리스트에서 로그인 유저 제외
+              if (data.userId == this.state.loginUser.userId) return false;
+              // 내가 보고 있는 프로필 유저 제외 (user)
+              if (data.userId == this.state.user.userId) return false;
+              // 로그인 유저가 팔로우하고 있는 유저 제외
+              for (var key in this.state.loginFollowing) {
+                if (this.state.loginFollowing[key].userId == data.userId) {
+                  return false;
+                }
+              }
+              return true;
+            })
+          );
         })
         .catch((err) => {
           console.log(err);
