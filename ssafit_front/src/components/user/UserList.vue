@@ -19,8 +19,9 @@
           <b-col> {{ user.userName }}</b-col>
 
           <!-- 팔로우 안되어 있으면 'follow' / 되어 있으면 'followed'-->
+          <span v-if="user.userId == loginUser.userId"></span>
           <b-button
-            v-if="validFollow(user.userId)"
+            v-else-if="validFollow(user.userId)"
             variant="outline-danger"
             @click="addFollow(user.userId)"
             >Follow
@@ -48,15 +49,18 @@ export default {
     };
   },
   computed: {
-    ...mapState(["users", "loginUser", "following"]),
+    ...mapState(["users", "loginUser", "following", "loginFollowing"]),
     rows() {
       return this.users.length;
     },
   },
   methods: {
+    addFollow(userId) {
+      this.$store.dispatch("addFollow", userId);
+    },
     validFollow(userId) {
-      for (var key in this.following) {
-        if (this.following[key].userId == userId) {
+      for (var key in this.loginFollowing) {
+        if (this.loginFollowing[key].userId == userId) {
           // 이미 내가 팔로우하고 있음 -> 팔로우 취소 가능
           return false;
         }
