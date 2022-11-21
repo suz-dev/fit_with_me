@@ -94,6 +94,7 @@ public class UserController {
     @PutMapping("/user")
     public ResponseEntity<String> modifyUser(User user) {
         userService.modifyUser(user);
+        System.out.println(user);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
     }
 
