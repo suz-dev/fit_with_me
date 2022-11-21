@@ -13,12 +13,19 @@
       {{ video.title }}
       {{ video.channelName }}
       {{ video.viewCnt }}
-      <b-button variant="outline-danger"
-        ><b-icon-suit-heart
-          variant="danger"
-          @click.self="createLike(video.id)"
-        ></b-icon-suit-heart
-      ></b-button>
+      <span v-if="loginUser.userName">
+        <!-- 찜 등록-->
+        <b-button
+          v-if="validLike(video.id)"
+          variant="outline-danger"
+          @click="createLike(video.id)"
+          ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
+        ></b-button>
+        <!-- 찜 삭제-->
+        <b-button v-else variant="outline-danger" @click="deleteLike(video.id)"
+          ><b-icon-suit-heart-fill variant="danger"></b-icon-suit-heart-fill
+        ></b-button>
+      </span>
     </div>
     <!-- <video-item></video-item> -->
     <!-- 리뷰 목록 -->
@@ -38,6 +45,7 @@ export default {
   components: { VideoReviewCreate },
   computed: {
     ...mapState(["video"]),
+    ...mapState(["loginUser", "likeVideos"]),
   },
   created() {
     const pathName = new URL(document.location).pathname.split("/");
@@ -47,9 +55,22 @@ export default {
     this.$store.dispatch("getReviews", id);
   },
   methods: {
+    validLike(videoId) {
+      for (var key in this.likeVideos) {
+        if (this.likeVideos[key].id == videoId) {
+          console.log(videoId);
+          return false;
+        }
+      }
+      return true;
+    },
     createLike(videoId) {
       this.$store.dispatch("createLike", videoId);
       return false;
+    },
+    deleteLike(videoId) {
+      confirm("삭제하시겠습니까?");
+      this.$store.dispatch("deleteLike", videoId);
     },
   },
 };

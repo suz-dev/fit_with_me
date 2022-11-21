@@ -45,12 +45,24 @@
             <b-button variant="primary" :to="video.id.videoId"
               >영상 상세</b-button
             >
-            <b-button variant="outline-danger" v-if="loginUser.userName"
-              ><b-icon-suit-heart
-                variant="danger"
-                @click.self="createLike(video.id.videoId)"
-              ></b-icon-suit-heart
-            ></b-button>
+            <span v-if="loginUser.userName">
+              <!-- 찜 등록-->
+              <b-button
+                v-if="validLike(video.id.videoId)"
+                variant="outline-danger"
+                @click="createLike(video.id.videoId)"
+                ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
+              ></b-button>
+              <!-- 찜 삭제-->
+              <b-button
+                v-else
+                variant="outline-danger"
+                @click="deleteLike(video.id.videoId)"
+                ><b-icon-suit-heart-fill
+                  variant="danger"
+                ></b-icon-suit-heart-fill
+              ></b-button>
+            </span>
           </b-card>
         </div>
       </b-card-group>
@@ -72,6 +84,7 @@ export default {
 
   data() {
     return {
+      status: [],
       perPage: 3,
       currentPage: 1,
       selected: "골프",
@@ -113,6 +126,15 @@ export default {
     };
   },
   methods: {
+    validLike(videoId) {
+      for (var key in this.likeVideos) {
+        if (this.likeVideos[key].id == videoId) {
+          console.log(videoId);
+          return false;
+        }
+      }
+      return true;
+    },
     searchPartVideos() {
       this.$store.dispatch("searchPartVideos", this.selected);
     },
@@ -122,6 +144,10 @@ export default {
 
         .then(this.$store.dispatch("createLike", videoId));
     },
+    deleteLike(videoId) {
+      confirm("삭제하시겠습니까?");
+      this.$store.dispatch("deleteLike", videoId);
+    },
   },
 
   computed: {
@@ -129,7 +155,7 @@ export default {
       return this.videos.length;
     },
     ...mapState({ videos: "partVideos" }),
-    ...mapState(["loginUser"]),
+    ...mapState(["loginUser", "likeVideos"]),
   },
   created() {
     this.$store.dispatch("searchPartVideos", this.selected);

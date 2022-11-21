@@ -31,9 +31,10 @@
             <b-button variant="primary" :to="'/' + video.id"
               >영상 상세</b-button
             >
+            <!-- 찜 삭제-->
             <b-button variant="outline-danger" @click="deleteLike(video.id)"
-              >찜 삭제
-            </b-button>
+              ><b-icon-suit-heart-fill variant="danger"></b-icon-suit-heart-fill
+            ></b-button>
           </b-card>
         </div>
       </b-card-group>
@@ -70,6 +71,7 @@ export default {
   },
   methods: {
     deleteLike(videoId) {
+      confirm("삭제하시겠습니까?");
       this.$store.dispatch("deleteLike", videoId);
     },
   },

@@ -65,6 +65,7 @@ export default new Vuex.Store({
     GET_LIKES(state, payload) {
       state.likeVideos = payload;
     },
+
     GET_FOLLOWING(state, payload) {
       state.following = payload;
     },
@@ -354,20 +355,22 @@ export default new Vuex.Store({
           console.log(videoId);
           alert("찜 완료");
           commit;
+          dispatch("getLikes", this.state.loginUser.userId);
         })
         .catch((err) => {
+          console.log(err);
           if (err.response.data.message.includes("Duplicate entry")) {
             // duplicate entry
             alert("이미 찜한 영상입니다.");
             return;
           } else if (err.response.data.message.includes("foreign key")) {
+            console.log("멈춤?");
             dispatch("createVideo", videoId);
             setTimeout(() => {
               dispatch("createLike", videoId);
             }, 500);
             return;
           }
-          console.log(err);
         });
     },
 
@@ -387,8 +390,9 @@ export default new Vuex.Store({
         });
     },
 
-    // 찜 삭제
-    deleteLike({ commit }, videoId) {
+    deleteLike({ dispatch }, videoId) {
+      // 찜 삭제
+
       const API_URL = `${REST_API}/likeapi/like`;
       axios({
         url: API_URL,
@@ -399,8 +403,8 @@ export default new Vuex.Store({
         },
       })
         .then(() => {
-          commit;
-          location.reload();
+          alert("삭제 완료");
+          dispatch("getLikes", this.state.loginUser.userId);
         })
         .catch((err) => {
           console.log(err);
@@ -469,7 +473,6 @@ export default new Vuex.Store({
         });
     },
   },
-
   modules: {},
   plugins: [createPersistedState()],
 });
