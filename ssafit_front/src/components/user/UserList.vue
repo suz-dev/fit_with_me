@@ -67,6 +67,9 @@ export default {
       }
       // 팔로우 가능
       return true;
+    }, // 언팔로우
+    unFollow(toUser) {
+      this.$store.dispatch("unFollow", toUser);
     },
   },
   created() {
