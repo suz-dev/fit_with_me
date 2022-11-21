@@ -458,9 +458,13 @@ export default new Vuex.Store({
       axios({
         url: API_URL,
         method: "GET",
-      }).then((res) => {
-        commit("GET_FOLLOWING", res.data);
-      });
+      })
+        .then((res) => {
+          commit("GET_FOLLOWING", res.data);
+        })
+        .then((err) => {
+          console.log(err);
+        });
     },
 
     // 팔로워 리스트
