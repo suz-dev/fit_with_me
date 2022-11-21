@@ -81,6 +81,13 @@
       <b-form-group id="id" label-for="id">
         <b-form inline>
           <b-form-input
+            v-if="loginUser.userId"
+            v-model="userId"
+            type="text"
+            readonly
+          ></b-form-input>
+          <b-form-input
+            v-else
             ref="idInput"
             id="id"
             v-model="userId"
@@ -92,7 +99,11 @@
           <!-- 구현 -->
           <!-- 중복체크 확인 여부 -->
           <!-- 중복체크 해서 ok -> true / false-->
-          <b-button @click="checkId">ID 중복체크</b-button>
+          <b-button v-if="loginUser.userId" disabled @click="checkId"
+            >ID 중복체크</b-button
+          >
+
+          <b-button v-else @click="checkId">ID 중복체크</b-button>
         </b-form>
       </b-form-group>
 
@@ -138,6 +149,13 @@
 
       <b-form-group id="email" label-for="email">
         <b-form-input
+          v-if="loginUser.userId"
+          v-model="email"
+          type="email"
+          readonly
+        ></b-form-input>
+        <b-form-input
+          v-else
           id="email"
           ref="emailInput"
           v-model="email"
@@ -164,11 +182,22 @@
       </b-form>
     </b-container>
     <b-button class="btn btn-primary" to="/">취소</b-button>
-    <button class="btn btn-primary" @click="createUser">등록</button>
+    <span>
+      <button
+        v-if="loginUser.userId"
+        class="btn btn-primary"
+        @click="createUser"
+      >
+        수정
+      </button>
+      <button v-else class="btn btn-primary" @click="createUser">등록</button>
+    </span>
+    <b-button class="btn btn-danger" v-if="loginUser.userId">탈퇴</b-button>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 export default {
   name: "UserCreate",
@@ -197,6 +226,7 @@ export default {
     state() {
       return this.password == this.pw2 && this.pw2.length > 0;
     },
+    ...mapState(["loginUser"]),
   },
   methods: {
     checkId() {
@@ -261,6 +291,27 @@ export default {
       }
       this.$store.dispatch("createUser", user);
     },
+  },
+  created() {
+    if (this.loginUser.userId) {
+      const API_URL = `http://localhost:9999/userapi/user/${this.loginUser.userId}`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        console.log(res.data);
+        let user = res.data;
+        this.profile = user.profile;
+        this.userId = user.userId;
+        this.password = user.password;
+        this.userName = user.userName;
+        this.sex = user.sex;
+        this.email = user.email;
+        this.birthDate = user.birthDate;
+        this.validId = true;
+      });
+    }
   },
 };
 </script>
