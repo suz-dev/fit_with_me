@@ -59,9 +59,8 @@ CREATE TABLE follow
     FOREIGN KEY (from_user) REFERENCES user (user_id) on delete cascade,
     FOREIGN KEY (to_user) REFERENCES user (user_id) on delete cascade
 );
-###수정
-테스트..................
-############ 수정 완
+
+
 desc user;
 desc video;
 

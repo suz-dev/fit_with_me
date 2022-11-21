@@ -8,6 +8,11 @@
     <div class="d-flex justify-content-center">
       <b-form inline>
         <!-- follow 컴포넌트-->
+        <div class="d-flex justify-content-center">
+          <b-button :to="'/user/userInfo/following/' + user.userId"
+            >following</b-button
+          >
+        </div>
         <div>follower</div>
         |
         <div>following</div>
@@ -25,10 +30,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import UserDetail from "@/components/user/UserDetail.vue";
 export default {
   components: {
     UserDetail,
+  },
+  computed: {
+    ...mapState(["user"]),
   },
 };
 </script>
