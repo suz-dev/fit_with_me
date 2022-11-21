@@ -2,8 +2,12 @@
   <div>
     <b-navbar type="primary" variant="primary">
       <!-- 홈 링크 -->
-      <b-button to="/">FIT with ME</b-button> |
-      <!-- 로그인/로그아웃 -->
+      <router-link to="/"
+        ><img
+          src="../../assets/logo_Cooper Black.png"
+          style="width: 100px"
+          alt="" /></router-link
+      ><!-- 로그인/로그아웃 -->
       <div>
         <div v-if="loginUser.userName">
           <img

@@ -66,13 +66,13 @@ const routes = [
       },
       // 팔로잉 리스트
       {
-        path: "following/:userId",
+        path: "following",
         name: "following",
         component: FollowingList,
       },
       // 팔로워 리스트
       {
-        path: "follower/:userId",
+        path: "follower",
         name: "follower",
         component: FollowerList,
       },
