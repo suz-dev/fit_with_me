@@ -26,7 +26,12 @@
             @click="addFollow(user.userId)"
             >팔로우 하기
           </b-button>
-          <b-button v-else variant="outline-danger">팔로우 취소</b-button>
+          <b-button
+            v-else
+            variant="outline-danger"
+            @click="unFollow(user.userId)"
+            >팔로우 취소</b-button
+          >
         </b-row>
       </b-container>
     </div>
@@ -68,6 +73,9 @@ export default {
       }
       // 팔로우 가능
       return true;
+    },
+    unFollow(toUser) {
+      this.$store.dispatch("unFollow", toUser);
     },
   },
 };
