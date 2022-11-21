@@ -390,9 +390,8 @@ export default new Vuex.Store({
         });
     },
 
+    // 찜 삭제
     deleteLike({ dispatch }, videoId) {
-      // 찜 삭제
-
       const API_URL = `${REST_API}/likeapi/like`;
       axios({
         url: API_URL,
