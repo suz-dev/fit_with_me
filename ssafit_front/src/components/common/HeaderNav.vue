@@ -17,27 +17,29 @@
         <!-- 로그인/로그아웃 -->
         <main>
           <div v-if="loginUser.userName">
-            <div class="dropdown">
-              <img
-                style="border-radius: 50%; width: 50px"
-                :src="require(`@/assets/${loginUser.profile}.png`)"
-              />
-            </div>
-            <div>
-              <b-dropdown
-                no-caret
-                id="dropdown-right"
-                right
-                block
-                variant="none"
-                :text="loginUser.userName"
-              >
-                <b-dropdown-item :to="'/user/userInfo/' + loginUser.userId"
-                  >My Page</b-dropdown-item
+            <b-container>
+              <div>
+                <b-dropdown
+                  no-caret
+                  id="dropdown-right"
+                  right
+                  block
+                  variant="none"
+                  :text="loginUser.userName"
                 >
-                <b-dropdown-item @click="logout"> 로그아웃 </b-dropdown-item>
-              </b-dropdown>
-            </div>
+                  <b-dropdown-item :to="'/user/userInfo/' + loginUser.userId"
+                    >My Page</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="logout"> 로그아웃 </b-dropdown-item>
+                </b-dropdown>
+              </div>
+              <div>
+                <img
+                  style="border-radius: 50%; width: 50px"
+                  :src="require(`@/assets/${loginUser.profile}.png`)"
+                />
+              </div>
+            </b-container>
           </div>
           <div v-else>
             <b-button to="/user/login" variant="light">로그인</b-button>
