@@ -14,12 +14,14 @@
           <b-button
             :to="'/user/userInfo/' + user.userId + '/follower'"
             variant="outline-secondary"
+            ><b-icon icon="person-plus" variant="secondary"></b-icon
             >follower</b-button
           >
           <div>&nbsp;&nbsp;</div>
           <b-button
             :to="'/user/userInfo/' + user.userId + '/following'"
             variant="outline-secondary"
+            ><b-icon icon="person-check" variant="secondary"></b-icon
             >following</b-button
           >
         </div>
@@ -30,19 +32,21 @@
 
     <!-- 캘린더 / 찜 / 유저 추천 -->
     <div class="d-flex justify-content-center">
-      <b-button variant="outline-secondary">Calendar</b-button>
+      <b-button variant="outline-secondary"
+        ><b-icon icon="calendar-check" variant="secondary"></b-icon
+      ></b-button>
       <div>&nbsp;&nbsp;</div>
       <b-button
         :to="'/user/userInfo/' + user.userId + '/like'"
         variant="outline-secondary"
-        >like</b-button
-      >
+        ><b-icon icon="heart-fill" variant="secondary"></b-icon
+      ></b-button>
       <div>&nbsp;&nbsp;</div>
       <b-button
         :to="'/user/userInfo/' + user.userId + '/users'"
         variant="outline-secondary"
-        >recommend</b-button
-      >
+        ><b-icon icon="person" variant="secondary"></b-icon
+      ></b-button>
     </div>
 
     <router-view></router-view>
