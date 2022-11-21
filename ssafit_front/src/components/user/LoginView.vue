@@ -46,6 +46,7 @@ export default {
       }
 
       this.$store.dispatch("login", this.user);
+      this.$store.dispatch("getLoginFollowing", this.user.id);
     },
   },
 };
