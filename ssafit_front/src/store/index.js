@@ -19,6 +19,7 @@ export default new Vuex.Store({
     review: {},
     loginUser: {},
     user: {},
+    users: [],
     likeVideos: [],
     following: [],
     follower: [],
@@ -74,6 +75,9 @@ export default new Vuex.Store({
     },
     GET_USER(state, payload) {
       state.user = payload;
+    },
+    GET_USERS(state, payload) {
+      state.users = payload;
     },
   },
   actions: {
@@ -506,6 +510,23 @@ export default new Vuex.Store({
       })
         .then((res) => {
           commit("GET_USER", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    // 전체 유저 리스트
+    getAllUser({ commit }) {
+      const API_URL = `${REST_API}/userapi/user`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          console.log(res.data);
+          commit("GET_USERS", res.data);
         })
         .catch((err) => {
           console.log(err);
