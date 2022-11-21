@@ -17,7 +17,7 @@
           <!-- id 누르면 해당 유저 페이지로 -->
           <b-col> {{ user.userId }}</b-col>
           <b-col> {{ user.userName }}</b-col>
-          <b-button variant="outline-danger" @click="unFllow(user.userId)"
+          <b-button variant="outline-danger" @click="unFollow(user.userId)"
             >팔로우 취소
           </b-button>
         </b-row>
