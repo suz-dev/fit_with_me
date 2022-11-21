@@ -43,7 +43,6 @@ export default new Vuex.Store({
       state.review = payload;
     },
     UPDATE_REVIEW(state, payload) {
-      console.log(payload);
       state.review.title = payload.title;
       state.review.content = payload.content;
       state.review.star = payload.star;
@@ -80,6 +79,14 @@ export default new Vuex.Store({
     GET_USER(state, payload) {
       state.user = payload;
     },
+    UPDATE_USER(state, payload) {
+      state.user = payload;
+      state.loginUser = {
+        userName: sessionStorage.getItem("userName"),
+        userId: sessionStorage.getItem("userId"),
+        profile: sessionStorage.getItem("profile"),
+      };
+    },
     GET_USERS(state, payload) {
       state.users = payload;
     },
@@ -101,7 +108,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log(res.data.items);
           commit("SEARCH_VIDEO", res.data.items);
         })
 
@@ -125,7 +131,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log(res.data.items);
           commit("SEARCH_PART_VIDEOS", res.data.items);
         })
 
@@ -146,8 +151,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log("---insert----");
-          console.log(res.data.items);
           const AXIOS_URL = `${REST_API}/videoapi/video`;
           axios
             .post(
@@ -166,12 +169,10 @@ export default new Vuex.Store({
               }
             )
             .then(() => {
-              console.log("삽입 완료");
               dispatch("getVideo", videoId);
             })
             .catch((err) => {
               console.log(err);
-              console.log(res.data.items[0].snippet.title);
             });
         })
 
@@ -187,12 +188,9 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((res) => {
-          console.log(res.data);
-          console.log("db에 있음");
           commit("GET_VIDEO", res.data);
         })
         .catch((err) => {
-          console.log("db에 없음");
           dispatch("createVideo", id);
           console.log(err);
         });
@@ -244,7 +242,6 @@ export default new Vuex.Store({
           alert("수정 완료");
         })
         .catch((err) => {
-          console.log(updateReview);
           console.log(err);
         });
     },
@@ -257,7 +254,6 @@ export default new Vuex.Store({
           location.reload();
         })
         .catch((err) => {
-          console.log(data.id);
           console.log(err);
         });
     },
@@ -270,8 +266,7 @@ export default new Vuex.Store({
         method: "POST",
         params: user,
       })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           alert("회원가입 성공!");
           // commit("USER_CREATE", user); 팔로우할때 다시 구현
           commit;
@@ -292,15 +287,11 @@ export default new Vuex.Store({
         params: user,
       })
         .then(() => {
-          console.log("수정 후 ");
-          console.log(user);
-
           alert("회원 정보 수정이 완료되었습니다");
-
           sessionStorage.setItem("userName", user.userName);
           sessionStorage.setItem("profile", user.profile);
-          commit("USER_LOGIN");
-          commit("");
+
+          commit("UPDATE_USER", user);
           location.reload();
           return;
         })
@@ -323,7 +314,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log(res);
           sessionStorage.setItem("access-token", res.data["access-token"]);
           sessionStorage.setItem("userId", payload.id);
           sessionStorage.setItem("userName", res.data.userName);
@@ -334,7 +324,6 @@ export default new Vuex.Store({
           return;
         })
         .catch((err) => {
-          console.log(payload);
           console.log(err);
           alert("회원정보가 일치하지 않습니다.");
         });
@@ -370,7 +359,6 @@ export default new Vuex.Store({
         )
         .then(() => {
           commit("CREATE_REVIEW", review);
-          console.log(review);
           location.reload();
         })
         .catch((err) => {
@@ -390,13 +378,11 @@ export default new Vuex.Store({
         },
       })
         .then(() => {
-          console.log(videoId);
           alert("찜 완료");
           commit;
           dispatch("getLikes", this.state.loginUser.userId);
         })
         .catch((err) => {
-          console.log(err);
           if (err.response.data.message.includes("Duplicate entry")) {
             // duplicate entry
             alert("이미 찜한 영상입니다.");
@@ -420,7 +406,6 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((res) => {
-          console.log(res.data);
           commit("GET_LIKES", res.data);
         })
         .catch((err) => {
@@ -518,8 +503,6 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-          console.log(toUser);
-          console.log(this.state.loginUser.userId);
         });
     },
     getUser({ commit }, userId) {
@@ -545,8 +528,6 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((res) => {
-          console.log(res.data);
-
           commit(
             "GET_USERS",
             res.data.filter((data) => {
