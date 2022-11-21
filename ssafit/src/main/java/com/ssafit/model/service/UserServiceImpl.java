@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService {
         System.out.println("user = " + user.getUserId());
         originUser.setPassword(user.getPassword()); // 비번 수정 -> 검증 기능 추가?
         originUser.setUserName(user.getUserName()); // 이름 수정
+        originUser.setBirthDate(user.getBirthDate());
+        originUser.setSex(user.getSex());
         return userDao.updateUser(originUser) == 1; // 업데이트
     }
 

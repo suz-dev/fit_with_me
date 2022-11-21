@@ -186,7 +186,7 @@
       <button
         v-if="loginUser.userId"
         class="btn btn-primary"
-        @click="createUser"
+        @click="updateUser"
       >
         수정
       </button>
@@ -290,6 +290,36 @@ export default {
         return;
       }
       this.$store.dispatch("createUser", user);
+    },
+
+    updateUser() {
+      let user = {
+        profile: this.profile,
+        userId: this.userId,
+        password: this.password,
+        userName: this.userName,
+        email: this.email,
+        sex: this.sex,
+        birthDate: this.birthDate,
+      };
+
+      if (this.password.length == 0) {
+        alert("비밀번호를 입력하세요");
+        this.$refs.pwInput.focus();
+        return;
+      }
+      if (!this.state) {
+        alert("비밀번호가 일치하는지 확인해주세요");
+        this.$refs.pw2Input.focus();
+        return;
+      }
+      if (this.userName.length == 0) {
+        alert("이름을 입력하세요");
+        this.$refs.nameInput.focus();
+        return;
+      }
+
+      this.$store.dispatch("updateUser", user);
     },
   },
   created() {

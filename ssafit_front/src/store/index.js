@@ -272,6 +272,28 @@ export default new Vuex.Store({
         });
     },
 
+    // 회원정보 수정
+    updateUser({ commit }, user) {
+      const API_URL = `${REST_API}/userapi/user`;
+      axios({
+        url: API_URL,
+        method: "PUT",
+        params: user,
+      })
+        .then((res) => {
+          console.log(user);
+          console.log(res);
+          alert("회원 정보 수정이 완료되었습니다");
+          commit;
+          location.reload();
+          return;
+        })
+        .catch((err) => {
+          console.log(user);
+          console.log(err);
+        });
+    },
+
     // 로그인
     login({ commit }, payload) {
       const API_URL = `${REST_API}/userapi/login`;
