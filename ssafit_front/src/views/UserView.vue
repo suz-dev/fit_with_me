@@ -9,10 +9,10 @@
       <b-form inline>
         <!-- follow 컴포넌트-->
         <div class="d-flex justify-content-center">
-          <b-button :to="'/user/userInfo/follower/' + user.userId"
+          <b-button :to="'/user/userInfo/' + user.userId + '/follower'"
             >follower</b-button
           >
-          <b-button :to="'/user/userInfo/following/' + user.userId"
+          <b-button :to="'/user/userInfo/' + user.userId + '/following'"
             >following</b-button
           >
         </div>
@@ -21,8 +21,10 @@
 
     <!-- 캘린더 / 찜 / 유저 추천 -->
     <div class="d-flex justify-content-center">
-      <b-button to="/user/userInfo/like">like</b-button>
-      <b-button to="/user/userInfo/users">recommend</b-button>
+      <b-button :to="'/user/userInfo/' + user.userId + '/like'">like</b-button>
+      <b-button :to="'/user/userInfo/' + user.userId + '/users'"
+        >recommend</b-button
+      >
     </div>
 
     <router-view></router-view>
