@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 유저 정보 -->
-    <user-detail></user-detail>
+    <user-detail :key="$route.fullPath"></user-detail>
 
     <br />
     <!-- 팔로우 페이지-->

@@ -16,7 +16,11 @@
           </b-col>
           <!-- id 누르면 해당 유저 페이지로 -->
           <b-col> {{ user.userId }}</b-col>
-          <b-col> {{ user.userName }}</b-col>
+          <b-col
+            ><router-link :to="'/user/userInfo/' + user.userId">{{
+              user.userName
+            }}</router-link></b-col
+          >
 
           <!-- 팔로우 안되어 있으면 'follow' / 되어 있으면 'followed'-->
           <span v-if="user.userId == loginUser.userId"></span>

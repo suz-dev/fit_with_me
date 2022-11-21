@@ -318,8 +318,6 @@ export default {
         this.$refs.nameInput.focus();
         return;
       }
-      console.log("수정완");
-      console.log(user);
       this.$store.dispatch("updateUser", user);
     },
   },
