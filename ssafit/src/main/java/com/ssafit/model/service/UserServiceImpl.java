@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
         User originUser = userDao.selectUserById(user.getUserId());
         System.out.println("originUser = " + originUser.getUserId());
         System.out.println("user = " + user.getUserId());
+        originUser.setProfile(user.getProfile());
         originUser.setPassword(user.getPassword()); // 비번 수정 -> 검증 기능 추가?
         originUser.setUserName(user.getUserName()); // 이름 수정
         originUser.setBirthDate(user.getBirthDate());

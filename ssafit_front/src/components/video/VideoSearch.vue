@@ -15,7 +15,7 @@
         </b-input-group-append>
       </b-input-group>
     </b-container>
-    <hr />
+    <br />
     <b-container v-if="videos">
       <b-card-group deck id="card-group">
         <div
