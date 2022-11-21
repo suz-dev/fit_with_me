@@ -48,7 +48,7 @@ export default {
 
   methods: {
     // 언팔로우
-    deleteReview(toUser) {
+    unFollow(toUser) {
       this.$store.dispatch("unFollow", toUser);
     },
   },

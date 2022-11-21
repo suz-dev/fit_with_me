@@ -9,13 +9,13 @@
       <b-form inline>
         <!-- follow 컴포넌트-->
         <div class="d-flex justify-content-center">
+          <b-button :to="'/user/userInfo/follower/' + user.userId"
+            >follower</b-button
+          >
           <b-button :to="'/user/userInfo/following/' + user.userId"
             >following</b-button
           >
         </div>
-        <div>follower</div>
-        |
-        <div>following</div>
       </b-form>
     </div>
 

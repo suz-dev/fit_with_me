@@ -20,6 +20,8 @@ export default new Vuex.Store({
     loginUser: {},
     user: {},
     likeVideos: [],
+    following: [],
+    follower: [],
   },
   getters: {},
   mutations: {
@@ -62,6 +64,13 @@ export default new Vuex.Store({
     },
     GET_LIKES(state, payload) {
       state.likeVideos = payload;
+    },
+
+    GET_FOLLOWING(state, payload) {
+      state.following = payload;
+    },
+    GET_FOLLOWER(state, payload) {
+      state.follower = payload;
     },
   },
   actions: {
@@ -242,6 +251,27 @@ export default new Vuex.Store({
         });
     },
 
+    // 회원가입
+    createUser({ commit }, user) {
+      const API_URL = `${REST_API}/userapi/user`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: user,
+      })
+        .then((res) => {
+          console.log(res);
+          alert("회원가입 성공!");
+          // commit("USER_CREATE", user); 팔로우할때 다시 구현
+          commit;
+          router.push("/");
+          return;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     // 로그인
     login({ commit }, payload) {
       const API_URL = `${REST_API}/userapi/login`;
@@ -279,27 +309,7 @@ export default new Vuex.Store({
       commit("LOGOUT");
     },
 
-    // 회원가입
-    createUser({ commit }, user) {
-      const API_URL = `${REST_API}/userapi/user`;
-      axios({
-        url: API_URL,
-        method: "POST",
-        params: user,
-      })
-        .then((res) => {
-          console.log(res);
-          alert("회원가입 성공!");
-          // commit("USER_CREATE", user); 팔로우할때 다시 구현
-          commit;
-          router.push("/");
-          return;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-
+    // 리뷰 작성
     createReview({ commit }, review) {
       const API_URL = `${REST_API}/videoapi/review`;
       axios
@@ -329,6 +339,8 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+
+    // 찜하기
     createLike({ commit, dispatch }, videoId) {
       const API_URL = `${REST_API}/likeapi/like`;
       axios({
@@ -361,6 +373,8 @@ export default new Vuex.Store({
           }
         });
     },
+
+    // 찜 목록 가져오기
     getLikes({ commit }, userId) {
       const API_URL = `${REST_API}/likeapi/like/${userId}`;
       axios({
@@ -375,7 +389,10 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+
     deleteLike({ dispatch }, videoId) {
+      // 찜 삭제
+
       const API_URL = `${REST_API}/likeapi/like`;
       axios({
         url: API_URL,
@@ -388,6 +405,68 @@ export default new Vuex.Store({
         .then(() => {
           alert("삭제 완료");
           dispatch("getLikes", this.state.loginUser.userId);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    // 팔로잉 리스트
+    getFollowing({ commit }, userId) {
+      const API_URL = `${REST_API}/userapi/following/${userId}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit("GET_FOLLOWING", res.data);
+      });
+    },
+
+    // 팔로워 리스트
+    getFollower({ commit }, userId) {
+      const API_URL = `${REST_API}/userapi/follower/${userId}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit("GET_FOLLOWER", res.data);
+      });
+    },
+
+    // 팔로우
+    addFollow({ commit }, fromUser) {
+      const API_URL = `${REST_API}/userapi/following/${fromUser}`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: {
+          fromUser: fromUser,
+          toUSer: this.state,
+        },
+      })
+        .then(() => {
+          commit;
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    // 팔로우 취소
+    unFollow({ commit }, fromUser) {
+      const API_URL = `${REST_API}/userapi/following/${fromUser}`;
+      axios({
+        url: API_URL,
+        method: "DELETE",
+        params: {
+          fromUser: fromUser,
+          toUSer: this.state,
+        },
+      })
+        .then(() => {
+          commit;
+          location.reload();
         })
         .catch((err) => {
           console.log(err);
