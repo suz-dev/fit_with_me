@@ -454,14 +454,14 @@ export default new Vuex.Store({
     },
 
     // 팔로우 취소
-    unFollow({ commit }, fromUser) {
-      const API_URL = `${REST_API}/userapi/following/${fromUser}`;
+    unFollow({ commit }, toUser) {
+      const API_URL = `${REST_API}/userapi/follow`;
       axios({
         url: API_URL,
         method: "DELETE",
         params: {
-          fromUser: fromUser,
-          toUSer: this.state,
+          fromUser: this.state.loginUser.userId,
+          toUser: toUser,
         },
       })
         .then(() => {
@@ -470,6 +470,8 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
+          console.log(toUser);
+          console.log(this.state.loginUser.userId);
         });
     },
   },
