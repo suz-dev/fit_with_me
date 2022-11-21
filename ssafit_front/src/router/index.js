@@ -9,6 +9,7 @@ import LoginView from "@/components/user/LoginView.vue";
 import UserCreate from "@/components/user/UserCreate.vue";
 import UserDetail from "@/components/user/UserDetail.vue";
 import UserLike from "@/components/user/UserLike.vue";
+import FollowingList from "@/components/user/FollowingList.vue";
 
 Vue.use(VueRouter);
 
@@ -59,6 +60,11 @@ const routes = [
         path: "like",
         name: "userLike",
         component: UserLike,
+      },
+      {
+        path: "following/:userId",
+        name: "following",
+        component: FollowingList,
       },
     ],
   },

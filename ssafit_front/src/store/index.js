@@ -20,6 +20,7 @@ export default new Vuex.Store({
     loginUser: {},
     user: {},
     likeVideos: [],
+    following: [],
   },
   getters: {},
   mutations: {
@@ -62,6 +63,9 @@ export default new Vuex.Store({
     },
     GET_LIKES(state, payload) {
       state.likeVideos = payload;
+    },
+    GET_FOLLOWING(state, payload) {
+      state.following = payload;
     },
   },
   actions: {
@@ -391,7 +395,37 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+
+    getFollowing({ commit }, userId) {
+      const API_URL = `${REST_API}/userapi/following/${userId}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit("GET_FOLLOWING", res.data);
+      });
+    },
+
+    unFollow({ commit }, fromUser) {
+      const API_URL = `${REST_API}/userapi/following/${fromUser}`;
+      axios({
+        url: API_URL,
+        method: "DELETE",
+        params: {
+          fromUser: fromUser,
+          toUSer: this.state,
+        },
+      })
+        .then(() => {
+          commit;
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
+
   modules: {},
   plugins: [createPersistedState()],
 });

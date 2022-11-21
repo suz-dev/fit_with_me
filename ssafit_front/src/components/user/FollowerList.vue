@@ -2,7 +2,7 @@
   <header class="d-flex justify-content-center">
     <div>
       <!-- 팔로우 유저 정보 -->
-      <h2>following</h2>
+      <h2>followers</h2>
       <b-container>
         <b-row v-for="user in follow" :key="user.userId">
           <b-col>
