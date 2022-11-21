@@ -13,11 +13,8 @@
       {{ video.title }}
       {{ video.channelName }}
       {{ video.viewCnt }}
-      <b-button variant="outline-danger"
-        ><b-icon-suit-heart
-          variant="danger"
-          @click.self="createLike(video.id)"
-        ></b-icon-suit-heart
+      <b-button variant="outline-danger" @click.self="createLike(video.id)"
+        ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
       ></b-button>
     </div>
     <!-- <video-item></video-item> -->

@@ -47,11 +47,11 @@
             <b-button variant="primary" :to="video.id.videoId"
               >영상 상세</b-button
             >
-            <b-button variant="outline-danger" v-if="loginUser.userName"
-              ><b-icon-suit-heart
-                variant="danger"
-                @click.self="createLike(video.id.videoId)"
-              ></b-icon-suit-heart
+            <b-button
+              variant="outline-danger"
+              v-if="loginUser.userName"
+              @click="createLike(video.id.videoId)"
+              ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
             ></b-button>
           </b-card>
         </div>

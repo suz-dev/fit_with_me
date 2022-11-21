@@ -45,12 +45,15 @@
             <b-button variant="primary" :to="video.id.videoId"
               >영상 상세</b-button
             >
-            <b-button variant="outline-danger" v-if="loginUser.userName"
-              ><b-icon-suit-heart
-                variant="danger"
-                @click.self="createLike(video.id.videoId)"
-              ></b-icon-suit-heart
-            ></b-button>
+            <div>
+              <b-button v-if="like">찜 삭제</b-button>
+              <b-button
+                variant="outline-danger"
+                v-if="loginUser.userName"
+                @click="createLike(video.id.videoId)"
+                ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
+              ></b-button>
+            </div>
           </b-card>
         </div>
       </b-card-group>
@@ -67,11 +70,13 @@
 
 <script>
 import { mapState } from "vuex";
+import axios from "axios";
 export default {
   name: "VideoList",
 
   data() {
     return {
+      status: [],
       perPage: 3,
       currentPage: 1,
       selected: "골프",
@@ -122,6 +127,20 @@ export default {
 
         .then(this.$store.dispatch("createLike", videoId));
     },
+    getLike(videoId) {
+      const API_URL = `http://localhost:9999/likeapi/like`;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          videoId: videoId,
+          userId: this.loginUser.userId,
+        },
+      }).then((res) => {
+        console.log(res);
+        return;
+      });
+    },
   },
 
   computed: {
@@ -133,6 +152,18 @@ export default {
   },
   created() {
     this.$store.dispatch("searchPartVideos", this.selected);
+  },
+
+  watch: {
+    videos(newValue) {
+      this.status = [];
+      newValue.forEach(() => {
+        var tmp = {
+          index: false,
+        };
+        this.status.push(tmp);
+      });
+    },
   },
 };
 </script>
