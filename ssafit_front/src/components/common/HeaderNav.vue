@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar class="navbar navbar-expand-sm" variant="none">
+    <b-navbar class="navbar navbar-expand-sm" variant="dark">
       <!-- 홈 링크 -->
 
       <b-container>
@@ -29,6 +29,9 @@
           /></router-link>
           <router-link to="/"
             ><img src="../../assets/logo_test8.png" style="width: 150px" alt=""
+          /></router-link>
+          <router-link to="/"
+            ><img src="../../assets/logo_test9.png" style="width: 150px" alt=""
           /></router-link>
         </header>
 
@@ -95,5 +98,9 @@ export default {
 <style scoped>
 main {
   float: right;
+}
+.navbar {
+  background-image: url("../../assets/KakaoTalk_20221121_214834251.jpg");
+  background-color: balck;
 }
 </style>
