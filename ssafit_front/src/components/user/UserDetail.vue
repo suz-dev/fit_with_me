@@ -18,7 +18,10 @@
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         <div>
           <!-- 등록 폼 수정 폼으로 바꾸기 -->
-          <b-button to="/user/regist" variant="outline-success"
+          <b-button
+            v-if="loginUser.userId == user.userId"
+            to="/user/regist"
+            variant="outline-success"
             >회원 정보 수정</b-button
           >
         </div>
@@ -34,7 +37,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["loginUser"]),
+    ...mapState(["loginUser", "user"]),
   },
   created() {
     const pathName = new URL(document.location).pathname.split("/");
