@@ -10,6 +10,7 @@ import UserCreate from "@/components/user/UserCreate.vue";
 import UserDetail from "@/components/user/UserDetail.vue";
 import UserLike from "@/components/user/UserLike.vue";
 import FollowingList from "@/components/user/FollowingList.vue";
+import FollowerList from "@/components/user/FollowerList.vue";
 
 Vue.use(VueRouter);
 
@@ -56,15 +57,23 @@ const routes = [
     name: "myPage",
     component: UserView,
     children: [
+      // 찜
       {
         path: "like",
         name: "userLike",
         component: UserLike,
       },
+      // 팔로잉 리스트
       {
         path: "following/:userId",
         name: "following",
         component: FollowingList,
+      },
+      // 팔로워 리스트
+      {
+        path: "follower/:userId",
+        name: "follower",
+        component: FollowerList,
       },
     ],
   },
