@@ -17,9 +17,19 @@
           <!-- id 누르면 해당 유저 페이지로 -->
           <b-col> {{ user.userId }}</b-col>
           <b-col> {{ user.userName }}</b-col>
-          <b-button variant="outline-danger" @click="unFollow(user.userId)"
-            >팔로우 취소
+          <span v-if="user.userId == loginUser.userId"></span>
+          <b-button
+            v-else-if="validFollow(user.userId)"
+            variant="outline-danger"
+            @click="addFollow(user.userId)"
+            >Follow
           </b-button>
+          <b-button
+            v-else
+            variant="outline-danger"
+            @click="unFollow(user.userId)"
+            >UnFollow</b-button
+          >
         </b-row>
       </b-container>
     </div>
@@ -37,7 +47,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user", "following"]),
+    ...mapState(["loginUser", "user", "following", "loginFollowing"]),
     rows() {
       return this.following.length;
     },
@@ -50,6 +60,16 @@ export default {
     // 언팔로우
     unFollow(toUser) {
       this.$store.dispatch("unFollow", toUser);
+    },
+    validFollow(userId) {
+      for (var key in this.loginFollowing) {
+        if (this.loginFollowing[key].userId == userId) {
+          // 이미 내가 팔로우하고 있음 -> 팔로우 취소 가능
+          return false;
+        }
+      }
+      // 팔로우 가능
+      return true;
     },
   },
 };
