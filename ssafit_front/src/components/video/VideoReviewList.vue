@@ -10,7 +10,7 @@
             :src="require(`@/assets/${review.profile}.png`)"
             style="border-radius: 50%; width: 50px"
           />
-
+          <!-- 이름 누르면 회원정보 페이지로 이동 -->
           {{ review.userName }}
         </b-col>
         <b-col> {{ review.content }}</b-col>

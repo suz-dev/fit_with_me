@@ -54,7 +54,7 @@ const routes = [
 
   // 마이페이지
   {
-    path: "/user/userInfo",
+    path: "/user/userInfo/:userId",
     name: "myPage",
     component: UserView,
     children: [
@@ -85,7 +85,7 @@ const routes = [
     ],
   },
   {
-    path: "/user/userInfo",
+    path: "/user/userInfo/:userId",
     name: "userDetail",
     component: UserDetail,
   },

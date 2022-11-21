@@ -73,6 +73,9 @@ export default new Vuex.Store({
     GET_FOLLOWER(state, payload) {
       state.follower = payload;
     },
+    GET_USER(state, payload) {
+      state.user = payload;
+    },
     GET_USERS(state, payload) {
       state.users = payload;
     },
@@ -499,10 +502,24 @@ export default new Vuex.Store({
           console.log(this.state.loginUser.userId);
         });
     },
+    getUser({ commit }, userId) {
+      const API_URL = `${REST_API}/userapi/user/${userId}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          commit("GET_USER", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
     // 전체 유저 리스트
     getAllUser({ commit }) {
       const API_URL = `${REST_API}/userapi/user`;
+
       axios({
         url: API_URL,
         method: "GET",

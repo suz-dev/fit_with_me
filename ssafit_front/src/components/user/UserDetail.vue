@@ -4,7 +4,7 @@
     <div>
       <img
         style="border-radius: 50%; width: 90px"
-        :src="require(`@/assets/${loginUser.profile}.png`)"
+        :src="require(`@/assets/${user.profile}.png`)"
       />
     </div>
     <p>
@@ -13,7 +13,7 @@
     <section>
       <div class="d-inline-flex">
         <h2>
-          {{ loginUser.userName }}
+          {{ user.userName }}
         </h2>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         <div>
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="userId">{{ loginUser.userId }}</div>
+      <div class="userId">{{ user.userId }}</div>
     </section>
   </header>
 </template>
