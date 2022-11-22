@@ -23,6 +23,7 @@ public class CalendarController {
 
     @PostMapping("/calendar")
     public ResponseEntity<?> createCalendar(Calendar calendar) {
+        System.out.println(calendar);
         calendarService.createCalendar(calendar);
         return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
     }
