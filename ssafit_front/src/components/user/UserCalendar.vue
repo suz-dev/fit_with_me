@@ -2,11 +2,30 @@
   <div>
     <b-container>
       <b-col>
-        <v-date-picker v-model="date" :attributes="attributes" />
+        <div class="d-inline-flex">
+          <div>
+            <v-date-picker v-model="date" :attributes="attributes" />
+            <b-button v-b-modal.addCalendar variant="outline-secondary"
+              >추가</b-button
+            >
+          </div>
 
-        <b-button v-b-modal.addCalendar variant="outline-secondary"
-          >추가</b-button
-        >
+          <b-table :items="selectedDate" :fields="fields">
+            <template #cell(startTime)="data">
+              {{ data.item.startTime.slice(0, 5) }}
+            </template>
+            <template #cell(endTime)="data">
+              {{ data.item.endTime.slice(0, 5) }}
+            </template>
+            <template #cell(memo)="data">
+              <b-button
+                @click="showModal(data.item)"
+                variant="outline-secondary"
+                >상세</b-button
+              >
+            </template>
+          </b-table>
+        </div>
       </b-col></b-container
     >
 
@@ -43,6 +62,45 @@
         </b-form-group>
       </b-form>
     </b-modal>
+
+    <b-modal
+      id="updateCalendar"
+      title="캘린더 상세"
+      ok-variant="outline-primary"
+    >
+      <b-form>
+        <b-form-group id="startTime" label="시작 시간 :" label-for="startTime">
+          <v-date-picker v-model="detail.startTime" mode="time" />
+        </b-form-group>
+        <b-form-group id="endTime" label="종료 시간 :" label-for="endTime">
+          <v-date-picker v-model="detail.endTime" mode="time" />
+        </b-form-group>
+        <b-form-group id="part" label="부위 :" label-for="part">
+          <b-form-select
+            id="part"
+            v-model="detail.part"
+            :options="options"
+            size="sm"
+          ></b-form-select>
+        </b-form-group>
+        <b-form-group id="memo" label="메모 :" label-for="memo">
+          <b-form-input
+            v-model="detail.memo"
+            id="memo"
+            type="text"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group id="videoUrl" label="영상 링크 :" label-for="videoUrl">
+          <b-form-input
+            id="videoUrl"
+            v-model="detail.videoUrl"
+            type="text"
+          ></b-form-input>
+        </b-form-group>
+      </b-form>
+      <b-button variant="outline-danger">수정 </b-button>
+      <b-button>삭제</b-button>
+    </b-modal>
   </div>
 </template>
 
@@ -56,6 +114,16 @@ const REST_API = `http://localhost:9999`;
 export default {
   data() {
     return {
+      detail: {
+        date: null,
+        startTime: null,
+        endTime: null,
+        part: "",
+        videoUrl: "",
+        memo: "",
+      },
+      perPage: 3,
+      currentPage: 1,
       haveExercise: [],
       date: new Date(),
       startTime: null,
@@ -102,6 +170,29 @@ export default {
           text: "기타",
         },
       ],
+      fields: [
+        {
+          key: "part",
+          label: "종목",
+        },
+        {
+          key: "startTime",
+          label: "시작 시간",
+        },
+        {
+          key: "endTime",
+          label: "종료 시간",
+        },
+        {
+          key: "videoUrl",
+          label: "url",
+        },
+        {
+          key: "memo",
+          label: "메모",
+        },
+      ],
+      selectedDate: [],
     };
   },
   computed: {
@@ -124,6 +215,18 @@ export default {
     },
   },
   methods: {
+    showModal(data) {
+      console.log(data);
+
+      this.detail.date = data.date;
+      this.detail.startTime = new Date(data.date + "T" + data.startTime);
+      this.detail.endTime = new Date(data.date + "T" + data.endTime);
+      this.detail.part = data.part;
+      this.detail.videoUrl = data.videoUrl;
+      this.detail.memo = data.memo;
+      this.$bvModal.show("updateCalendar");
+    },
+
     addCalendar() {
       const API_URL = `${REST_API}/calendarapi/calendar`;
       axios
@@ -164,6 +267,23 @@ export default {
       oldValue;
       this.startTime = value;
       this.endTime = value;
+      // date에 있는 리스트 가져오기
+      const API_URL = `${REST_API}/calendarapi/calendar`;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          date:
+            value.getFullYear() +
+            "-" +
+            (value.getMonth() + 1) +
+            "-" +
+            value.getDate(),
+          userId: this.loginUser.userId,
+        },
+      }).then((res) => {
+        this.selectedDate = res.data;
+      });
     },
   },
 
@@ -181,6 +301,24 @@ export default {
         this.haveExercise.push(new Date(date[0], date[1] - 1, date[2]));
       });
       console.log(this.haveExercise);
+    });
+
+    const API_URL2 = `${REST_API}/calendarapi/calendar`;
+
+    axios({
+      url: API_URL2,
+      method: "GET",
+      params: {
+        date:
+          this.date.getFullYear() +
+          "-" +
+          (this.date.getMonth() + 1) +
+          "-" +
+          this.date.getDate(),
+        userId: this.loginUser.userId,
+      },
+    }).then((res) => {
+      this.selectedDate = res.data;
     });
   },
 };
