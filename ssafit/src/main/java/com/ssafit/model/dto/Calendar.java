@@ -12,8 +12,8 @@ public class Calendar {
     private String videoUrl;
     private String memo;
 
-    public Calendar(int calendarId) {
-        this.calendarId = calendarId;
+    public Calendar() {
+
     }
 
     public Calendar(int calendarId, String userId, String date, String part, String starTime, String endTime, String videoUrl, String memo) {

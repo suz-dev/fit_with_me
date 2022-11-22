@@ -33,7 +33,7 @@
 
 
     <!--    // id + date로 일정 조회-->
-    <select id="selectCalendar" parameterType="HashMap" resultMap="calendarResultMap">
+    <select id="selectCalendarByDate" parameterType="HashMap" resultMap="calendarResultMap">
         SELECT * FROM calendar
         WHERE user_id=#{userId} and date=#{date}
     </select>
