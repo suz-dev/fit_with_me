@@ -1,16 +1,16 @@
 <template>
   <!-- 유저 정보 -->
   <header class="d-flex justify-content-center">
-    <div>
+    <div class="d-inline-flex p-2 bd-highlight">
       <img
         style="border-radius: 50%; width: 120px"
         :src="require(`@/assets/${user.profile}.jpg`)"
       />
     </div>
 
-    <p>
+    <div class="d-inline-flex">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </p>
+    </div>
 
     <section>
       <div><br /></div>
@@ -21,7 +21,9 @@
           </h2>
         </div>
 
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="d-inline-flex">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
         <div>
           <!-- 등록 폼 수정 폼으로 바꾸기 -->
 
