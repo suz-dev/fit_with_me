@@ -3,8 +3,8 @@
   <header class="d-flex justify-content-center">
     <div>
       <img
-        style="border-radius: 50%; width: 90px"
-        :src="require(`@/assets/${user.profile}.png`)"
+        style="border-radius: 50%; width: 120px"
+        :src="require(`@/assets/${user.profile}.jpg`)"
       />
     </div>
     <p>

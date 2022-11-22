@@ -9,68 +9,69 @@
           <b-form inline>
             <div>
               <label>
-                <input type="radio" v-model="profile" value="bear" checked />
-                <img src="@/assets/bear.png" alt="Option 2" />
+                <input type="radio" v-model="profile" value="sarang1" checked />
+                <img src="@/assets/sarang1.jpg" alt="Option 2" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" v-model="profile" value="bird" checked />
-                <img src="@/assets/bird.png" alt="Option 1" />
+                <input type="radio" v-model="profile" value="sarang2" checked />
+                <img src="@/assets/sarang2.jpg" alt="Option 1" />
               </label>
             </div>
             <div>
               <label>
-                <input type="radio" v-model="profile" value="chicken" checked />
-                <img src="@/assets/chicken.png" alt="Option 1" />
+                <input type="radio" v-model="profile" value="bong1" checked />
+                <img src="@/assets/bong1.jpg" alt="Option 1" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" v-model="profile" value="dog" checked />
-                <img src="@/assets/dog.png" alt="Option 2" />
+                <input type="radio" v-model="profile" value="bong2" checked />
+                <img src="@/assets/bong2.jpg" alt="Option 2" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" v-model="profile" value="fox" checked />
-                <img src="@/assets/fox.png" alt="Option 1" />
+                <input type="radio" v-model="profile" value="eli" checked />
+                <img src="@/assets/eli.jpg" alt="Option 1" />
               </label>
             </div>
             <div>
               <label>
-                <input type="radio" v-model="profile" value="horse" checked />
-                <img src="@/assets/horse.png" alt="Option 1" />
+                <input type="radio" v-model="profile" value="kong" checked />
+                <img src="@/assets/kong.jpg" alt="Option 1" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" v-model="profile" value="leopard" checked />
-                <img src="@/assets/leopard.png" alt="Option 2" />
+                <input type="radio" v-model="profile" value="som" checked />
+                <img src="@/assets/som.jpg" alt="Option 2" />
               </label>
             </div>
 
             <div>
               <label>
-                <input type="radio" v-model="profile" value="penguin" checked />
-                <img src="@/assets/penguin.png" alt="Option 1" />
+                <input type="radio" v-model="profile" value="kang" checked />
+                <img src="@/assets/kang.jpg" alt="Option 1" />
               </label>
             </div>
-            <div>
+            <!-- <div>
               <label>
                 <input type="radio" v-model="profile" value="turtle" checked />
                 <img src="@/assets/turtle.png" alt="Option 1" />
               </label>
             </div>
+            -->
 
             <div>
               <label>
                 <input type="radio" v-model="profile" value="basic" checked />
-                <img src="@/assets/basic.png" alt="Option 1" />
+                <img src="@/assets/basic.jpg" alt="Option 1" />
               </label>
             </div>
           </b-form>

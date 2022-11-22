@@ -35,8 +35,8 @@
               </div>
               <div>
                 <img
-                  style="border-radius: 50%; width: 50px"
-                  :src="require(`@/assets/${loginUser.profile}.png`)"
+                  style="border-radius: 50%; width: 60px"
+                  :src="require(`@/assets/${loginUser.profile}.jpg`)"
                 />
               </div>
             </b-container>
