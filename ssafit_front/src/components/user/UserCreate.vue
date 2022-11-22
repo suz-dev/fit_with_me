@@ -182,18 +182,20 @@
         <b-form-select v-model="sex" :options="options"></b-form-select>
       </b-form>
     </b-container>
-    <b-button class="btn btn-primary" to="/">취소</b-button>
+    <b-button class="btn" variant="outline-secondary" to="/">취소</b-button>
     <span>
-      <button
+      <b-button
         v-if="loginUser.userId"
-        class="btn btn-primary"
+        variant="outline-primary"
         @click="updateUser"
       >
         수정
-      </button>
-      <button v-else class="btn btn-primary" @click="createUser">등록</button>
+      </b-button>
+      <b-button v-else variant="outline-primary" @click="createUser">
+        등록
+      </b-button>
     </span>
-    <b-button class="btn btn-danger" v-if="loginUser.userId">탈퇴</b-button>
+    <b-button variant="outline-danger" v-if="loginUser.userId">탈퇴</b-button>
   </div>
 </template>
 
@@ -346,7 +348,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 [type="radio"] {
   position: absolute;
   opacity: 0;

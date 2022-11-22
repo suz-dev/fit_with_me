@@ -9,9 +9,8 @@ import LoginView from "@/components/user/LoginView.vue";
 import UserCreate from "@/components/user/UserCreate.vue";
 import UserDetail from "@/components/user/UserDetail.vue";
 import UserLike from "@/components/user/UserLike.vue";
-import FollowingList from "@/components/user/FollowingList.vue";
-import FollowerList from "@/components/user/FollowerList.vue";
 import UserList from "@/components/user/UserList.vue";
+import UserCalendar from "@/components/user/UserCalendar.vue";
 
 Vue.use(VueRouter);
 
@@ -64,26 +63,21 @@ const routes = [
         name: "userLike",
         component: UserLike,
       },
-      // 팔로잉 리스트
-      {
-        path: "following",
-        name: "following",
-        component: FollowingList,
-      },
-      // 팔로워 리스트
-      {
-        path: "follower",
-        name: "follower",
-        component: FollowerList,
-      },
+
       // 전체 유저 리스트
       {
         path: "users",
         name: "getAllUser",
         component: UserList,
       },
+      {
+        path: "calendar",
+        name: "calendar",
+        component: UserCalendar,
+      },
     ],
   },
+
   {
     path: "/user/userInfo/:userId",
     name: "userDetail",
