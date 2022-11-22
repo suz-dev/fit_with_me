@@ -80,6 +80,5 @@ main {
 }
 .navbar {
   background-image: url("../../assets/KakaoTalk_20221121_214834251.jpg");
-  background-color: balck;
 }
 </style>
