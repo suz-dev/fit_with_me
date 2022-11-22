@@ -26,7 +26,6 @@
           :key="video.id.videoId"
         >
           <b-card
-            :title="video.snippet.title"
             :img-src="
               'https://img.youtube.com/vi/' +
               video.id.videoId +
@@ -40,6 +39,8 @@
             id="card"
           >
             <b-card-text>
+              {{ video.snippet.title }}
+              <br />
               {{ video.snippet.channelTitle }}
               <!-- <b-badge>{{ video.viewCnt }}</b-badge> -->
             </b-card-text>
