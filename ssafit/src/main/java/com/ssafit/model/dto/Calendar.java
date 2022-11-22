@@ -16,12 +16,12 @@ public class Calendar {
 
     }
 
-    public Calendar(int calendarId, String userId, String date, String part, String starTime, String endTime, String videoUrl, String memo) {
+    public Calendar(int calendarId, String userId, String date, String part, String startTime, String endTime, String videoUrl, String memo) {
         this.calendarId = calendarId;
         this.userId = userId;
         this.date = date;
         this.part = part;
-        this.startTime = starTime;
+        this.startTime = startTime;
         this.endTime = endTime;
         this.videoUrl = videoUrl;
         this.memo = memo;
@@ -59,12 +59,12 @@ public class Calendar {
         this.part = part;
     }
 
-    public String getStarTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStarTime(String starTime) {
-        this.startTime = starTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getEndTime() {

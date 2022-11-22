@@ -39,7 +39,7 @@ public class CalendarServiceImpl implements CalendarService{
 
         originCalendar.setPart(calendar.getPart());
         originCalendar.setVideoUrl(calendar.getVideoUrl());
-        originCalendar.setStarTime(calendar.getStarTime());
+        originCalendar.setStartTime(calendar.getStartTime());
         originCalendar.setEndTime(calendar.getEndTime());
         originCalendar.setMemo(calendar.getMemo());
 
