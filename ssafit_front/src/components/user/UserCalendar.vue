@@ -138,42 +138,42 @@ export default {
       videoUrl: "",
       memo: "",
       options: [
-        { value: "골프", text: "골프" },
+        { value: "골프", text: "⛳ 골프" },
         {
           value: "러닝",
-          text: "러닝",
+          text: "🏃‍♀️ 러닝",
         },
         {
           value: "복싱",
-          text: "복싱",
+          text: "🥊 복싱",
         },
         {
           value: "사이클",
-          text: "사이클",
+          text: "🚴‍♀️ 사이클",
         },
         {
           value: "수영",
-          text: "수영",
+          text: "🏊‍♀️ 수영",
         },
         {
           value: "요가",
-          text: "요가",
+          text: "🪔 요가",
         },
         {
           value: "웨이트",
-          text: "웨이트",
+          text: "🏋️‍♂️ 웨이트",
         },
         {
           value: "테니스",
-          text: "테니스",
+          text: "🎾 테니스",
         },
         {
           value: "필라테스",
-          text: "필라테스",
+          text: "🧘‍♂️ 필라테스",
         },
         {
           value: "기타",
-          text: "기타",
+          text: "ETC.",
         },
       ],
       fields: [
