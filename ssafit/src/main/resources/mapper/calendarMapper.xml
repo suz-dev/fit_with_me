@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssafit.model.dao.CalendarDao">
+
+
+    <resultMap id="calendarResultMap" type="Calendar">
+        <id column="calendar_id" property="calendarId"/>
+        <result column="user_id" property="userId"/>
+        <result column="date" property="date"/>
+        <result column="part" property="part"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="memo" property="memo"/>
+    </resultMap>
+
+    <!--     일정 작성-->
+    <insert id="insertCalendar" parameterType="Calendar">
+        INSERT INTO calendar(user_id, date, part, start_time, end_time, video_url, memo)
+        VALUES( #{userId}, #{date}, #{part}, #{startTime}, #{endTime}, #{videoUrl}, #{memo})
+    </insert>
+
+
+    <!--    // id로 일정 조회-->
+
+    <select id="selectAllCalendar" parameterType="String" resultMap="calendarResultMap">
+        SELECT * FROM calendar
+        WHERE user_id=#{userId}
+    </select>
+
+
+    <!--    // id + date로 일정 조회-->
+    <select id="selectCalendar" parameterType="HashMap" resultMap="calendarResultMap">
+        SELECT * FROM calendar
+        WHERE user_id=#{userId} and date=#{date}
+    </select>
+
+    <!--   calendarId로 조회 -->
+    <select id="selectCalendarById" parameterType="int" resultMap="calendarResultMap">
+        SELECT * FROM calendar
+        WHERE calendar_id=#{calendarId}
+    </select>
+
+    <!--    // 일정 수정-->
+    <update id="updateCalendar" parameterType="Calendar">
+        UPDATE calendar
+        SET part=#{part}, start_time=#{startTime}, end_time=#{endTime}, video_url=#{videoUrl}, memo=#{memo}
+        WHERE calendar_id = #{calendarId}
+    </update>
+
+    <!--    // 일정 삭제-->
+
+
+    <delete id="deleteCalendar" parameterType="int">
+        DELETE FROM calendar
+        WHERE calendar_id=#{calendarId}
+    </delete>
+</mapper>
+

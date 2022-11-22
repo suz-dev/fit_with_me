@@ -10,28 +10,7 @@
 
         <header>
           <router-link to="/"
-            ><img src="../../assets/logo_test.png" style="width: 150px" alt=""
-          /></router-link>
-          <router-link to="/"
-            ><img src="../../assets/logo_test3.png" style="width: 150px" alt=""
-          /></router-link>
-          <router-link to="/"
-            ><img src="../../assets/logo_test4.png" style="width: 150px" alt=""
-          /></router-link>
-          <router-link to="/"
             ><img src="../../assets/logo_test5.png" style="width: 150px" alt=""
-          /></router-link>
-          <router-link to="/"
-            ><img src="../../assets/logo_test6.png" style="width: 150px" alt=""
-          /></router-link>
-          <router-link to="/"
-            ><img src="../../assets/logo_test7.png" style="width: 150px" alt=""
-          /></router-link>
-          <router-link to="/"
-            ><img src="../../assets/logo_test8.png" style="width: 150px" alt=""
-          /></router-link>
-          <router-link to="/"
-            ><img src="../../assets/logo_test9.png" style="width: 150px" alt=""
           /></router-link>
         </header>
 

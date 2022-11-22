@@ -7,8 +7,8 @@ public class Calendar {
     private String userId;
     private String date;
     private String part;
-    private Time starTime;
-    private Time endTime;
+    private String startTime;
+    private String endTime;
     private String videoUrl;
     private String memo;
 
@@ -16,12 +16,12 @@ public class Calendar {
         this.calendarId = calendarId;
     }
 
-    public Calendar(int calendarId, String userId, String date, String part, Time starTime, Time endTime, String videoUrl, String memo) {
+    public Calendar(int calendarId, String userId, String date, String part, String starTime, String endTime, String videoUrl, String memo) {
         this.calendarId = calendarId;
         this.userId = userId;
         this.date = date;
         this.part = part;
-        this.starTime = starTime;
+        this.startTime = starTime;
         this.endTime = endTime;
         this.videoUrl = videoUrl;
         this.memo = memo;
@@ -59,19 +59,19 @@ public class Calendar {
         this.part = part;
     }
 
-    public Time getStarTime() {
-        return starTime;
+    public String getStarTime() {
+        return startTime;
     }
 
-    public void setStarTime(Time starTime) {
-        this.starTime = starTime;
+    public void setStarTime(String starTime) {
+        this.startTime = starTime;
     }
 
-    public Time getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -98,7 +98,7 @@ public class Calendar {
                 ", userId='" + userId + '\'' +
                 ", date='" + date + '\'' +
                 ", part='" + part + '\'' +
-                ", starTime=" + starTime +
+                ", starTime=" + startTime +
                 ", endTime=" + endTime +
                 ", videoUrl='" + videoUrl + '\'' +
                 ", memo='" + memo + '\'' +

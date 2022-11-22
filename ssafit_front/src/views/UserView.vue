@@ -30,6 +30,8 @@
 
     <br />
 
+    <user-calendar></user-calendar>
+
     <!-- 캘린더 / 찜 / 유저 추천 -->
     <div class="d-flex justify-content-center">
       <b-button variant="outline-secondary"
@@ -56,12 +58,14 @@
 </template>
 
 <script>
+import UserCalendar from "@/components/user/UserCalendar.vue";
 import { mapState } from "vuex";
 import UserDetail from "@/components/user/UserDetail.vue";
 
 export default {
   components: {
     UserDetail,
+    UserCalendar,
   },
   computed: {
     ...mapState(["user"]),
