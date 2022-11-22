@@ -7,15 +7,21 @@
         :src="require(`@/assets/${user.profile}.jpg`)"
       />
     </div>
+
     <p>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </p>
+
     <section>
+      <div><br /></div>
       <div class="d-inline-flex">
-        <h2>
-          {{ user.userName }}
-        </h2>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <div>
+          <h2>
+            {{ user.userName }}
+          </h2>
+        </div>
+
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
         <div>
           <!-- 등록 폼 수정 폼으로 바꾸기 -->
 
