@@ -42,21 +42,21 @@
               {{ video.snippet.channelTitle }}
             </b-card-text>
 
-            <b-button variant="primary" :to="video.id.videoId"
-              >영상 상세</b-button
-            >
+            <b-button variant="none" :to="video.id.videoId"
+              ><b-icon icon="play-btn-fill" variant="danger"></b-icon
+            ></b-button>
             <span v-if="loginUser.userName">
               <!-- 찜 등록-->
               <b-button
                 v-if="validLike(video.id.videoId)"
-                variant="outline-danger"
+                variant="none"
                 @click="createLike(video.id.videoId)"
                 ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
               ></b-button>
               <!-- 찜 삭제-->
               <b-button
                 v-else
-                variant="outline-danger"
+                variant="none"
                 @click="deleteLike(video.id.videoId)"
                 ><b-icon-suit-heart-fill
                   variant="danger"
