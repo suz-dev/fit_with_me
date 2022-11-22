@@ -37,6 +37,7 @@
       <b-button variant="outline-secondary"
         ><b-icon icon="calendar-check" variant="secondary"></b-icon
       ></b-button>
+
       <div>&nbsp;&nbsp;</div>
       <b-button
         :to="'/user/userInfo/' + user.userId + '/like'"
@@ -50,6 +51,7 @@
         ><b-icon icon="person" variant="secondary"></b-icon
       ></b-button>
     </div>
+    <br />
 
     <router-view></router-view>
   </div>
@@ -59,6 +61,7 @@
 import UserCalendar from "@/components/user/UserCalendar.vue";
 import { mapState } from "vuex";
 import UserDetail from "@/components/user/UserDetail.vue";
+
 export default {
   components: {
     UserDetail,
