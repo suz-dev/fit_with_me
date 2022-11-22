@@ -67,6 +67,11 @@
       id="updateCalendar"
       title="캘린더 상세"
       ok-variant="outline-primary"
+      ok-title="수정"
+      @ok="updateCalendar"
+      cancel-title="삭제"
+      cancel-variant="outline-danger"
+      @cancle="deleteCalendar"
     >
       <b-form>
         <b-form-group id="startTime" label="시작 시간 :" label-for="startTime">
@@ -97,9 +102,8 @@
             type="text"
           ></b-form-input>
         </b-form-group>
+        <b-button @click="deleteCalendar">삭제</b-button>
       </b-form>
-      <b-button variant="outline-danger">수정 </b-button>
-      <b-button>삭제</b-button>
     </b-modal>
   </div>
 </template>
@@ -121,6 +125,7 @@ export default {
         part: "",
         videoUrl: "",
         memo: "",
+        calendarId: null,
       },
       perPage: 3,
       currentPage: 1,
@@ -215,6 +220,32 @@ export default {
     },
   },
   methods: {
+    updateCalendar() {
+      const API_URL = `${REST_API}/calendarapi/calendar`;
+      axios({
+        url: API_URL,
+        method: "PUT",
+        params: {
+          startTime:
+            this.detail.startTime.getHours() +
+            ":" +
+            this.detail.startTime.getMinutes() +
+            ":00",
+          endTime:
+            this.detail.endTime.getHours() +
+            ":" +
+            this.detail.endTime.getMinutes() +
+            ":00",
+          part: this.detail.part,
+          videoUrl: this.detail.videoUrl,
+          memo: this.detail.memo,
+          calendarId: this.detail.calendarId,
+        },
+      }).then(() => {
+        this.$router.go();
+      });
+    },
+
     showModal(data) {
       console.log(data);
 
@@ -224,11 +255,13 @@ export default {
       this.detail.part = data.part;
       this.detail.videoUrl = data.videoUrl;
       this.detail.memo = data.memo;
+      this.detail.calendarId = data.calendarId;
       this.$bvModal.show("updateCalendar");
     },
 
     addCalendar() {
       const API_URL = `${REST_API}/calendarapi/calendar`;
+      // const curr = this.date;
       axios
         .post(
           API_URL,
@@ -246,7 +279,7 @@ export default {
               ":00",
             endTime:
               this.endTime.getHours() + ":" + this.endTime.getMinutes() + ":00",
-            part: "기타",
+            part: this.part,
             videoUrl: this.videoUrl,
             memo: this.memo,
             userId: this.loginUser.userId,
@@ -258,7 +291,20 @@ export default {
           }
         )
         .then(() => {
-          location.reload();
+          this.$router.go();
+        });
+    },
+    deleteCalendar() {
+      const API_URL = `${REST_API}/calendarapi/calendar/${this.detail.calendarId}`;
+      axios({
+        url: API_URL,
+        method: "DELETE",
+      })
+        .then(() => {
+          alert("삭제 완료");
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },

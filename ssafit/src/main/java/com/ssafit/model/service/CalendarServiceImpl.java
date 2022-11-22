@@ -36,7 +36,7 @@ public class CalendarServiceImpl implements CalendarService{
     @Override
     public boolean modifyCalendar(Calendar calendar) {
         Calendar originCalendar = calendarDao.selectCalendarById(calendar.getCalendarId());
-
+        System.out.println(calendar);
         originCalendar.setPart(calendar.getPart());
         originCalendar.setVideoUrl(calendar.getVideoUrl());
         originCalendar.setStartTime(calendar.getStartTime());
