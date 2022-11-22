@@ -7,7 +7,7 @@
       <b-row v-for="review in reviews" :key="review.reviewId">
         <b-col
           ><img
-            :src="require(`@/assets/${review.profile}.png`)"
+            :src="require(`@/assets/${review.profile}.jpg`)"
             style="border-radius: 50%; width: 50px"
           />
           <!-- 이름 누르면 회원정보 페이지로 이동 -->

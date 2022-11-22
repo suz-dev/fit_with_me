@@ -10,7 +10,7 @@
         >
           <b-col>
             <img
-              :src="require(`@/assets/${user.profile}.png`)"
+              :src="require(`@/assets/${user.profile}.jpg`)"
               style="border-radius: 50%; width: 50px"
             />
           </b-col>
