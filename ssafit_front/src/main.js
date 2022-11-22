@@ -3,7 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import VCalendar from "v-calendar";
 
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, {
+  // Use <vc-calendar /> instead of <v-calendar />
+  // ...other defaults
+});
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
