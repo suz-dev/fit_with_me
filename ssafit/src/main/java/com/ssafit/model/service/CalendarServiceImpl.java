@@ -25,12 +25,12 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public List<Calendar> getCalendar(HashMap<String, String> params) {
-        return calendarDao.selectCalendar(params);
+        return calendarDao.selectCalendarByDate(params);
     }
 
     @Override
     public Calendar getCalendarById(int calendarId) {
-        calendarDao.selectCalendarById(calendarId);
+        return calendarDao.selectCalendarById(calendarId);
     }
 
     @Override
@@ -42,6 +42,7 @@ public class CalendarServiceImpl implements CalendarService{
         originCalendar.setStarTime(calendar.getStarTime());
         originCalendar.setEndTime(calendar.getEndTime());
         originCalendar.setMemo(calendar.getMemo());
+
         return calendarDao.updateCalendar(originCalendar)==1;
     }
 
