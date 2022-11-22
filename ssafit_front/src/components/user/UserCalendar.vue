@@ -5,9 +5,13 @@
         <div class="d-inline-flex">
           <div>
             <v-date-picker v-model="date" :attributes="attributes" />
-            <b-button v-b-modal.addCalendar variant="outline-secondary"
-              >추가</b-button
-            >
+            <b-button v-b-modal.addCalendar variant="none"
+              ><b-icon
+                icon="plus-square"
+                variant="secondary"
+                aria-hidden="true"
+              ></b-icon
+            ></b-button>
           </div>
 
           <b-table :items="selectedDate" :fields="fields">
@@ -18,16 +22,13 @@
               {{ data.item.endTime.slice(0, 5) }}
             </template>
             <template #cell(memo)="data">
-              <b-button
-                @click="showModal(data.item)"
-                variant="outline-secondary"
-                >상세</b-button
-              >
+              <b-button @click="showModal(data.item)" variant="none"
+                ><b-icon icon="journal" aria-hidden="true"></b-icon
+              ></b-button>
             </template>
           </b-table>
-        </div>
-      </b-col></b-container
-    >
+        </div> </b-col
+    ></b-container>
 
     <b-modal
       id="addCalendar"
@@ -178,23 +179,23 @@ export default {
       fields: [
         {
           key: "part",
-          label: "종목",
+          label: "🏆",
         },
         {
           key: "startTime",
-          label: "시작 시간",
+          label: "🕒",
         },
         {
           key: "endTime",
-          label: "종료 시간",
+          label: "🕛",
         },
         {
           key: "videoUrl",
-          label: "url",
+          label: "🎬",
         },
         {
           key: "memo",
-          label: "메모",
+          label: "📃",
         },
       ],
       selectedDate: [],
