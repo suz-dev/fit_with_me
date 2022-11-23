@@ -3,7 +3,7 @@
     <header-nav></header-nav>
     <br />
     <br />
-    <router-view></router-view>
+    <router-view :key="$route.fullPath"></router-view>
     <!-- <img src="@/assets/bear.png" /> -->
   </div>
 </template>
