@@ -312,6 +312,7 @@ export default {
       })
         .then(() => {
           alert("삭제 완료");
+          this.$router.go();
         })
         .catch((err) => {
           console.log(err);
