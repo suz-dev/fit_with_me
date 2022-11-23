@@ -60,6 +60,10 @@ export default {
   methods: {
     createReview() {
       console.log(this.review);
+      if (this.loginUser.userId == null) {
+        alert("로그인이 필요합니다.");
+      }
+
       this.$store.dispatch("createReview", this.review);
     },
   },
