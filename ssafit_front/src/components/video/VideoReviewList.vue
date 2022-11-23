@@ -26,7 +26,7 @@
             readonly
           ></b-form-rating
         ></b-col>
-        <b-col v-if="review.userName == loginUser.userName">
+        <b-col v-if="review.userId == loginUser.userId">
           <b-button v-b-modal.updateModal @click="updateModal(review)"
             >수정</b-button
           >
@@ -53,7 +53,7 @@
           <b-form-input
             inline
             id="userName"
-            v-model="selected.userName"
+            v-model="loginUser.userName"
             readonly
             type="text"
           ></b-form-input>

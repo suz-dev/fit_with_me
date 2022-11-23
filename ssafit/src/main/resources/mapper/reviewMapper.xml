@@ -34,7 +34,7 @@
 
     <update id="updateReview" parameterType="Review">
         UPDATE review
-        SET content = #{content}, star = #{star}
+        SET content = #{content}, star = #{star}, profile=#{profile}, user_name=#{userName}
         WHERE review_id = #{reviewId}
     </update>
 
