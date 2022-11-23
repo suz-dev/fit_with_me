@@ -78,7 +78,7 @@ public class VideoController {
         return new ResponseEntity<>(review, HttpStatus.OK);
     }
 
-    @PostMapping("/review")
+    @PostMapping("/create")
     public ResponseEntity<?> createReview(Review review) {
         reviewService.createReview(review);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
