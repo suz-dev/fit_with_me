@@ -141,7 +141,6 @@ export default {
   created() {
     this.$store.dispatch("getFollower", this.user.userId);
     this.$store.dispatch("getFollowing", this.user.userId);
-    this.$store.dispatch("getFollower", this.user.userId);
   },
 
   methods: {
