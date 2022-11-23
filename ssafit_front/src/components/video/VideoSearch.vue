@@ -98,6 +98,9 @@ export default {
       return this.videos.length;
     },
   },
+  created() {
+    this.$store.dispatch("resetSearch");
+  },
   methods: {
     validLike(videoId) {
       for (var key in this.likeVideos) {

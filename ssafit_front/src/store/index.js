@@ -33,6 +33,9 @@ export default new Vuex.Store({
     SEARCH_PART_VIDEOS(state, payload) {
       state.partVideos = payload;
     },
+    RESET_SERACH(state) {
+      state.searchVideos = [];
+    },
     GET_VIDEO(state, payload) {
       state.video = payload;
     },
@@ -90,6 +93,9 @@ export default new Vuex.Store({
     GET_USERS(state, payload) {
       state.users = payload;
     },
+    DELETE_USER(state) {
+      state.loginUser = {};
+    },
   },
   actions: {
     searchVideos({ commit }, search) {
@@ -137,6 +143,9 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err);
         });
+    },
+    resetSearch({ commit }) {
+      commit("RESET_SERACH");
     },
     createVideo({ dispatch }, videoId) {
       const API_URL = `https://www.googleapis.com/youtube/v3/videos`;
@@ -309,7 +318,7 @@ export default new Vuex.Store({
         method: "DELETE",
       })
         .then(() => {
-          commit;
+          commit("DELETE_USER");
           location.reload();
         })
         .catch((err) => {

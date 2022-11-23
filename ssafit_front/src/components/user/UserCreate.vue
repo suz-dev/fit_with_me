@@ -338,6 +338,7 @@ export default {
     // 회원 탈퇴
     deleteUser() {
       this.$store.dispatch("deleteUser", this.loginUser.userId);
+      this.$router.push("/");
     },
   },
   created() {
