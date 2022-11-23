@@ -1,32 +1,47 @@
 <template>
   <div>
-    <h2>영상 상세</h2>
-
     <!-- iframe으로 재생할 수 있게 -->
+    <b-container>
+      <b-row class="justify-content-md-center">
+        <div class="embed-responsive embed-responsive-16by9" style="width: 50%">
+          <iframe
+            class="embed-responsive-item"
+            :src="'https://www.youtube-nocookie.com/embed/' + video.id"
+            width="420"
+            height="315"
+            frameborder="0"
+          ></iframe>
+        </div>
+      </b-row>
+    </b-container>
+    <br />
+    <b-container>
+      <b-col class="video_title">
+        {{ video.title }}
+      </b-col>
+      <b-col class="channel_title">
+        {{ video.channelName }}
+      </b-col>
+      <b-col>
+        {{ video.viewCnt }}
+      </b-col>
+      <b-col>
+        <span v-if="loginUser.userName">
+          <!-- 찜 등록-->
+          <b-button
+            v-if="validLike(video.id)"
+            variant="none"
+            @click="createLike(video.id)"
+            ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
+          ></b-button>
+          <!-- 찜 삭제-->
+          <b-button v-else variant="none" @click="deleteLike(video.id)"
+            ><b-icon-suit-heart-fill variant="danger"></b-icon-suit-heart-fill
+          ></b-button>
+        </span>
+      </b-col>
+    </b-container>
 
-    <iframe
-      :src="'https://www.youtube-nocookie.com/embed/' + video.id"
-      width="420"
-      height="315"
-    ></iframe>
-    <div>
-      {{ video.title }}
-      {{ video.channelName }}
-      {{ video.viewCnt }}
-      <span v-if="loginUser.userName">
-        <!-- 찜 등록-->
-        <b-button
-          v-if="validLike(video.id)"
-          variant="outline-danger"
-          @click="createLike(video.id)"
-          ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
-        ></b-button>
-        <!-- 찜 삭제-->
-        <b-button v-else variant="outline-danger" @click="deleteLike(video.id)"
-          ><b-icon-suit-heart-fill variant="danger"></b-icon-suit-heart-fill
-        ></b-button>
-      </span>
-    </div>
     <!-- <video-item></video-item> -->
     <!-- 리뷰 목록 -->
     <b-container>
@@ -77,4 +92,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.video_title {
+  font-size: 18px;
+}
+
+.channel_title {
+  color: gray;
+  font-size: 13px;
+}
+</style>
