@@ -1,64 +1,59 @@
 <template>
-  <div>
-    <b-navbar class="navbar navbar-expand-sm" variant="dark">
-      <!-- 홈 링크 -->
+  <b-navbar class="navbar navbar-expand-sm" variant="dark">
+    <!-- 홈 링크 -->
 
-      <b-container>
-        <div>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
+    <b-container fluid>
+      <div class="item">
+        <b-container>
+          <header>
+            <a href="/"
+              ><img
+                src="../../assets/logo_test5.png"
+                style="width: 120px"
+                alt=""
+            /></a>
+          </header>
+          <p>&nbsp;&nbsp;</p>
+          <div>
+            <b-input-group class="mt-3">
+              <b-form-input
+                v-model="search"
+                @keyup.enter="searchVideos"
+                type="text"
+                placeholder="Search"
+              ></b-form-input>
+            </b-input-group>
+          </div>
+        </b-container>
+      </div>
 
-        <header>
-          <a href="/"
-            ><img src="../../assets/logo_test5.png" style="width: 150px" alt=""
-          /></a>
-        </header>
-
-        <div>
-          <b-input-group class="mt-3">
-            <b-form-input
-              v-model="search"
-              @keyup.enter="searchVideos"
-              type="text"
-              placeholder="검색어를 입력하세요."
-            ></b-form-input>
-          </b-input-group>
-        </div>
-
-        <!-- 로그인/로그아웃 -->
-        <main>
-          <div v-if="loginUser.userName">
-            <b-container>
-              <div>
-                <b-dropdown
-                  no-caret
-                  id="dropdown-right"
-                  right
-                  block
-                  variant="none"
-                  :text="loginUser.userName"
-                >
-                  <b-dropdown-item :to="'/user/userInfo/' + loginUser.userId"
-                    >My Page</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="logout"> 로그아웃 </b-dropdown-item>
-                </b-dropdown>
-              </div>
-              <div>
+      <!-- 로그인/로그아웃 -->
+      <main class="item">
+        <div v-if="loginUser.userName">
+          <div>
+            <b-dropdown no-caret id="dropdown-right" right block variant="none"
+              ><template #button-content>
                 <img
-                  style="border-radius: 50%; width: 60px"
+                  style="border-radius: 50%; width: 50px"
                   :src="require(`@/assets/${loginUser.profile}.jpg`)"
                 />
-              </div>
-            </b-container>
+              </template>
+              <b-dropdown-item disabled>
+                {{ loginUser.userName }}님
+              </b-dropdown-item>
+              <b-dropdown-item :to="'/user/userInfo/' + loginUser.userId"
+                >My Page</b-dropdown-item
+              >
+              <b-dropdown-item @click="logout"> 로그아웃 </b-dropdown-item>
+            </b-dropdown>
           </div>
-          <div v-else>
-            <b-button to="/user/login" variant="light">로그인</b-button>
-          </div>
-        </main>
-      </b-container>
-    </b-navbar>
-  </div>
+        </div>
+        <div v-else>
+          <b-button to="/user/login" variant="light">로그인</b-button>
+        </div>
+      </main>
+    </b-container>
+  </b-navbar>
 </template>
 
 <script>
@@ -89,7 +84,7 @@ export default {
     searchVideos() {
       console.log(this.search);
       this.$store.dispatch("searchVideos", this.search);
-      this.$router.push("/search");
+      this.$router.pusth("/search");
     },
   },
 };
@@ -101,5 +96,15 @@ main {
 }
 .navbar {
   background-image: url("../../assets/배경2.jpg");
+}
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+.disabled {
+  color: black;
 }
 </style>

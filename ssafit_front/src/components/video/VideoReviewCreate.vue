@@ -2,39 +2,44 @@
   <div>
     <!-- 리뷰 등록 폼 -->
     <h3>리뷰 등록</h3>
-    <div class="text-center">
-      <b-form inline>
-        <b-form-group id="content" label="리뷰 내용:" label-for="content">
-          <b-form-textarea
-            id="content"
-            v-model="review.content"
-            type="text"
-            rows="3"
-            cols="60"
-            max-rows="6"
-            required
-          ></b-form-textarea>
-        </b-form-group>
 
-        <b-form-group inline id="userName" label="작성자 :" label-for="userId">
-          <b-form-input
-            inline
-            id="userName"
-            v-model="review.userName"
-            readonly
-            type="text"
-          ></b-form-input>
-        </b-form-group>
+    <b-container>
+      <b-row>
+        <b-form inline>
+          <div>
+            <img
+              :src="require(`@/assets/${loginUser.profile}.jpg`)"
+              style="border-radius: 50%; width: 50px"
+            />
+          </div>
 
-        <b-form-group inline id="star" label="별점 :" label-for="star">
-          <b-form-rating
-            variant="warning"
-            v-model="review.star"
-          ></b-form-rating>
-        </b-form-group>
-        <button class="btn btn-primary" @click="createReview">등록</button>
-      </b-form>
-    </div>
+          <div>
+            <b-form-group id="content">
+              <b-form-textarea
+                id="content"
+                v-model="review.content"
+                type="text"
+                rows="3"
+                cols="60"
+                max-rows="6"
+                required
+              ></b-form-textarea>
+            </b-form-group>
+          </div>
+          <div>
+            <b-form-group id="star">
+              <b-form-rating
+                variant="warning"
+                v-model="review.star"
+              ></b-form-rating>
+            </b-form-group>
+            <b-button variant="outline-secondary" @click="createReview"
+              >등록</b-button
+            >
+          </div>
+        </b-form>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -65,6 +70,7 @@ export default {
       }
 
       this.$store.dispatch("createReview", this.review);
+      this.$router.go();
     },
   },
 };

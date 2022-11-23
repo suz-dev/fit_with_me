@@ -6,51 +6,50 @@
         style="border-radius: 50%; width: 120px"
         :src="require(`@/assets/${user.profile}.jpg`)"
       />
-    </div>
 
-    <div class="d-inline-flex">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </div>
-
-    <section>
-      <div><br /></div>
       <div class="d-inline-flex">
-        <div>
-          <h2>
-            {{ user.userName }}
-          </h2>
-        </div>
-
-        <div class="d-inline-flex">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <div>
-          <!-- 등록 폼 수정 폼으로 바꾸기 -->
-
-          <b-button
-            v-if="loginUser.userId == user.userId"
-            to="/user/regist"
-            variant="none"
-            ><b-icon icon="gear" variant="secondary"></b-icon
-          ></b-button>
-
-          <b-button
-            v-else-if="validFollow(user.userId)"
-            variant="outline-danger"
-            @click="addFollow(user.userId)"
-            >Follow
-          </b-button>
-          <b-button
-            v-else
-            variant="outline-danger"
-            @click="unFollow(user.userId)"
-            >UnFollow</b-button
-          >
-        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
 
-      <div class="userId">{{ user.userId }}</div>
-    </section>
+      <section>
+        <div><br /></div>
+        <div class="d-inline-flex">
+          <div>
+            <h2>
+              {{ user.userName }}
+            </h2>
+          </div>
+
+          <div class="d-inline-flex">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+          <div>
+            <!-- 등록 폼 수정 폼으로 바꾸기 -->
+
+            <b-button
+              v-if="loginUser.userId == user.userId"
+              to="/user/regist"
+              variant="none"
+              ><b-icon icon="gear" variant="secondary"></b-icon
+            ></b-button>
+
+            <b-button
+              v-else-if="validFollow(user.userId)"
+              variant="outline-danger"
+              @click="addFollow(user.userId)"
+              >Follow
+            </b-button>
+            <b-button
+              v-else
+              variant="outline-danger"
+              @click="unFollow(user.userId)"
+              >UnFollow</b-button
+            >
+          </div>
+        </div>
+        <div class="userId">{{ user.userId }}</div>
+      </section>
+    </div>
   </header>
 </template>
 
@@ -89,7 +88,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .userId {
   text-align: left;
   font-size: 20px;
