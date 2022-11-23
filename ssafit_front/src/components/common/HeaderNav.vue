@@ -69,7 +69,9 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.$router.push("/");
+      if (location.href == "http://localhost:8080/") {
+        this.$router.go();
+      } else this.$router.push("/");
     },
   },
 };
