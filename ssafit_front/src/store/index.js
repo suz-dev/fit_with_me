@@ -411,16 +411,11 @@ export default new Vuex.Store({
           dispatch("getLikes", this.state.loginUser.userId);
         })
         .catch((err) => {
-          if (err.response.data.message.includes("Duplicate entry")) {
-            // duplicate entry
-            alert("이미 찜한 영상입니다.");
-            return;
-          } else if (err.response.data.message.includes("foreign key")) {
-            console.log("멈춤?");
+          if (err.response.data.message.includes("foreign key")) {
             dispatch("createVideo", videoId);
             setTimeout(() => {
               dispatch("createLike", videoId);
-            }, 500);
+            }, 300);
             return;
           }
         });
