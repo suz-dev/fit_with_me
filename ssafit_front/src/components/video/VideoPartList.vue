@@ -1,14 +1,19 @@
 <template>
   <div>
     <b-container>
-      <b-form-select
-        style="width: 50%"
-        @change="searchPartVideos"
-        v-model="selected"
-        :options="options"
-        size="sm"
-        class="mt-3"
-      ></b-form-select>
+      <b-row>
+        <b-col></b-col>
+        <b-col>
+          <b-form-select
+            @change="searchPartVideos"
+            v-model="selected"
+            :options="options"
+            size="sm"
+            class="mt-3"
+          ></b-form-select
+        ></b-col>
+        <b-col></b-col>
+      </b-row>
     </b-container>
     <br />
     <b-container v-if="videos">
@@ -29,11 +34,11 @@
           >
             <b-card-text class="txt_line">
               <span class="video_title">
-                {{ video.snippet.title }}
+                <span v-html="video.snippet.title"></span>
               </span>
               <br />
               <div class="channel_title">
-                {{ video.snippet.channelTitle }}
+                <span v-html="video.snippet.channelTitle"></span>
               </div>
               <b-button variant="none" :to="video.id.videoId"
                 ><b-icon icon="play-btn-fill" variant="danger"></b-icon
@@ -116,7 +121,6 @@ export default {
     validLike(videoId) {
       for (var key in this.likeVideos) {
         if (this.likeVideos[key].id == videoId) {
-          console.log(videoId);
           return false;
         }
       }
@@ -132,7 +136,6 @@ export default {
         .then(this.$store.dispatch("createLike", videoId));
     },
     deleteLike(videoId) {
-      confirm("삭제하시겠습니까?");
       this.$store.dispatch("deleteLike", videoId);
     },
   },

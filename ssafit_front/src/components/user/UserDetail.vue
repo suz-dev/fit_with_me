@@ -62,9 +62,7 @@ export default {
   },
   created() {
     const pathName = new URL(document.location).pathname.split("/");
-    console.log(pathName);
     const id = pathName[3];
-    console.log(id);
     this.$store.dispatch("getUser", id);
   },
   methods: {

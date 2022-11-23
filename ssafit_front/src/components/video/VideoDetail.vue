@@ -22,8 +22,8 @@
       <b-col class="channel_title">
         {{ video.channelName }}
       </b-col>
-      <b-col>
-        {{ video.viewCnt }}
+      <b-col class="channel_title">
+        {{ video.viewCnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 회
       </b-col>
       <b-col>
         <span v-if="loginUser.userName">
@@ -65,7 +65,6 @@ export default {
   created() {
     const pathName = new URL(document.location).pathname.split("/");
     const id = pathName[pathName.length - 1];
-    console.log(id);
     this.$store.dispatch("getVideo", id);
     this.$store.dispatch("getReviews", id);
     this.$store.dispatch("getLikes", this.loginUser.userId);
@@ -74,7 +73,6 @@ export default {
     validLike(videoId) {
       for (var key in this.likeVideos) {
         if (this.likeVideos[key].id == videoId) {
-          console.log(videoId);
           return false;
         }
       }
@@ -85,7 +83,6 @@ export default {
       return false;
     },
     deleteLike(videoId) {
-      confirm("삭제하시겠습니까?");
       this.$store.dispatch("deleteLike", videoId);
     },
   },
@@ -94,11 +91,11 @@ export default {
 
 <style>
 .video_title {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .channel_title {
+  font-size: 14px;
   color: gray;
-  font-size: 13px;
 }
 </style>
