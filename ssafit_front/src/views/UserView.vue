@@ -9,12 +9,12 @@
       <b-form inline>
         <!-- follow 컴포넌트-->
         <div class="d-flex justify-content-center">
-          <b-button v-b-modal.follower variant="outline-secondary"
+          <b-button @click="showFollowerModal" variant="outline-secondary"
             ><b-icon icon="person-plus" variant="secondary"></b-icon
             >follower</b-button
           >
           <div>&nbsp;&nbsp;</div>
-          <b-button v-b-modal.following variant="outline-secondary"
+          <b-button @click="showFollowingModal" variant="outline-secondary"
             ><b-icon icon="person-check" variant="secondary"></b-icon
             >following</b-button
           >
@@ -144,6 +144,14 @@ export default {
   },
 
   methods: {
+    showFollowerModal() {
+      this.$store.dispatch("getFollower", this.user.userId);
+      this.$bvModal.show("follower");
+    },
+    showFollowingModal() {
+      this.$store.dispatch("getFollowing", this.user.userId);
+      this.$bvModal.show("following");
+    },
     addFollow(userId) {
       console.log(userId);
       this.$store.dispatch("addFollow", userId);
