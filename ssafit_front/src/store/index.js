@@ -383,13 +383,13 @@ export default new Vuex.Store({
           },
           {
             headers: {
+              "access-token": sessionStorage.getItem("access-token"),
               "Content-Type": "application/x-www-form-urlencoded",
             },
           }
         )
         .then(() => {
           commit("CREATE_REVIEW", review);
-          location.reload();
         })
         .catch(() => {});
     },
