@@ -1,19 +1,31 @@
 <template>
   <div>
-    <b-container>
-      <b-col>
-        <div class="d-inline-flex">
-          <div>
-            <v-date-picker v-model="date" :attributes="attributes" />
-            <b-button
-              v-if="loginUser.userId == user.userId"
-              v-b-modal.addCalendar
-              variant="outline-secondary"
-              >추가</b-button
-            >
-          </div>
+    <br />
+    <b-container class="container">
+      <b-row>
+        <b-col cols="4">
+          <v-date-picker v-model="date" :attributes="attributes" />
+          <br />
 
-          <b-table :items="selectedDateItems" :fields="fields">
+          <b-button
+            v-if="loginUser.userId == user.userId"
+            v-b-modal.addCalendar
+            variant="none"
+            ><b-icon
+              icon="plus-square
+"
+              variant="secondary"
+            ></b-icon
+          ></b-button>
+        </b-col>
+        <b-col>
+          <b-table borderless :items="selectedDateItems" :fields="fields">
+            <template #cell(part)="data">
+              <img
+                :src="require(`@/assets/exercise/${data.item.part}.png`)"
+                style="width: 40px"
+              />
+            </template>
             <template #cell(startTime)="data">
               {{ data.item.startTime.slice(0, 5) }}
             </template>
@@ -29,16 +41,14 @@
               ></b-button>
             </template>
             <template #cell(memo)="data">
-              <b-button
-                @click="showModal(data.item)"
-                variant="outline-secondary"
-                >상세</b-button
-              >
+              <b-button @click="showModal(data.item)" variant="none"
+                ><b-icon icon="sticky" variant="secondary"></b-icon
+              ></b-button>
             </template>
           </b-table>
-        </div>
-      </b-col></b-container
-    >
+        </b-col>
+      </b-row>
+    </b-container>
 
     <b-modal
       id="addCalendar"
@@ -149,64 +159,64 @@ export default {
       videoUrl: "",
       memo: "",
       options: [
-        { value: "골프", text: "골프" },
+        { value: "golf", text: "골프" },
         {
-          value: "러닝",
+          value: "running",
           text: "러닝",
         },
         {
-          value: "복싱",
+          value: "boxing",
           text: "복싱",
         },
         {
-          value: "사이클",
+          value: "cycle",
           text: "사이클",
         },
         {
-          value: "수영",
+          value: "swim",
           text: "수영",
         },
         {
-          value: "요가",
+          value: "yoga",
           text: "요가",
         },
         {
-          value: "웨이트",
+          value: "weight",
           text: "웨이트",
         },
         {
-          value: "테니스",
+          value: "tennis",
           text: "테니스",
         },
         {
-          value: "필라테스",
+          value: "pilates",
           text: "필라테스",
         },
         {
-          value: "기타",
+          value: "etc",
           text: "기타",
         },
       ],
       fields: [
         {
           key: "part",
-          label: "종목",
+          label: "part",
         },
         {
           key: "startTime",
-          label: "시작 시간",
+          label: "start",
         },
         {
           key: "endTime",
-          label: "종료 시간",
+          label: "end",
         },
         {
           key: "videoUrl",
-          label: "url",
+          label: "URL",
         },
         {
           key: "memo",
-          label: "메모",
+          label: "",
         },
       ],
       selectedDateItems: [],
@@ -385,4 +395,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.container {
+  width: 850px;
+}
+</style>

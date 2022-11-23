@@ -32,7 +32,7 @@
                 ></b-form-rating>
               </b-form-group>
               <b-button variant="none" @click="createReview"
-                ><b-icon icon="chat-left-dots" aria-hidden="true"></b-icon
+                ><b-icon icon="plus-square" aria-hidden="true"></b-icon
               ></b-button>
             </b-col>
           </b-row>
@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     createReview() {
-      console.log(this.review);
       if (this.loginUser.userId == null) {
         alert("로그인이 필요합니다.");
       }

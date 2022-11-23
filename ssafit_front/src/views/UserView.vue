@@ -10,12 +10,10 @@
         <!-- follow 컴포넌트-->
         <div class="d-flex justify-content-center">
           <b-button @click="showFollowerModal" variant="outline-secondary"
-            ><b-icon icon="person-plus" variant="secondary"></b-icon
             >follower</b-button
           >
           <div>&nbsp;&nbsp;</div>
           <b-button @click="showFollowingModal" variant="outline-secondary"
-            ><b-icon icon="person-check" variant="secondary"></b-icon
             >following</b-button
           >
           <div>&nbsp;&nbsp;</div>
@@ -48,7 +46,7 @@
     </div>
     <br />
 
-    <router-view></router-view>
+    <router-view :key="user.userId"></router-view>
 
     <b-modal id="follower" title="follower" ok-variant="outline-primary">
       <b-container v-if="follower">
@@ -141,7 +139,8 @@ export default {
   created() {
     this.$store.dispatch("getFollower", this.user.userId);
     this.$store.dispatch("getFollowing", this.user.userId);
-    localStorage.setItem("date", JSON.stringify(new Date()));
+    if (localStorage.getItem("date") == null)
+      localStorage.setItem("date", JSON.stringify(new Date()));
   },
 
   methods: {

@@ -56,6 +56,7 @@
                   ><b-icon
                     icon="x-square"
                     aria-hidden="true"
+                    variant="danger"
                   ></b-icon></b-button
               ></b-col>
             </b-col>
@@ -122,7 +123,6 @@ export default {
       this.selected = review;
     },
     updateReview(review) {
-      console.log(review);
       this.$store.dispatch("updateReview", review);
     },
     deleteReview(review) {

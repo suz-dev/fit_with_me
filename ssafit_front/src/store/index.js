@@ -183,8 +183,6 @@ export default new Vuex.Store({
         })
 
         .catch(() => {
-          console.log("삽입 실패");
-
           alert("존재하지 않는 동영상입니다.");
           router.go(-1);
         });
@@ -307,7 +305,6 @@ export default new Vuex.Store({
           return;
         })
         .catch((err) => {
-          console.log(user);
           console.log(err);
         });
     },

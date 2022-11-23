@@ -1,53 +1,44 @@
 <template>
   <div>
-    <h3>찜 리스트</h3>
-
     <b-container v-if="likeVideos">
       <b-card-group deck>
-        <div
-          v-for="video in likeVideos.slice(
-            (currentPage - 1) * perPage,
-            currentPage * perPage
-          )"
-          :key="video.id"
-        >
+        <div v-for="video in likeVideos" :key="video.id">
           <b-card
-            :title="video.title"
             :img-src="
               'https://img.youtube.com/vi/' + video.id + '/mqdefault.jpg'
             "
             img-alt="Image"
             img-top
             tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
+            style="max-width: 20rem; margin: 20px"
+            class="border border-white"
             id="card"
           >
-            <b-card-text>
-              {{ video.channelName }}
-              <!-- <b-badge>{{ video.viewCnt }}</b-badge> -->
+            <b-card-text class="txt_line">
+              <span class="video_title">
+                <span v-html="video.snippet.title"></span>
+              </span>
+              <br />
+              <div class="channel_title">
+                <span v-html="video.snippet.channelTitle"></span>
+              </div>
+              <b-button variant="none" :to="video.id"
+                ><b-icon icon="play-btn-fill" variant="danger"></b-icon
+              ></b-button>
+              <span>
+                <b-button
+                  v-if="loginUser.userName"
+                  variant="none"
+                  @click="deleteLike(video.id)"
+                  ><b-icon-suit-heart-fill
+                    variant="danger"
+                  ></b-icon-suit-heart-fill
+                ></b-button>
+              </span>
             </b-card-text>
-
-            <b-button variant="primary" :to="'/' + video.id"
-              >영상 상세</b-button
-            >
-            <!-- 찜 삭제-->
-            <b-button
-              v-if="loginUser.userId == user.userId"
-              variant="outline-danger"
-              @click="deleteLike(video.id)"
-              ><b-icon-suit-heart-fill variant="danger"></b-icon-suit-heart-fill
-            ></b-button>
           </b-card>
         </div>
       </b-card-group>
-
-      <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-        aria-controls="card-group"
-      ></b-pagination>
     </b-container>
   </div>
 </template>
@@ -55,30 +46,43 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      perPage: 3,
-      currentPage: 1,
-    };
-  },
   computed: {
     ...mapState(["user", "likeVideos", "loginUser"]),
-    rows() {
-      return this.likeVideos.length;
-    },
   },
 
   created() {
     this.videos = this.$store.dispatch("getLikes", this.user.userId);
-    console.log(this.videos);
   },
   methods: {
     deleteLike(videoId) {
-      confirm("삭제하시겠습니까?");
       this.$store.dispatch("deleteLike", videoId);
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+#card {
+  border-radius: 10%;
+}
+
+img {
+  border-radius: 10%;
+}
+
+.txt_line {
+  padding: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video_title {
+  font-size: 18px;
+}
+
+.channel_title {
+  color: gray;
+  font-size: 13px;
+}
+</style>
