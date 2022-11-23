@@ -111,7 +111,6 @@ export default new Vuex.Store({
           q: search,
           type: "video",
           maxResults: 10,
-          order: "viewCount",
         },
       })
         .then((res) => {
@@ -135,7 +134,6 @@ export default new Vuex.Store({
           q: part,
           type: "video",
           maxResults: 10,
-          order: "viewCount",
         },
       })
         .then((res) => {
