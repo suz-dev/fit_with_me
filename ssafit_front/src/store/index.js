@@ -319,7 +319,8 @@ export default new Vuex.Store({
       })
         .then(() => {
           commit("DELETE_USER");
-          location.reload();
+          alert("탈퇴 완료");
+          router.push("/");
         })
         .catch((err) => {
           console.log(err);
