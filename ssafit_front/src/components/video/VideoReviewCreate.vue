@@ -7,6 +7,7 @@
           <b-row>
             <b-col cols="2">
               <img
+                v-if="loginUser.userId"
                 :src="require(`@/assets/${loginUser.profile}.jpg`)"
                 style="border-radius: 50%; width: 50px"
               />
