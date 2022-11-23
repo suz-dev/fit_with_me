@@ -1,44 +1,42 @@
 <template>
   <div>
     <!-- 리뷰 등록 폼 -->
-    <h3>리뷰 등록</h3>
-
     <b-container>
-      <b-row>
-        <b-form inline>
-          <div>
-            <img
-              :src="require(`@/assets/${loginUser.profile}.jpg`)"
-              style="border-radius: 50%; width: 50px"
-            />
-          </div>
-
-          <div>
-            <b-form-group id="content">
+      <b-list-group>
+        <b-list-group-item class="border border-white">
+          <b-row>
+            <b-col cols="2">
+              <img
+                :src="require(`@/assets/${loginUser.profile}.jpg`)"
+                style="border-radius: 50%; width: 50px"
+              />
+            </b-col>
+            <b-col cols="8">
               <b-form-textarea
-                id="content"
+                id="input"
                 v-model="review.content"
                 type="text"
-                rows="3"
-                cols="60"
-                max-rows="6"
+                rows="1"
                 required
+                placeholder="댓글을 입력하세요"
               ></b-form-textarea>
-            </b-form-group>
-          </div>
-          <div>
-            <b-form-group id="star">
-              <b-form-rating
-                variant="warning"
-                v-model="review.star"
-              ></b-form-rating>
-            </b-form-group>
-            <b-button variant="outline-secondary" @click="createReview"
-              >등록</b-button
-            >
-          </div>
-        </b-form>
-      </b-row>
+            </b-col>
+
+            <b-col>
+              <b-form-group id="star">
+                <b-form-rating
+                  variant="warning"
+                  class="border border-white"
+                  v-model="review.star"
+                ></b-form-rating>
+              </b-form-group>
+              <b-button variant="none" @click="createReview"
+                ><b-icon icon="chat-left-dots" aria-hidden="true"></b-icon
+              ></b-button>
+            </b-col>
+          </b-row>
+        </b-list-group-item>
+      </b-list-group>
     </b-container>
   </div>
 </template>
@@ -76,4 +74,27 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px lightgrey solid;
+  background-color: transparent;
+  text-align: center;
+  color: gray;
+}
+#input:focus {
+  outline: none; /* 아웃라인 지우기 */
+  color: gray;
+}
+
+#input::placeholder {
+  color: gray;
+  font-size: 15px;
+}
+
+/* #input::-webkit-input-placeholder {
+  color: black(255, 255, 255);
+} */
+</style>

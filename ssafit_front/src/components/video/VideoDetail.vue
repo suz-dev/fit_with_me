@@ -45,10 +45,10 @@
     <!-- <video-item></video-item> -->
     <!-- 리뷰 목록 -->
     <b-container>
+      <video-review-create></video-review-create>
       <router-view></router-view>
       <!-- 리뷰 등록 form -->
-      <video-review-create></video-review-create
-    ></b-container>
+    </b-container>
   </div>
 </template>
 
