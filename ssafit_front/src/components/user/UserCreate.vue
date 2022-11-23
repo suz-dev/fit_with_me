@@ -16,12 +16,6 @@
 
             <div>
               <label>
-                <input type="radio" v-model="profile" value="sarang2" checked />
-                <img src="@/assets/sarang2.jpg" alt="Option 1" />
-              </label>
-            </div>
-            <div>
-              <label>
                 <input type="radio" v-model="profile" value="bong1" checked />
                 <img src="@/assets/bong1.jpg" alt="Option 1" />
               </label>
@@ -60,13 +54,25 @@
                 <img src="@/assets/kang.jpg" alt="Option 1" />
               </label>
             </div>
-            <!-- <div>
+
+            <div>
               <label>
-                <input type="radio" v-model="profile" value="turtle" checked />
-                <img src="@/assets/turtle.png" alt="Option 1" />
+                <input type="radio" v-model="profile" value="yong" checked />
+                <img src="@/assets/yong.jpg" alt="Option 1" />
               </label>
             </div>
-            -->
+            <div>
+              <label>
+                <input type="radio" v-model="profile" value="min" checked />
+                <img src="@/assets/min.jpg" alt="Option 1" />
+              </label>
+            </div>
+            <div>
+              <label>
+                <input type="radio" v-model="profile" value="thunder" checked />
+                <img src="@/assets/thunder.jpg" alt="Option 1" />
+              </label>
+            </div>
 
             <div>
               <label>
