@@ -27,6 +27,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 로그인 요청시 & swagger 접근  토큰 없이 허용 (다른 요청 다 막음)
-        registry.addInterceptor(jwtInterceptor).addPathPatterns("/videoapi/review/**");
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/videoapi/create/**");
     }
 }

@@ -367,7 +367,7 @@ export default new Vuex.Store({
 
     // 리뷰 작성
     createReview({ commit }, review) {
-      const API_URL = `${REST_API}/videoapi/review`;
+      const API_URL = `${REST_API}/videoapi/create`;
       axios
         .post(
           API_URL,
@@ -390,9 +390,7 @@ export default new Vuex.Store({
           commit("CREATE_REVIEW", review);
           location.reload();
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     },
 
     // 찜하기
