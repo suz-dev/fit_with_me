@@ -5,13 +5,9 @@
         <div class="d-inline-flex">
           <div>
             <v-date-picker v-model="date" :attributes="attributes" />
-            <b-button v-b-modal.addCalendar variant="none"
-              ><b-icon
-                icon="plus-square"
-                variant="secondary"
-                aria-hidden="true"
-              ></b-icon
-            ></b-button>
+            <b-button v-b-modal.addCalendar variant="outline-secondary"
+              >추가</b-button
+            >
           </div>
 
           <b-table :items="selectedDate" :fields="fields">
@@ -21,14 +17,24 @@
             <template #cell(endTime)="data">
               {{ data.item.endTime.slice(0, 5) }}
             </template>
-            <template #cell(memo)="data">
-              <b-button @click="showModal(data.item)" variant="none"
-                ><b-icon icon="journal" aria-hidden="true"></b-icon
+            <template #cell(videoUrl)="data">
+              <b-button
+                variant="none"
+                :to="'/' + data.item.videoUrl.split('=')[1]"
+                ><b-icon icon="play-btn-fill" variant="danger"></b-icon
               ></b-button>
             </template>
+            <template #cell(memo)="data">
+              <b-button
+                @click="showModal(data.item)"
+                variant="outline-secondary"
+                >상세</b-button
+              >
+            </template>
           </b-table>
-        </div> </b-col
-    ></b-container>
+        </div>
+      </b-col></b-container
+    >
 
     <b-modal
       id="addCalendar"
@@ -103,7 +109,7 @@
             type="text"
           ></b-form-input>
         </b-form-group>
-        <b-button @click="deleteCalendar">삭제</b-button>
+        <b-button @click="deleteCalendar">삭제--</b-button>
       </b-form>
     </b-modal>
   </div>
@@ -138,64 +144,64 @@ export default {
       videoUrl: "",
       memo: "",
       options: [
-        { value: "골프", text: "⛳ 골프" },
+        { value: "골프", text: "골프" },
         {
           value: "러닝",
-          text: "🏃‍♀️ 러닝",
+          text: "러닝",
         },
         {
           value: "복싱",
-          text: "🥊 복싱",
+          text: "복싱",
         },
         {
           value: "사이클",
-          text: "🚴‍♀️ 사이클",
+          text: "사이클",
         },
         {
           value: "수영",
-          text: "🏊‍♀️ 수영",
+          text: "수영",
         },
         {
           value: "요가",
-          text: "🪔 요가",
+          text: "요가",
         },
         {
           value: "웨이트",
-          text: "🏋️‍♂️ 웨이트",
+          text: "웨이트",
         },
         {
           value: "테니스",
-          text: "🎾 테니스",
+          text: "테니스",
         },
         {
           value: "필라테스",
-          text: "🧘‍♂️ 필라테스",
+          text: "필라테스",
         },
         {
           value: "기타",
-          text: "ETC.",
+          text: "기타",
         },
       ],
       fields: [
         {
           key: "part",
-          label: "🏆",
+          label: "종목",
         },
         {
           key: "startTime",
-          label: "🕒",
+          label: "시작 시간",
         },
         {
           key: "endTime",
-          label: "🕛",
+          label: "종료 시간",
         },
         {
           key: "videoUrl",
-          label: "🎬",
+          label: "url",
         },
         {
           key: "memo",
-          label: "📃",
+          label: "메모",
         },
       ],
       selectedDate: [],
