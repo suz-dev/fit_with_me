@@ -32,7 +32,10 @@
               >영상 상세</b-button
             >
             <!-- 찜 삭제-->
-            <b-button variant="outline-danger" @click="deleteLike(video.id)"
+            <b-button
+              v-if="loginUser.userId == user.userId"
+              variant="outline-danger"
+              @click="deleteLike(video.id)"
               ><b-icon-suit-heart-fill variant="danger"></b-icon-suit-heart-fill
             ></b-button>
           </b-card>
@@ -59,7 +62,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user", "likeVideos"]),
+    ...mapState(["user", "likeVideos", "loginUser"]),
     rows() {
       return this.likeVideos.length;
     },
