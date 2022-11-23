@@ -36,9 +36,12 @@ public class ReviewServiceImpl implements ReviewService {
 
         Review originReview = reviewDao.selectReview(review.getReviewId());
 
+        originReview.setProfile(review.getProfile());
+        originReview.setUserName(review.getUserName());
 
         originReview.setContent(review.getContent());
         originReview.setStar(review.getStar());
+
 
         return reviewDao.updateReview(originReview) == 1;
     }

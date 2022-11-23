@@ -244,11 +244,14 @@ export default new Vuex.Store({
           content: updateReview.content,
           viewCnt: updateReview.viewCnt,
           star: updateReview.star,
+          userName: this.state.loginUser.userName,
+          profile: this.state.loginUser.profile,
         },
       })
         .then(() => {
           commit("UPDATE_REVIEW", updateReview);
           alert("수정 완료");
+          location.reload();
         })
         .catch((err) => {
           console.log(err);
