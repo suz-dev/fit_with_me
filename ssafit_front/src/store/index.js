@@ -110,7 +110,7 @@ export default new Vuex.Store({
           part: "snippet",
           q: search,
           type: "video",
-          maxResults: 10,
+          maxResults: 20,
         },
       })
         .then((res) => {
@@ -133,7 +133,7 @@ export default new Vuex.Store({
           part: "snippet",
           q: part,
           type: "video",
-          maxResults: 10,
+          maxResults: 21,
         },
       })
         .then((res) => {

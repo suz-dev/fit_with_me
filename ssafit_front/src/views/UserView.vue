@@ -32,7 +32,9 @@
 
     <!-- 캘린더 / 찜 / 유저 추천 -->
     <div class="d-flex justify-content-center">
-      <b-button variant="outline-secondary" @click="moveCalendar"
+      <b-button
+        variant="outline-secondary"
+        :to="'/user/userInfo/' + user.userId"
         ><b-icon icon="calendar-check" variant="secondary"></b-icon
       ></b-button>
 
@@ -139,13 +141,10 @@ export default {
   created() {
     this.$store.dispatch("getFollower", this.user.userId);
     this.$store.dispatch("getFollowing", this.user.userId);
+    localStorage.setItem("date", JSON.stringify(new Date()));
   },
 
   methods: {
-    moveCalendar() {
-      localStorage.setItem("date", JSON.stringify(new Date()));
-      this.$router.push("/user/userInfo/" + this.user.userId + "/calendar");
-    },
     showFollowerModal() {
       this.$store.dispatch("getFollower", this.user.userId);
       this.$bvModal.show("follower");

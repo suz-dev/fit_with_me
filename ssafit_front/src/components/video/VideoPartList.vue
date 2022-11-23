@@ -1,28 +1,19 @@
 <template>
   <div>
-    <h3>파트 별 영상</h3>
     <b-container>
       <b-form-select
+        style="width: 50%"
         @change="searchPartVideos"
         v-model="selected"
         :options="options"
         size="sm"
         class="mt-3"
       ></b-form-select>
-      <div class="mt-3">
-        <strong>{{ selected }}</strong>
-      </div>
     </b-container>
-
+    <br />
     <b-container v-if="videos">
       <b-card-group deck>
-        <div
-          v-for="video in videos.slice(
-            (currentPage - 1) * perPage,
-            currentPage * perPage
-          )"
-          :key="video.id.videoId"
-        >
+        <div v-for="video in videos" :key="video.id.videoId">
           <b-card
             :img-src="
               'https://img.youtube.com/vi/' +
@@ -32,47 +23,43 @@
             img-alt="Image"
             img-top
             tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
+            style="max-width: 20rem; margin: 20px"
+            class="border border-white"
             id="card"
           >
-            <b-card-text>
-              {{ video.snippet.title }}
+            <b-card-text class="txt_line">
+              <span class="video_title">
+                {{ video.snippet.title }}
+              </span>
               <br />
-              {{ video.snippet.channelTitle }}
+              <div class="channel_title">
+                {{ video.snippet.channelTitle }}
+              </div>
+              <b-button variant="none" :to="video.id.videoId"
+                ><b-icon icon="play-btn-fill" variant="danger"></b-icon
+              ></b-button>
+              <span v-if="loginUser.userName">
+                <!-- 찜 등록-->
+                <b-button
+                  v-if="validLike(video.id.videoId)"
+                  variant="none"
+                  @click="createLike(video.id.videoId)"
+                  ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
+                ></b-button>
+                <!-- 찜 삭제-->
+                <b-button
+                  v-else
+                  variant="none"
+                  @click="deleteLike(video.id.videoId)"
+                  ><b-icon-suit-heart-fill
+                    variant="danger"
+                  ></b-icon-suit-heart-fill
+                ></b-button>
+              </span>
             </b-card-text>
-
-            <b-button variant="none" :to="video.id.videoId"
-              ><b-icon icon="play-btn-fill" variant="danger"></b-icon
-            ></b-button>
-            <span v-if="loginUser.userName">
-              <!-- 찜 등록-->
-              <b-button
-                v-if="validLike(video.id.videoId)"
-                variant="none"
-                @click="createLike(video.id.videoId)"
-                ><b-icon-suit-heart variant="danger"></b-icon-suit-heart
-              ></b-button>
-              <!-- 찜 삭제-->
-              <b-button
-                v-else
-                variant="none"
-                @click="deleteLike(video.id.videoId)"
-                ><b-icon-suit-heart-fill
-                  variant="danger"
-                ></b-icon-suit-heart-fill
-              ></b-button>
-            </span>
           </b-card>
         </div>
       </b-card-group>
-
-      <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-        aria-controls="card-group"
-      ></b-pagination>
     </b-container>
   </div>
 </template>
@@ -87,7 +74,7 @@ export default {
       status: [],
       perPage: 3,
       currentPage: 1,
-      selected: "골프",
+      selected: "필라테스",
       options: [
         { value: "골프", text: "골프" },
         {
@@ -145,6 +132,7 @@ export default {
         .then(this.$store.dispatch("createLike", videoId));
     },
     deleteLike(videoId) {
+      confirm("삭제하시겠습니까?");
       this.$store.dispatch("deleteLike", videoId);
     },
   },
@@ -169,5 +157,21 @@ export default {
 
 img {
   border-radius: 10%;
+}
+
+.txt_line {
+  padding: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video_title {
+  font-size: 18px;
+}
+
+.channel_title {
+  color: gray;
+  font-size: 13px;
 }
 </style>
