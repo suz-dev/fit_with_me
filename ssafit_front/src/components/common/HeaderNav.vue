@@ -14,6 +14,17 @@
           /></a>
         </header>
 
+        <div>
+          <b-input-group class="mt-3">
+            <b-form-input
+              v-model="search"
+              @keyup.enter="searchVideos"
+              type="text"
+              placeholder="검색어를 입력하세요."
+            ></b-form-input>
+          </b-input-group>
+        </div>
+
         <!-- 로그인/로그아웃 -->
         <main>
           <div v-if="loginUser.userName">
@@ -58,12 +69,14 @@ export default {
 
   data() {
     return {
+      search: "",
       userId: "",
     };
   },
 
   computed: {
     ...mapState(["loginUser"]),
+    ...mapState({ videos: "searchVideos" }),
   },
 
   methods: {
@@ -72,6 +85,11 @@ export default {
       if (location.href == "http://localhost:8080/") {
         this.$router.go();
       } else this.$router.push("/");
+    },
+    searchVideos() {
+      console.log(this.search);
+      this.$store.dispatch("searchVideos", this.search);
+      this.$router.push("/search");
     },
   },
 };
@@ -82,6 +100,6 @@ main {
   float: right;
 }
 .navbar {
-  background-image: url("../../assets/KakaoTalk_20221121_214834251.jpg");
+  background-image: url("../../assets/배경2.jpg");
 }
 </style>

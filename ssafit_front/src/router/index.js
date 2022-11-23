@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "@/views/HomeView";
 import UserView from "@/views/UserView";
+import VideoPartList from "@/components/video/VideoPartList.vue";
 import VideoSearch from "@/components/video/VideoSearch.vue";
 import VideoDetail from "@/components/video/VideoDetail.vue";
 import VideoReviewList from "@/components/video/VideoReviewList.vue";
@@ -23,6 +24,11 @@ const routes = [
       {
         path: "",
         name: "videoList",
+        component: VideoPartList,
+      },
+      {
+        path: "search",
+        name: "videoSearch",
         component: VideoSearch,
       },
     ],
@@ -71,7 +77,7 @@ const routes = [
         component: UserList,
       },
       {
-        path: "calendar",
+        path: "",
         name: "calendar",
         component: UserCalendar,
       },
