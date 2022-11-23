@@ -5,7 +5,10 @@
         <div class="d-inline-flex">
           <div>
             <v-date-picker v-model="date" :attributes="attributes" />
-            <b-button v-b-modal.addCalendar variant="outline-secondary"
+            <b-button
+              v-if="loginUser.userId == user.userId"
+              v-b-modal.addCalendar
+              variant="outline-secondary"
               >추가</b-button
             >
           </div>
@@ -106,8 +109,12 @@
             type="text"
           ></b-form-input>
         </b-form-group>
-        <b-button @click="updateCalendar">수정</b-button>
-        <b-button @click="deleteCalendar">삭제</b-button>
+        <b-button v-if="loginUser.userId == user.userId" @click="updateCalendar"
+          >수정</b-button
+        >
+        <b-button v-if="loginUser.userId == user.userId" @click="deleteCalendar"
+          >삭제</b-button
+        >
       </b-form>
     </b-modal>
   </div>
@@ -206,7 +213,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["loginUser"]),
+    ...mapState(["loginUser", "user"]),
     attributes() {
       return [
         // Attributes for todos
@@ -291,7 +298,7 @@ export default {
             part: this.part,
             videoUrl: this.videoUrl,
             memo: this.memo,
-            userId: this.loginUser.userId,
+            userId: this.user.userId,
           },
           {
             headers: {
@@ -336,7 +343,7 @@ export default {
             (value.getMonth() + 1) +
             "-" +
             value.getDate(),
-          userId: this.loginUser.userId,
+          userId: this.user.userId,
         },
       }).then((res) => {
         this.selectedDateItems = res.data;
@@ -345,8 +352,7 @@ export default {
   },
 
   created() {
-    localStorage.setItem("date", JSON.stringify(new Date()));
-    const API_URL = `${REST_API}/calendarapi/calendar/${this.loginUser.userId}`;
+    const API_URL = `${REST_API}/calendarapi/calendar/${this.user.userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -370,7 +376,7 @@ export default {
           (this.date.getMonth() + 1) +
           "-" +
           this.date.getDate(),
-        userId: this.loginUser.userId,
+        userId: this.user.userId,
       },
     }).then((res) => {
       this.selectedDateItems = res.data;
