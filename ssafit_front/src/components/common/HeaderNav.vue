@@ -84,7 +84,7 @@ export default {
     searchVideos() {
       console.log(this.search);
       this.$store.dispatch("searchVideos", this.search);
-      this.$router.pusth("/search");
+      this.$router.push("/search");
     },
   },
 };
