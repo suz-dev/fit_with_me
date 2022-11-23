@@ -5,7 +5,7 @@
     <!-- iframe으로 재생할 수 있게 -->
 
     <iframe
-      :src="'https://www.youtube.com/embed/' + video.id"
+      :src="'https://www.youtube-nocookie.com/embed/' + video.id"
       width="420"
       height="315"
     ></iframe>
