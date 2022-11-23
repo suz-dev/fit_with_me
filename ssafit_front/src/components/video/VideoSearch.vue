@@ -23,10 +23,12 @@
                 />
               </div>
               <b-col class="txt_line">
-                <b-col class="txt_line"> {{ video.snippet.title }}</b-col>
+                <b-col class="txt_line">
+                  <span v-html="video.snippet.title"></span
+                ></b-col>
                 <b-col class="channel_title">
-                  {{ video.snippet.channelTitle }}</b-col
-                >
+                  <span v-html="video.snippet.channelTitle"></span
+                ></b-col>
                 <b-col>
                   <b-button variant="none" :to="video.id.videoId"
                     ><b-icon icon="play-btn-fill" variant="danger"></b-icon
@@ -55,13 +57,6 @@
           </b-container>
         </b-list-group-item>
       </b-list-group>
-
-      <!-- <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-        aria-controls="card-group"
-      ></b-pagination> -->
     </b-container>
   </div>
 </template>
@@ -90,21 +85,18 @@ export default {
     validLike(videoId) {
       for (var key in this.likeVideos) {
         if (this.likeVideos[key].id == videoId) {
-          console.log(videoId);
           return false;
         }
       }
       return true;
     },
     searchVideos() {
-      console.log(this.search);
       this.$store.dispatch("searchVideos", this.search);
     },
     createLike(videoId) {
       this.$store.dispatch("createLike", videoId);
     },
     deleteLike(videoId) {
-      confirm("삭제하시겠습니까?");
       this.$store.dispatch("deleteLike", videoId);
     },
   },

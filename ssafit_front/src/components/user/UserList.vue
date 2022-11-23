@@ -2,7 +2,6 @@
   <header class="d-flex justify-content-center">
     <div>
       <!-- 전체 유저 리스트 -->
-      <h2>팔로우 추천</h2>
       <b-container>
         <b-row
           v-for="user in users.slice((currentPage - 1) * perPage)"

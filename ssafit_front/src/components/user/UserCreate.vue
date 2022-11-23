@@ -1,12 +1,20 @@
 <template>
   <div>
-    <h2>회원 정보</h2>
+    <h2 v-if="loginUser.userId">회 원 정 보</h2>
+    <h2 v-else>회 원 가 입</h2>
+    <br />
 
     <b-container>
       <!-- 프로필 사진 -->
-      <b-form-group id="id" label-for="id">
-        <b-container>
+      <b-form-group>
+        <div class="container1">
           <b-form inline>
+            <div>
+              <label>
+                <input type="radio" v-model="profile" value="basic" checked />
+                <img src="@/assets/basic.jpg" alt="Option 1" />
+              </label>
+            </div>
             <div>
               <label>
                 <input type="radio" v-model="profile" value="sarang1" checked />
@@ -18,13 +26,6 @@
               <label>
                 <input type="radio" v-model="profile" value="bong1" checked />
                 <img src="@/assets/bong1.jpg" alt="Option 1" />
-              </label>
-            </div>
-
-            <div>
-              <label>
-                <input type="radio" v-model="profile" value="bong2" checked />
-                <img src="@/assets/bong2.jpg" alt="Option 2" />
               </label>
             </div>
 
@@ -73,16 +74,10 @@
                 <img src="@/assets/thunder.jpg" alt="Option 1" />
               </label>
             </div>
-
-            <div>
-              <label>
-                <input type="radio" v-model="profile" value="basic" checked />
-                <img src="@/assets/basic.jpg" alt="Option 1" />
-              </label>
-            </div>
           </b-form>
-        </b-container>
+        </div>
       </b-form-group>
+      <br />
 
       <!-- userId 입력 + 유효성 검사(아이디 중복 체크) -->
       <b-form-group id="id" label-for="id">
@@ -106,10 +101,10 @@
           <!-- 구현 -->
           <!-- 중복체크 확인 여부 -->
           <!-- 중복체크 해서 ok -> true / false-->
+          <span>&nbsp;&nbsp;&nbsp;</span>
           <b-button v-if="loginUser.userId" disabled @click="checkId"
             >ID 중복체크</b-button
           >
-
           <b-button v-else @click="checkId">ID 중복체크</b-button>
         </b-form>
       </b-form-group>
@@ -143,17 +138,34 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="name" label-for="name">
-        <b-form-input
-          id="name"
-          ref="nameInput"
-          v-model="userName"
-          type="text"
-          placeholder="Name"
-          required
-        ></b-form-input>
+      <!-- 이름 / 성별 / 생년월일 -->
+      <b-form-group>
+        <b-form inline>
+          <b-form-input
+            inline
+            id="name"
+            ref="nameInput"
+            v-model="userName"
+            type="text"
+            placeholder="Name"
+            required
+          ></b-form-input>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+
+          <!-- 성별 -->
+          <b-form-select v-model="sex" :options="options"></b-form-select>
+
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <b-form-datepicker
+            id="birthDate"
+            v-model="birthDate"
+            placeholder="생년월일 (선택)"
+            required
+          ></b-form-datepicker>
+        </b-form>
       </b-form-group>
 
+      <!-- 이메일 -->
       <b-form-group id="email" label-for="email">
         <b-form-input
           v-if="loginUser.userId"
@@ -172,23 +184,12 @@
           required
         ></b-form-input>
       </b-form-group>
-
-      <b-form inline>
-        <b-form-group id="birthDate" label-for="birthDate">
-          <b-form-datepicker
-            id="birthDate"
-            v-model="birthDate"
-            placeholder="생년월일 (선택)"
-            required
-          ></b-form-datepicker>
-        </b-form-group>
-
-        <!-- 성별 -->
-
-        <b-form-select v-model="sex" :options="options"></b-form-select>
-      </b-form>
     </b-container>
-    <b-button class="btn" variant="outline-secondary" to="/">취소</b-button>
+
+    <br />
+
+    <b-button class="btn" variant="secondary" to="/">취소</b-button>
+    <span>&nbsp;&nbsp;&nbsp;</span>
     <span>
       <b-button
         v-if="loginUser.userId"
@@ -197,10 +198,12 @@
       >
         수정
       </b-button>
-      <b-button v-else variant="outline-primary" @click="createUser">
+
+      <b-button v-else variant="outline-secondary" @click="createUser">
         등록
       </b-button>
     </span>
+    <span>&nbsp;&nbsp;&nbsp;</span>
     <b-button
       variant="outline-danger"
       v-if="loginUser.userId"
@@ -281,8 +284,7 @@ export default {
         url: API_URL,
         method: "GET",
       })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           alert("이미 사용중인 아이디입니다");
         })
         .catch((err) => {
@@ -377,7 +379,6 @@ export default {
         url: API_URL,
         method: "GET",
       }).then((res) => {
-        console.log(res.data);
         let user = res.data;
         this.profile = user.profile;
         this.userId = user.userId;
@@ -412,6 +413,24 @@ export default {
 
 /* CHECKED STYLES */
 [type="radio"]:checked + img {
-  outline: 5px solid blue;
+  /* outline: 5px solid blue;
+   */
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(
+        45deg,
+        rgb(185, 174, 255),
+        rgb(227, 157, 241),
+        rgb(141, 179, 250)
+      )
+      border-box;
+  border: 9px solid transparent;
+  border-radius: 50%;
+}
+
+.container1 {
+  width: 700px;
+}
+.container {
+  width: 700px;
 }
 </style>

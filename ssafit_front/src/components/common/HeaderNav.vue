@@ -49,7 +49,7 @@
           </div>
         </div>
         <div v-else>
-          <b-button to="/user/login" variant="light">로그인</b-button>
+          <b-button to="/user/login" variant="outline-light">로그인</b-button>
         </div>
       </main>
     </b-container>
@@ -82,7 +82,6 @@ export default {
       } else this.$router.push("/");
     },
     searchVideos() {
-      console.log(this.search);
       this.$store.dispatch("searchVideos", this.search);
       this.$router.push("/search");
     },
