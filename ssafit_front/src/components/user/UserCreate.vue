@@ -204,9 +204,35 @@
     <b-button
       variant="outline-danger"
       v-if="loginUser.userId"
-      @click="deleteUser"
+      @click="showDeleteModal"
       >탈퇴</b-button
     >
+
+    <b-modal
+      id="deleteModal"
+      title="정말 탈퇴하시겠습니까?"
+      ok-variant="outline-primary"
+      @ok="deleteUser"
+    >
+      비밀번호를 다시 입력하세요.
+      <!-- pw 검증 -->
+      <b-form-group
+        id="pw"
+        label-for="pw"
+        valid-feedback="비밀번호가 일치합니다."
+        invalid-feedback="비밀번호가 일치하지않습니다"
+        :state="state"
+      >
+        <b-form-input
+          id="pw"
+          ref="pw2Input"
+          v-model="pw2"
+          type="password"
+          placeholder="Password 재입력"
+          required
+        ></b-form-input>
+      </b-form-group>
+    </b-modal>
   </div>
 </template>
 
@@ -333,12 +359,14 @@ export default {
         return;
       }
       this.$store.dispatch("updateUser", user);
+      this.$router.push(`/user/userInfo/${this.loginUser.userId}`);
     },
-
+    showDeleteModal() {
+      this.$bvModal.show("deleteModal");
+    },
     // 회원 탈퇴
     deleteUser() {
       this.$store.dispatch("deleteUser", this.loginUser.userId);
-      this.$router.push("/");
     },
   },
   created() {
