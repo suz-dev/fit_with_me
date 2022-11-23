@@ -9,9 +9,9 @@
         </div>
 
         <header>
-          <router-link to="/"
+          <a href="/"
             ><img src="../../assets/logo_test5.png" style="width: 150px" alt=""
-          /></router-link>
+          /></a>
         </header>
 
         <!-- 로그인/로그아웃 -->
