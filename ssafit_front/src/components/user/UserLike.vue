@@ -16,11 +16,11 @@
           >
             <b-card-text class="txt_line">
               <span class="video_title">
-                <span v-html="video.snippet.title"></span>
+                <span v-html="video.title"></span>
               </span>
               <br />
               <div class="channel_title">
-                <span v-html="video.snippet.channelTitle"></span>
+                <span v-html="video.channelTitle"></span>
               </div>
               <b-button variant="none" :to="video.id"
                 ><b-icon icon="play-btn-fill" variant="danger"></b-icon
