@@ -53,6 +53,7 @@ export default {
     console.log(id);
     this.$store.dispatch("getVideo", id);
     this.$store.dispatch("getReviews", id);
+    this.$store.dispatch("getLikes", this.loginUser.userId);
   },
   methods: {
     validLike(videoId) {

@@ -119,7 +119,6 @@ export default {
       this.$store.dispatch("createLike", videoId);
     },
     deleteLike(videoId) {
-      confirm("삭제하시겠습니까?");
       this.$store.dispatch("deleteLike", videoId);
     },
   },
