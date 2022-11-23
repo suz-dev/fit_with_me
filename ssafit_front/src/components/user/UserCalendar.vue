@@ -10,7 +10,7 @@
             >
           </div>
 
-          <b-table :items="selectedDate" :fields="fields">
+          <b-table :items="selectedDateItems" :fields="fields">
             <template #cell(startTime)="data">
               {{ data.item.startTime.slice(0, 5) }}
             </template>
@@ -19,8 +19,9 @@
             </template>
             <template #cell(videoUrl)="data">
               <b-button
+                v-if="data.item.videoUrl"
                 variant="none"
-                :to="'/' + data.item.videoUrl.split('=')[1]"
+                @click="moveVideo(data.item.videoUrl)"
                 ><b-icon icon="play-btn-fill" variant="danger"></b-icon
               ></b-button>
             </template>
@@ -71,14 +72,10 @@
     </b-modal>
 
     <b-modal
+      hide-footer
       id="updateCalendar"
       title="캘린더 상세"
       ok-variant="outline-primary"
-      ok-title="수정"
-      @ok="updateCalendar"
-      cancel-title="삭제"
-      cancel-variant="outline-danger"
-      @cancle="deleteCalendar"
     >
       <b-form>
         <b-form-group id="startTime" label="시작 시간 :" label-for="startTime">
@@ -109,7 +106,8 @@
             type="text"
           ></b-form-input>
         </b-form-group>
-        <b-button @click="deleteCalendar">삭제--</b-button>
+        <b-button @click="updateCalendar">수정</b-button>
+        <b-button @click="deleteCalendar">삭제</b-button>
       </b-form>
     </b-modal>
   </div>
@@ -137,7 +135,7 @@ export default {
       perPage: 3,
       currentPage: 1,
       haveExercise: [],
-      date: new Date(),
+      date: new Date(JSON.parse(localStorage.getItem("date")).slice(0, 10)),
       startTime: null,
       endTime: null,
       part: "기타",
@@ -204,7 +202,7 @@ export default {
           label: "메모",
         },
       ],
-      selectedDate: [],
+      selectedDateItems: [],
     };
   },
   computed: {
@@ -227,6 +225,13 @@ export default {
     },
   },
   methods: {
+    moveVideo(videoUrl) {
+      if (videoUrl.includes("=")) {
+        this.$router.push("/" + videoUrl.split("=")[1]);
+      } else {
+        alert("잘못된 링크 형식입니다.");
+      }
+    },
     updateCalendar() {
       const API_URL = `${REST_API}/calendarapi/calendar`;
       axios({
@@ -254,8 +259,6 @@ export default {
     },
 
     showModal(data) {
-      console.log(data);
-
       this.detail.date = data.date;
       this.detail.startTime = new Date(data.date + "T" + data.startTime);
       this.detail.endTime = new Date(data.date + "T" + data.endTime);
@@ -318,6 +321,7 @@ export default {
   watch: {
     date: function (value, oldValue) {
       oldValue;
+      localStorage.setItem("date", JSON.stringify(value));
       this.startTime = value;
       this.endTime = value;
       // date에 있는 리스트 가져오기
@@ -335,7 +339,7 @@ export default {
           userId: this.loginUser.userId,
         },
       }).then((res) => {
-        this.selectedDate = res.data;
+        this.selectedDateItems = res.data;
       });
     },
   },
@@ -350,14 +354,11 @@ export default {
       this.haveExercise = [];
       arr.forEach((element) => {
         const date = element.date.split("-");
-        console.log(date);
         this.haveExercise.push(new Date(date[0], date[1] - 1, date[2]));
       });
-      console.log(this.haveExercise);
     });
 
     const API_URL2 = `${REST_API}/calendarapi/calendar`;
-
     axios({
       url: API_URL2,
       method: "GET",
@@ -371,7 +372,7 @@ export default {
         userId: this.loginUser.userId,
       },
     }).then((res) => {
-      this.selectedDate = res.data;
+      this.selectedDateItems = res.data;
     });
   },
 };

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h2>회원 정보</h2>
+    <h2 v-if="loginUser.userId">회원 정보</h2>
+    <h2 v-else>회원가입</h2>
 
     <b-container>
       <!-- 프로필 사진 -->
