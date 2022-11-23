@@ -111,6 +111,7 @@ export default new Vuex.Store({
           q: search,
           type: "video",
           maxResults: 10,
+          order: "viewCount",
         },
       })
         .then((res) => {
@@ -134,6 +135,7 @@ export default new Vuex.Store({
           q: part,
           type: "video",
           maxResults: 10,
+          order: "viewCount",
         },
       })
         .then((res) => {
@@ -179,15 +181,14 @@ export default new Vuex.Store({
             )
             .then(() => {
               dispatch("getVideo", videoId);
-            })
-            .catch((err) => {
-              console.log(err);
             });
         })
 
-        .catch((err) => {
+        .catch(() => {
           console.log("삽입 실패");
-          console.log(err);
+
+          alert("존재하지 않는 동영상입니다.");
+          router.go(-1);
         });
     },
     getVideo({ commit, dispatch }, id) {
