@@ -201,7 +201,12 @@
         등록
       </b-button>
     </span>
-    <b-button variant="outline-danger" v-if="loginUser.userId">탈퇴</b-button>
+    <b-button
+      variant="outline-danger"
+      v-if="loginUser.userId"
+      @click="deleteUser"
+      >탈퇴</b-button
+    >
   </div>
 </template>
 
@@ -328,6 +333,11 @@ export default {
         return;
       }
       this.$store.dispatch("updateUser", user);
+    },
+
+    // 회원 탈퇴
+    deleteUser() {
+      this.$store.dispatch("deleteUser", this.loginUser.userId);
     },
   },
   created() {

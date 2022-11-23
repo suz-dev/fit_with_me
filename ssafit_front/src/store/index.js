@@ -301,6 +301,22 @@ export default new Vuex.Store({
         });
     },
 
+    // 회원 탈퇴
+    deleteUser({ commit }, userId) {
+      const API_URL = `${REST_API}/userapi/user/${userId}`;
+      axios({
+        url: API_URL,
+        method: "DELETE",
+      })
+        .then(() => {
+          commit;
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     // 로그인
     login({ commit }, payload) {
       const API_URL = `${REST_API}/userapi/login`;
