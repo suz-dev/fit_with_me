@@ -271,7 +271,6 @@ export default {
 
     addCalendar() {
       const API_URL = `${REST_API}/calendarapi/calendar`;
-      // const curr = this.date;
       axios
         .post(
           API_URL,
@@ -346,6 +345,7 @@ export default {
   },
 
   created() {
+    localStorage.setItem("date", JSON.stringify(new Date()));
     const API_URL = `${REST_API}/calendarapi/calendar/${this.loginUser.userId}`;
     axios({
       url: API_URL,
