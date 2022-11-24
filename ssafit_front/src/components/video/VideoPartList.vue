@@ -149,6 +149,7 @@ export default {
   },
   created() {
     this.$store.dispatch("searchPartVideos", this.selected);
+    this.$store.dispatch("getLikes", this.loginUser.userId);
   },
 };
 </script>
