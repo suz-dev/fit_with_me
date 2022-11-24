@@ -382,8 +382,9 @@ export default {
             new Date().getDate()
         )
       );
+      this.date = new Date();
     }
-    this.date = new Date();
+
     const API_URL = `${REST_API}/calendarapi/calendar/${this.user.userId}`;
     axios({
       url: API_URL,
