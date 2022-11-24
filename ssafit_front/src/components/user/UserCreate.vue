@@ -184,32 +184,43 @@
           required
         ></b-form-input>
       </b-form-group>
+
+      <br />
+
+      <b-form-group>
+        <b-row>
+          <b-col cols="2">
+            <b-button
+              variant="outline-danger"
+              v-if="loginUser.userId"
+              @click="showDeleteModal"
+              >탈퇴</b-button
+            >
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+          </b-col>
+          <b-col>
+            <b-button class="btn" variant="secondary" to="/">취소</b-button>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+
+            <span>
+              <b-button
+                v-if="loginUser.userId"
+                variant="outline-secondary"
+                @click="updateUser"
+              >
+                수정
+              </b-button>
+
+              <b-button v-else variant="outline-secondary" @click="createUser">
+                등록
+              </b-button>
+            </span>
+          </b-col>
+          <b-col cols="2"></b-col>
+        </b-row>
+      </b-form-group>
     </b-container>
-
-    <br />
-
-    <b-button class="btn" variant="secondary" to="/">취소</b-button>
-    <span>&nbsp;&nbsp;&nbsp;</span>
-    <span>
-      <b-button
-        v-if="loginUser.userId"
-        variant="outline-primary"
-        @click="updateUser"
-      >
-        수정
-      </b-button>
-
-      <b-button v-else variant="outline-secondary" @click="createUser">
-        등록
-      </b-button>
-    </span>
-    <span>&nbsp;&nbsp;&nbsp;</span>
-    <b-button
-      variant="outline-danger"
-      v-if="loginUser.userId"
-      @click="showDeleteModal"
-      >탈퇴</b-button
-    >
 
     <b-modal
       id="deleteModal"
@@ -332,7 +343,6 @@ export default {
         return;
       }
       this.$store.dispatch("createUser", user);
-      this.$router.push("/user/login");
     },
 
     updateUser() {
