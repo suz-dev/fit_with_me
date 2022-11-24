@@ -152,7 +152,7 @@ export default {
       perPage: 3,
       currentPage: 1,
       haveExercise: [],
-      date: new Date(JSON.parse(localStorage.getItem("date")).slice(0, 10)),
+      date: new Date(JSON.parse(localStorage.getItem("date"))),
       startTime: new Date(),
       endTime: new Date(),
       part: "기타",
@@ -277,8 +277,8 @@ export default {
 
     showModal(data) {
       this.detail.date = data.date;
-      this.detail.startTime = new Date(data.date + "T" + data.startTime);
-      this.detail.endTime = new Date(data.date + "T" + data.endTime);
+      this.detail.startTime = new Date(data.date + " " + data.startTime);
+      this.detail.endTime = new Date(data.date + " " + data.endTime);
       this.detail.part = data.part;
       this.detail.videoUrl = data.videoUrl;
       this.detail.memo = data.memo;
@@ -338,7 +338,16 @@ export default {
   watch: {
     date: function (value, oldValue) {
       oldValue;
-      localStorage.setItem("date", JSON.stringify(value));
+      localStorage.setItem(
+        "date",
+        JSON.stringify(
+          value.getFullYear() +
+            "-" +
+            (value.getMonth() + 1) +
+            "-" +
+            value.getDate()
+        )
+      );
       this.startTime = value;
       this.endTime = value;
       // date에 있는 리스트 가져오기
@@ -362,6 +371,19 @@ export default {
   },
 
   created() {
+    if (localStorage.getItem("date") == null) {
+      localStorage.setItem(
+        "date",
+        JSON.stringify(
+          new Date().getFullYear() +
+            "-" +
+            (new Date().getMonth() + 1) +
+            "-" +
+            new Date().getDate()
+        )
+      );
+    }
+    this.date = new Date();
     const API_URL = `${REST_API}/calendarapi/calendar/${this.user.userId}`;
     axios({
       url: API_URL,

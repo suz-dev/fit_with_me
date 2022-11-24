@@ -139,8 +139,6 @@ export default {
   created() {
     this.$store.dispatch("getFollower", this.user.userId);
     this.$store.dispatch("getFollowing", this.user.userId);
-    if (localStorage.getItem("date") == null)
-      localStorage.setItem("date", JSON.stringify(new Date()));
   },
 
   methods: {
