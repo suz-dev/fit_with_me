@@ -95,7 +95,7 @@ main {
   float: right;
 }
 .navbar {
-  background-image: url("../../assets/배경2.jpg");
+  background-image: url("../../assets/그림1.jpg");
 }
 .container {
   display: flex;
