@@ -76,6 +76,7 @@ export default {
 
   methods: {
     logout() {
+      localStorage.removeItem("date");
       this.$store.dispatch("logout");
       if (location.href == "http://localhost:8080/") {
         this.$router.go();
