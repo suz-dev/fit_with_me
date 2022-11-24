@@ -45,7 +45,7 @@
 
             <b-col cols="8"></b-col>
             <b-col>
-              <b-col v-if="review.userName == loginUser.userName">
+              <b-col v-if="review.userId == loginUser.userId">
                 <b-button
                   variant="none"
                   v-b-modal.updateModal
