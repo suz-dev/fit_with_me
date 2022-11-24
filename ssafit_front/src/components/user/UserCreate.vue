@@ -332,6 +332,7 @@ export default {
         return;
       }
       this.$store.dispatch("createUser", user);
+      this.$router.push("/user/login");
     },
 
     updateUser() {

@@ -22,12 +22,12 @@
               <div class="channel_title">
                 <span v-html="video.channelTitle"></span>
               </div>
-              <b-button variant="none" :to="video.id"
+              <b-button variant="none" :to="'/' + video.id"
                 ><b-icon icon="play-btn-fill" variant="danger"></b-icon
               ></b-button>
               <span>
                 <b-button
-                  v-if="loginUser.userName"
+                  v-if="loginUser.userId == user.userId"
                   variant="none"
                   @click="deleteLike(video.id)"
                   ><b-icon-suit-heart-fill

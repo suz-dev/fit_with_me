@@ -4,19 +4,25 @@
     <b-container class="container">
       <b-row>
         <b-col cols="4">
-          <v-date-picker v-model="date" :attributes="attributes" />
-          <br />
+          <b-row>
+            <v-date-picker v-model="date" :attributes="attributes" />
+          </b-row>
 
-          <b-button
-            v-if="loginUser.userId == user.userId"
-            v-b-modal.addCalendar
-            variant="none"
-            ><b-icon
-              icon="plus-square
+          <b-row>
+            <b-col></b-col>
+            <b-col cols="4">
+              <b-button
+                v-if="loginUser.userId == user.userId"
+                v-b-modal.addCalendar
+                variant="none"
+                ><b-icon
+                  icon="plus-square
 "
-              variant="secondary"
-            ></b-icon
-          ></b-button>
+                  variant="secondary"
+                ></b-icon
+              ></b-button>
+            </b-col>
+          </b-row>
         </b-col>
         <b-col>
           <b-table borderless :items="selectedDateItems" :fields="fields">
@@ -41,7 +47,10 @@
               ></b-button>
             </template>
             <template #cell(memo)="data">
-              <b-button @click="showModal(data.item)" variant="none"
+              <b-button
+                v-if="loginUser.userId == user.userId"
+                @click="showModal(data.item)"
+                variant="none"
                 ><b-icon icon="sticky" variant="secondary"></b-icon
               ></b-button>
             </template>
@@ -57,13 +66,13 @@
       @ok="addCalendar"
     >
       <b-form>
-        <b-form-group id="startTime" label="시작 시간 :" label-for="startTime">
+        <b-form-group id="startTime" label="start" label-for="startTime">
           <v-date-picker v-model="startTime" mode="time" />
         </b-form-group>
-        <b-form-group id="endTime" label="종료 시간 :" label-for="endTime">
+        <b-form-group id="endTime" label="end" label-for="endTime">
           <v-date-picker v-model="endTime" mode="time" />
         </b-form-group>
-        <b-form-group id="part" label="부위 :" label-for="part">
+        <b-form-group id="part">
           <b-form-select
             id="part"
             v-model="part"
@@ -71,11 +80,17 @@
             size="sm"
           ></b-form-select>
         </b-form-group>
-        <b-form-group id="memo" label="메모 :" label-for="memo">
-          <b-form-input v-model="memo" id="memo" type="text"></b-form-input>
+        <b-form-group id="memo">
+          <b-form-input
+            placeholder="memo"
+            v-model="memo"
+            id="memo"
+            type="text"
+          ></b-form-input>
         </b-form-group>
         <b-form-group id="videoUrl" label="영상 링크 :" label-for="videoUrl">
           <b-form-input
+            placeholder="URL"
             id="videoUrl"
             v-model="videoUrl"
             type="text"
@@ -91,13 +106,14 @@
       ok-variant="outline-primary"
     >
       <b-form>
-        <b-form-group id="startTime" label="시작 시간 :" label-for="startTime">
-          <v-date-picker v-model="detail.startTime" mode="time" />
+        <b-form-group id="startTime" label="start" label-for="startTime">
+          <v-date-picker v-model="detail.startTime" mode="time"></v-date-picker>
         </b-form-group>
-        <b-form-group id="endTime" label="종료 시간 :" label-for="endTime">
+
+        <b-form-group id="endTime" label="end" label-for="endTime">
           <v-date-picker v-model="detail.endTime" mode="time" />
         </b-form-group>
-        <b-form-group id="part" label="부위 :" label-for="part">
+        <b-form-group id="part">
           <b-form-select
             id="part"
             v-model="detail.part"
@@ -105,26 +121,43 @@
             size="sm"
           ></b-form-select>
         </b-form-group>
-        <b-form-group id="memo" label="메모 :" label-for="memo">
+        <b-form-group id="memo">
           <b-form-input
             v-model="detail.memo"
             id="memo"
+            placeholder="memo"
             type="text"
           ></b-form-input>
         </b-form-group>
-        <b-form-group id="videoUrl" label="영상 링크 :" label-for="videoUrl">
+        <b-form-group id="videoUrl">
           <b-form-input
             id="videoUrl"
             v-model="detail.videoUrl"
+            placeholder="URL"
             type="text"
           ></b-form-input>
         </b-form-group>
-        <b-button v-if="loginUser.userId == user.userId" @click="updateCalendar"
-          >수정</b-button
-        >
-        <b-button v-if="loginUser.userId == user.userId" @click="deleteCalendar"
-          >삭제</b-button
-        >
+        <b-row>
+          <b-col></b-col>
+          <b-col cols="3">
+            <b-button
+              variant="none"
+              v-if="loginUser.userId == user.userId"
+              @click="updateCalendar"
+              ><b-icon icon="pencil-square" aria-hidden="true"></b-icon
+            ></b-button>
+            <b-button
+              variant="none"
+              v-if="loginUser.userId == user.userId"
+              @click="deleteCalendar"
+              ><b-icon
+                icon="x-square"
+                aria-hidden="true"
+                variant="danger"
+              ></b-icon
+            ></b-button>
+          </b-col>
+        </b-row>
       </b-form>
     </b-modal>
   </div>
@@ -155,10 +188,11 @@ export default {
       date: new Date(JSON.parse(localStorage.getItem("date"))),
       startTime: new Date(),
       endTime: new Date(),
-      part: "기타",
+      part: null,
       videoUrl: "",
       memo: "",
       options: [
+        { value: null, text: "Please select part", disabled: true },
         { value: "golf", text: "골프" },
         {
           value: "running",
@@ -287,6 +321,10 @@ export default {
     },
 
     addCalendar() {
+      if (this.part == null) {
+        alert("운동 종류를 선택하세요.");
+        return;
+      }
       const API_URL = `${REST_API}/calendarapi/calendar`;
       axios
         .post(

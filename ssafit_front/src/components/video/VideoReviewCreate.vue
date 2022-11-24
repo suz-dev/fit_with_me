@@ -65,6 +65,8 @@ export default {
     createReview() {
       if (this.loginUser.userId == null) {
         alert("로그인이 필요합니다.");
+        this.$router.push("/user/login");
+        return;
       }
 
       this.$store.dispatch("createReview", this.review);

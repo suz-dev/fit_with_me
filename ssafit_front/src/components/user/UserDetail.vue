@@ -35,16 +35,21 @@
 
             <b-button
               v-else-if="validFollow(user.userId)"
-              variant="outline-danger"
+              variant="none"
               @click="addFollow(user.userId)"
-              >Follow
+              ><b-icon
+                icon="person-plus"
+                aria-hidden="true"
+                variant="primary"
+              ></b-icon>
             </b-button>
-            <b-button
-              v-else
-              variant="outline-danger"
-              @click="unFollow(user.userId)"
-              >UnFollow</b-button
-            >
+            <b-button v-else variant="none" @click="unFollow(user.userId)">
+              <b-icon
+                icon="person-check"
+                aria-hidden="true"
+                variant="secondary"
+              ></b-icon
+            ></b-button>
           </div>
         </div>
         <div class="userId">{{ user.userId }}</div>
