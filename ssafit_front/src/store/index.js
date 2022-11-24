@@ -279,7 +279,7 @@ export default new Vuex.Store({
           alert("회원가입 성공!");
           // commit("USER_CREATE", user); 팔로우할때 다시 구현
           commit;
-          router.push("/");
+          router.push("/user/login");
           return;
         })
         .catch((err) => {

@@ -20,7 +20,7 @@
           <b-button
             :to="'/user/userInfo/' + user.userId + '/users'"
             variant="outline-secondary"
-            ><b-icon icon="person-plus" variant="secondary"></b-icon
+            ><b-icon icon="person-lines-fill" variant="secondary"></b-icon
           ></b-button>
         </div>
       </b-form>
@@ -48,72 +48,87 @@
 
     <router-view :key="user.userId"></router-view>
 
-    <b-modal id="follower" title="follower" ok-variant="outline-primary">
+    <b-modal id="follower" title="follower" hide-footer>
       <b-container v-if="follower">
-        <b-row v-for="user in follower" :key="user.userId">
-          <b-col>
-            <img
-              :src="require(`@/assets/${user.profile}.jpg`)"
-              style="border-radius: 50%; width: 50px"
-            />
-          </b-col>
-          <!-- id 누르면 해당 유저 페이지로 -->
-          <b-col> {{ user.userId }}</b-col>
-          <b-col
-            ><router-link :to="'/user/userInfo/' + user.userId">{{
-              user.userName
-            }}</router-link></b-col
-          >
+        <div v-for="user in follower" :key="user.userId">
+          <b-row>
+            <b-col cols="2">
+              <img
+                :src="require(`@/assets/${user.profile}.jpg`)"
+                style="border-radius: 50%; width: 50px"
+              />
+            </b-col>
+            <!-- name 누르면 해당 유저 페이지로 -->
 
-          <!-- 팔로우 안되어 있으면 'follow' / 되어 있으면 'followed'-->
-          <span v-if="user.userId == loginUser.userId"></span>
-          <b-button
-            v-else-if="validFollow(user.userId)"
-            variant="outline-danger"
-            @click="addFollow(user.userId)"
-            >Follow
-          </b-button>
-          <b-button
-            v-else
-            variant="outline-danger"
-            @click="unFollow(user.userId)"
-            >UnFollow</b-button
-          >
-        </b-row>
+            <b-col
+              ><router-link :to="'/user/userInfo/' + user.userId">{{
+                user.userName
+              }}</router-link></b-col
+            >
+
+            <!-- 팔로우 안되어 있으면 'follow' / 되어 있으면 'followed'-->
+            <span v-if="user.userId == loginUser.userId"></span>
+            <b-button
+              v-else-if="validFollow(user.userId)"
+              variant="none"
+              @click="addFollow(user.userId)"
+              ><b-icon
+                icon="person-plus"
+                aria-hidden="true"
+                variant="primary"
+              ></b-icon>
+            </b-button>
+            <b-button v-else variant="none" @click="unFollow(user.userId)"
+              ><b-icon
+                icon="person-check"
+                aria-hidden="true"
+                variant="secondary"
+              ></b-icon
+            ></b-button>
+          </b-row>
+          <br />
+        </div>
       </b-container>
     </b-modal>
 
-    <b-modal id="following" title="following" ok-variant="outline-secondary">
+    <b-modal id="following" title="following" hide-footer>
       <b-container v-if="following">
-        <b-row v-for="user in following" :key="user.userId">
-          <b-col>
-            <img
-              :src="require(`@/assets/${user.profile}.jpg`)"
-              style="border-radius: 50%; width: 50px"
-            />
-          </b-col>
-          <!-- id 누르면 해당 유저 페이지로 -->
-          <b-col> {{ user.userId }}</b-col>
-          <b-col
-            ><router-link :to="'/user/userInfo/' + user.userId">{{
-              user.userName
-            }}</router-link></b-col
-          >
+        <div v-for="user in following" :key="user.userId">
+          <b-row>
+            <b-col cols="2">
+              <img
+                :src="require(`@/assets/${user.profile}.jpg`)"
+                style="border-radius: 50%; width: 50px"
+              />
+            </b-col>
+            <!-- 이름 누르면 이동 -->
+            <b-col
+              ><router-link :to="'/user/userInfo/' + user.userId">{{
+                user.userName
+              }}</router-link></b-col
+            >
 
-          <span v-if="user.userId == loginUser.userId"></span>
-          <b-button
-            v-else-if="validFollow(user.userId)"
-            variant="outline-danger"
-            @click="addFollow(user.userId)"
-            >Follow
-          </b-button>
-          <b-button
-            v-else
-            variant="outline-danger"
-            @click="unFollow(user.userId)"
-            >UnFollow</b-button
-          >
-        </b-row>
+            <span v-if="user.userId == loginUser.userId"></span>
+            <b-button
+              v-else-if="validFollow(user.userId)"
+              variant="none"
+              @click="addFollow(user.userId)"
+              ><b-icon
+                icon="person-plus"
+                aria-hidden="true"
+                variant="primary"
+              ></b-icon>
+            </b-button>
+            <b-button v-else variant="none" @click="unFollow(user.userId)"
+              ><b-icon
+                icon="person-check"
+                aria-hidden="true"
+                variant="secondary"
+              ></b-icon
+            ></b-button>
+          </b-row>
+          <br />
+        </div>
       </b-container>
     </b-modal>
   </div>

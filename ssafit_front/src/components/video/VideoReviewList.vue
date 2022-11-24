@@ -23,7 +23,7 @@
                 :to="'/user/userInfo/' + review.userId"
                 ><div>{{ review.userName }}</div></router-link
               >
-              <span v-else>{{ review.userName }}</span>
+              <div v-else>{{ review.userName }}</div>
             </b-col>
             <b-col cols="8" align="left">
               {{ review.content }}
@@ -65,7 +65,14 @@
       </b-list-group>
     </b-container>
 
-    <b-modal id="updateModal" @ok="updateReview(selected)" title="수정">
+    <b-modal
+      id="updateModal"
+      @ok="updateReview(selected)"
+      title="수정"
+      ok-only
+      ok-variant="outline-secondary
+    "
+    >
       <b-form>
         <b-form-group id="content">
           <b-form-textarea
@@ -78,23 +85,26 @@
             required
           ></b-form-textarea>
         </b-form-group>
-
-        <b-form-group inline id="userName">
-          <b-form-input
-            inline
-            id="userName"
-            v-model="selected.userName"
-            readonly
-            type="text"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group inline id="star">
-          <b-form-rating
-            variant="warning"
-            v-model="selected.star"
-          ></b-form-rating>
-        </b-form-group>
+        <b-container>
+          <b-form inline>
+            <b-col
+              ><b-form-input
+                inline
+                id="userName"
+                v-model="selected.userName"
+                readonly
+                type="text"
+              ></b-form-input>
+            </b-col>
+            <b-col>
+              <b-form-rating
+                variant="warning"
+                class="border border-white"
+                v-model="selected.star"
+              ></b-form-rating>
+            </b-col>
+          </b-form>
+        </b-container>
       </b-form>
     </b-modal>
   </div>
@@ -130,6 +140,7 @@ export default {
         id: review.reviewId,
         videoId: review.videoId,
       });
+      alert("삭제 완료");
     },
   },
 };
