@@ -2,9 +2,9 @@
 
 ## 💻 About The Project
 
----
+![logo.gif](/img/logo)
 
-![메인_키워드조회.gif](/img/logo)
+<br>
 
 **진행기간**
 <br>
@@ -39,13 +39,7 @@
 
 <br>
 
-## 🎬 시연영상
-
----
-
-### [시연영상](https://www.youtube.com/watch?v=z3C_lbMPCxI)
-
-<br>
+## 🎬 [시연영상](https://www.youtube.com/watch?v=z3C_lbMPCxI)
 
 ### 메인-키워드 조회
 
@@ -68,8 +62,6 @@
 ![팔로우.gif](https://blog.kakaocdn.net/dn/bor2Xh/btrWQr2A1db/KNOKSkB6b5LnTuQV38gvm0/img.gif)
 
 ## ⚙ Skills
-
----
 
 **Backend**
 
@@ -96,8 +88,6 @@
 
 ## 👭 About Team
 
----
-
 |              [이윤경](https://github.com/yxxnkxx)              |              [조수정](https://github.com/suz-dev)              |
 | :------------------------------------------------------------: | :------------------------------------------------------------: |
 | <img src="img/profile_lyg.jpg" alt="profile_lyg" width="150"/> | <img src="img/profile_jsj.jpg" alt="profile_jsj" width="150"/> |
@@ -106,8 +96,6 @@
 <br>
 
 ## 💙 주요 기능
-
----
 
 JWT를 이용한 회원가입/로그인 기능 구현
 
