@@ -1,92 +1,116 @@
-# ssafit_1116
+# 💪🏻 FIT with ME
 
+## 💻 About The Project
 
+---
 
-## Getting started
+![메인_키워드조회.gif](/img/logo)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+**진행기간**
+<br>
+`2022.11.15 ~ 2022.11.24`
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+<br>
 
-## Add your files
+**배경**
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- 기획 주제 선정 이유
+  - 코로나 판데믹 이후 홈트레이닝의 수요가 증가하면서 홈트레이닝 문화가 자리잡게 됨 <Br>
+    ['헬스도 언택트 시대', 홈 트레이닝 관련 상표 출원 증가](https://www.asiatoday.co.kr/view.php?key=20200719010011054) <br>
+  - 홈트레이닝을 위한 정보를 모아 관리할 수 있는 사이트의 필요성을 느낌
+  - 체계적으로 운동 기록과 정보를 관리하고, 같은 관심사를 지닌 유저와의 소통을 통해 홈트레이닝에 대한 지속적인 흥미를 유발하고자 함
+- 타겟층
+  - 홈트레이닝을 즐기고 운동 기록 관리가 필요한 사용자
+- 목적
+  - Youtube API를 통해 운동 영상을 시청하고, 자신의 운동 기록과 연동
+  - 다른 사용자와 팔로우, 서로의 의견과 기록을 공유하며 동기 부여
 
-```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/leeykkk22/ssafit_1116.git
-git branch -M master
-git push -uf origin master
-```
+**개요**
 
-## Integrate with your tools
+1. 유튜브 API를 통한 운동 영상 조회 및 시청
+2. 개인 계정 생성 및 로그인을 통해 찜 기능으로 영상 관리
+3. 마이페이지 기능으로 개인 운동기록 관리 및 타 계정과 팔로우 가능
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/leeykkk22/ssafit_1116/-/settings/integrations)
+**기대효과**
 
-## Collaborate with your team
+- 운동 영상을 활용한 사용자의 운동에 대한 관심도 유지 및 증대 기능
+- 마이페이지의 캘린더와 팔로우 기능을 통한 개인 운동 기록 관리 및 회원 간 소통 기회 증진
+- 영상 상세 페이지의 댓글 기능을 통한 유저간 의견공유를 통해 커뮤니티적 성격 활성화
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+<br>
 
-## Test and Deploy
+## 🎬 시연영상
 
-Use the built-in continuous integration in GitLab.
+---
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### [시연영상](https://www.youtube.com/watch?v=z3C_lbMPCxI)
 
-***
+<br>
 
-# Editing this README
+### 메인-키워드 조회
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+![메인_키워드조회.gif](https://blog.kakaocdn.net/dn/qbBGn/btrWSu4quDa/AoU3kIyJjL6LKtLNQkO2b1/img.gif)
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### 메인-검색
 
-## Name
-Choose a self-explaining name for your project.
+![메인_검색.gif](https://blog.kakaocdn.net/dn/b7wybB/btrWRysONze/Hxm2gBaHeFk4CZ7g3YgKL0/img.gif)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+### 영상 찜, 리뷰
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+![찜/리뷰.gif](https://blog.kakaocdn.net/dn/chO0I8/btrWQt0ggs6/rNiyZtq4Gm5jcoqn7r8EDk/img.gif)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### 마이페이지-캘린더
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+![캘린더.gif](https://blog.kakaocdn.net/dn/b7wybB/btrWRysONze/Hxm2gBaHeFk4CZ7g3YgKL0/img.gif)
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### 마이페이지-팔로우
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+![팔로우.gif](https://blog.kakaocdn.net/dn/bor2Xh/btrWQr2A1db/KNOKSkB6b5LnTuQV38gvm0/img.gif)
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## ⚙ Skills
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+---
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+**Backend**
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+- java 1.8
+- spring boot
+- MySQL
+- IntelliJ
+- Swagger
+- JWT
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+**Frontend**
 
-## License
-For open source projects, say how it is licensed.
+- Vue.js
+- BootStrapVue
+- VSCode
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+**협업툴**
+
+- GitLab
+- Git
+- Notion
+
+<br>
+
+## 👭 About Team
+
+---
+
+|              [이윤경](https://github.com/yxxnkxx)              |              [조수정](https://github.com/suz-dev)              |
+| :------------------------------------------------------------: | :------------------------------------------------------------: |
+| <img src="img/profile_lyg.jpg" alt="profile_lyg" width="150"/> | <img src="img/profile_jsj.jpg" alt="profile_jsj" width="150"/> |
+|                          `Full-stack`                          |                          `Full-stack`                          |
+
+<br>
+
+## 💙 주요 기능
+
+---
+
+JWT를 이용한 회원가입/로그인 기능 구현
+
+youtube api를 활용한 영상 조회, 리뷰 작성 및 찜 기능
+
+마이페이지의 캘린더, 팔로잉 기능을 통한 SNS 기능
