@@ -2,7 +2,7 @@
 
 ## 💻 About The Project
 
-![logo.gif](/img/logo)
+![logo](img/logo.png)
 
 <br>
 
@@ -55,7 +55,7 @@
 
 ### 마이페이지-캘린더
 
-![캘린더.gif](https://blog.kakaocdn.net/dn/b7wybB/btrWRysONze/Hxm2gBaHeFk4CZ7g3YgKL0/img.gif)
+![캘린더.gif](https://blog.kakaocdn.net/dn/cxI6jl/btrWRPVpbgE/Yyd15WJTxuiFj20f5qAa8K/img.gif)
 
 ### 마이페이지-팔로우
 
