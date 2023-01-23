@@ -10,7 +10,6 @@
 <br>
 `2022.11.15 ~ 2022.11.24`
 
-<br>
 
 **배경**
 
@@ -60,6 +59,9 @@
 ### 마이페이지-팔로우
 
 ![팔로우.gif](https://blog.kakaocdn.net/dn/bor2Xh/btrWQr2A1db/KNOKSkB6b5LnTuQV38gvm0/img.gif)
+
+
+<br>
 
 ## ⚙ Skills
 
